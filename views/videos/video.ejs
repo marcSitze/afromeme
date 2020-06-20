@@ -1,0 +1,22 @@
+ <%- include('../layout/header') %> 
+
+ <div class="container mt-3">
+    <h1>Upload a Meme here it's free</h1>
+    <h2>Only images and gifs are supported for now</h2>
+    <p>Click on the Browse button to choose an image in your file system and click on the submit button to upload the image</p>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <p>Image file:</p>
+      <div class="custom-file mb-3">
+        <input type="file" class="custom-file-input" id="customFile" name="video">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+      </div>
+    
+      <div class="my-3">
+        <button type="submit" class="btn btn-primary mt-5 mb-3">Submit</button>
+      </div>
+    </form>
+  </div>
+
+<%- include('../layout/footer') %> 
+
+
