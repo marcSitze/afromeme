@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
-require('dotenv').config();
+// require('dotenv').config();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 5000;
