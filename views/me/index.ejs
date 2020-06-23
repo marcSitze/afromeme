@@ -1,0 +1,12 @@
+<%- include('./header') %> 
+    <div><%= user.name %></div>
+    <div><%= user.email %></div>
+    <div><%= user.date %></div>
+
+    <% videos.forEach(video => { %>
+         <% if(video.author == user.id) { %>
+            <img src="/<%= video.path %>" alt="">
+         <% } %>
+    <% }) %> 
+
+<%- include('./footer') %> 

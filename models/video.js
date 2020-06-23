@@ -13,6 +13,11 @@ const videoSchema = new mongoose.Schema({
     path: {
         type: String,
         required: true
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
 });
 

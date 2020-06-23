@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-
+const config = require('config');
+const jwtSecret = config.get('jwtSecret');
 const User = require('../models/Users');
 const bcrypt = require('bcryptjs');
-
 
 
 /*===========================
@@ -79,7 +79,7 @@ router.post('/register', async (req, res) => {
          
          jwt.sign(
             payload,
-            'secret',
+            jwtSecret,
             {
                expiresIn: 3600000
             },
@@ -90,6 +90,7 @@ router.post('/register', async (req, res) => {
                res.redirect('/login');
             }
          );
+         console.log('You are signed in');
    } catch(err) {
       res.send('server error');
       console.error(err);
@@ -151,7 +152,7 @@ router.post('/login', async (req, res) => {
    
          jwt.sign(
             payload,
-            'secret',
+            jwtSecret,
             {
                expiresIn: 3600000
             },
@@ -170,11 +171,11 @@ router.post('/login', async (req, res) => {
                //       user
                //    }
                //  }); 
-               res.status(200).redirect('/'); 
+               res.status(200).redirect('/me'); 
 
             }
          );
-         console.log('You are signed in');
+         console.log('You are logged in');
       
    } catch(err) {
       console.error(err);
