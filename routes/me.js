@@ -22,24 +22,28 @@ router.get('/', auth, async (req, res) => {
         res.render('me/index', {
             title: 'me',
             user,
-            videos
+            videos,
+            userAuth: user
         }); 
+       // res.render('me/index'); 
      
-    } catch (err) {
-        console.log(err);
+    } catch (err) { 
+        console.log(err);  
     }
 });
-
+ 
+  
 // logout a user
-router.get('/logout', auth, (req, res) => {
+router.get('/logout', (req, res) => {
 
     res.cookie('jwt', 'loggedout', { expires: new Date( Date.now() + 10 * 1 ),
         httpOnly: true
     }); 
 
-    console.log('You are signed Out');
+    console.log('You are logged Out');
     res.redirect('/');
-   
+    
 });
+
  
-module.exports = router;
+module.exports = router; 

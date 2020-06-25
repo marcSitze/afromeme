@@ -1,0 +1,14 @@
+<%- include('../layout/header.ejs') %> 
+<form action="/users" method="GET">
+    <label>Search by name: </label>
+    <input type="text" name="search" value="<%= searchOptions.search %>">
+    <button type="submit">Search</button>
+</form>
+
+    <% users.forEach(user => { %>
+        <li><%= user.name %></li>
+        <li><%= user.email %></li>
+        <li><%= user.date %></li>
+    <% }) %> 
+
+<%- include('../layout/footer.ejs') %>

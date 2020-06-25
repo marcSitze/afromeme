@@ -37,18 +37,32 @@ const multerFilter = (req, file, cb) => {
 
 
 // Render the upload file page
-router.get('/', auth, (req, res) => {
+router.get('/', async (req, res) => {
    // console.log(req.user);
-    res.render('videos/video', {
-        title: 'Upload'
+   try {
+     const user = await User.findById(req.user.id);
+     res.render('videos/video', {
+        title: 'Upload',
+        userAuth: user
     });
+   } catch(err) {
+       console.error(err);
+   }
+   
 });
  
  // show when file upload is successful
-router.get('/success', (req, res) => {
-    res.render('videos/success', {
-        title: 'Success'
-    });
+router.get('/success', async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.render('videos/success', {
+            title: 'Success',
+            userAuth: user
+        });
+    } catch(err) {
+        console.error(err);
+    }
+     
  });
  
  // post a video
@@ -66,7 +80,8 @@ router.post('/',(req, res) => {
             errors.push({ msg: "please upload an image" });
             return res.render('videos/video', {
                 title: 'Upload',
-                errors  
+                errors,
+                userAuth: true
             });
         }    
      //   console.log(req.file); 
@@ -75,7 +90,8 @@ router.post('/',(req, res) => {
 	       console.log('Error uploading file.');
            return res.render('videos/video', {
             title: 'Upload',
-            errors
+            errors,
+            userAuth: true
         });
         }
         //res.end("File is uploaded");
@@ -86,7 +102,8 @@ router.post('/',(req, res) => {
         video = new Video({
             name: req.file.originalname,
             path: req.file.filename,
-            author: req.user.id
+            author: req.user.id,
+            description: req.body.description
         });
         try {
             await video.save();

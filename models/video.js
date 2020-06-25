@@ -6,7 +6,7 @@ const videoSchema = new mongoose.Schema({
         required: true
     },
     publishDate: {
-        type: String,
+        type: Date,
         required: true,
         default: Date.now
     },
@@ -18,6 +18,9 @@ const videoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
+    },
+    description: {
+        type: String
     }
 });
 

@@ -1,7 +1,7 @@
 $(function () {
 
     $("#portfolio-wrapper").magnificPopup({
-        delegate: 'a', // child items selector, by clicking on it popup will open
+        delegate: '.pop-img', // child items selector, by clicking on it popup will open
         type: 'image',
         gallery: {
             enabled: true 
@@ -25,7 +25,7 @@ $(function () {
         }, 1250, "easeInOutExpo");
  
     }); 
- 
+  
 });     
          
  
@@ -51,4 +51,8 @@ $(document).ready(function(){
   }); 
  
  
-     
+$(function(){
+  $('.comment').on('click', () => {
+    $('.comment-input').toggle();
+  });
+}); 
