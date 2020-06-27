@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('config');
-const db = config.get('mongoURI');
+const db = config.get('dataBASE_URL');
 
 const ConnectDB = async () => {
     try {
@@ -15,4 +15,4 @@ const ConnectDB = async () => {
     }
 };
 
-module.exports = ConnectDB;
+module.exports = ConnectDB; 
