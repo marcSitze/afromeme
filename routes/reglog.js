@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const jwtSecret = config.get('jwtSecret');
+const newSecret = 'secret';
 const User = require('../models/Users');
 const bcrypt = require('bcryptjs');
 
@@ -88,7 +89,7 @@ router.post('/register', async (req, res) => {
          
          jwt.sign(
             payload,
-            jwtSecret,
+            newSecret,
             {
                expiresIn: 3600000
             },
@@ -173,7 +174,7 @@ const userAuth = null;
    
          jwt.sign(
             payload,
-            jwtSecret,
+            newSecret,
             {
                expiresIn: 3600000
             },
