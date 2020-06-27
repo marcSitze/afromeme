@@ -8,14 +8,14 @@ const bcrypt = require('bcryptjs');
 
 const isLoggedIn = require('../auth/isLoggedIn');
 
-router.use(isLoggedIn);
+// router.use(isLoggedIn);
 
 /*===========================
          REGISTER
 ============================*/ 
 router.get('/register', (req, res) => {
    // to check if user is loggedin
-   const userAuth = req.user? true: null;
+   const userAuth = null;
    res.render('register/register', {
       user: new User(),
       title: 'Register',
@@ -31,7 +31,7 @@ router.post('/register', async (req, res) => {
    let user;
    try { 
       // to check if user is loggedin
-    const userAuth = req.user? true: null;
+    const userAuth = null;
       // 1 check if user exists
       user = await User.findOne({ email });
 
@@ -113,7 +113,7 @@ router.post('/register', async (req, res) => {
 router.get('/login', (req, res) => {
 
    // to check if user is loggedin
-   const userAuth = req.user? true: null;
+   const userAuth = null;
 
    res.render('register/login', {
       title: 'Login',
@@ -124,7 +124,7 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
 
 // to check if user is loggedin
-const userAuth = req.user? true: null;
+const userAuth = null;
 
    const { email, password } = req.body;
    const errors = [];
