@@ -16,13 +16,12 @@ module.exports = (req, res, next) => {
         req.user = decoded.user;
       //  console.log(req.user.id);
      // console.log('User is logged in with id: ' + req.user.id);
-       return next();
+        next();
     } catch(err) {
        // res.status(401).json({ msg: 'Token is not valid' });
     //   res.redirect('/login');
-         res.send('you are not logged in');
-        return next();
-        }
+    res.redirect('/login');
+    return next();
 }
 
     next();
