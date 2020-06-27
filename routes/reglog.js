@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 
 const isLoggedIn = require('../auth/isLoggedIn');
 
-// router.use(isLoggedIn);
+ router.use(isLoggedIn);
 
 /*===========================
          REGISTER
