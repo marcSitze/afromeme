@@ -22,9 +22,9 @@ module.exports = (req, res, next) => {
      // console.log('User is logged in with id: ' + req.user.id);
        next();
     } catch(err) {
-        res.status(401).json({ msg: 'Token is not valid' });
+        //res.status(401).json({ msg: 'Token is not valid' });
         console.log('Token is invalid');
-       //res.redirect('/login');
+       res.redirect('/login');
        return next();
 }
 
