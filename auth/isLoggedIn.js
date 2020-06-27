@@ -4,7 +4,7 @@ const jwtSecret = config.get('jwtSecret');
 module.exports = (req, res, next) => {
 
 
-    if(req.cookies.jwt =='loggedout'){
+    if(req.cookies.jwt == 'loggedout'){
         return next();
     }
 
@@ -21,7 +21,8 @@ module.exports = (req, res, next) => {
        // res.status(401).json({ msg: 'Token is not valid' });
     //   res.redirect('/login');
          res.send('you are not logged in');
-    }
+        return next();
+        }
 }
 
     next();

@@ -27,6 +27,7 @@ module.exports = (req, res, next) => {
     } catch(err) {
        // res.status(401).json({ msg: 'Token is not valid' });
          res.redirect('/login');
+         return next();
     }
  
 };
