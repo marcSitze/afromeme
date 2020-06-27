@@ -1,3 +1,9 @@
+$(function(){
+  $('#colapseBtn').on('click', () => {
+    $('#navbarResponsive').slideToggle();
+  });
+});
+
 $(function () {
 
     $("#portfolio-wrapper").magnificPopup({
@@ -11,19 +17,21 @@ $(function () {
 });      
 
 // hide and show scroll to top
-// $(function(){
-//   //const position = window.scrollTop();
-//   $(window).scroll(function() {
-//   const position = $(window).scrollTop();
-//   console.log(position);
-//  // $("#bact-to-top").fadeIn();
-//     if(position > 200){
-//       $("#bact-to-top").fadeIn();
-//     }else{
-//       $("#back-to-top").fadeOut();
-//     } 
-//   });
-// });  
+$(function(){
+  //const position = window.scrollTop();
+  $(window).scroll(function() {
+  const position = $(window).scrollTop();
+  console.log(position);
+ // $("#bact-to-top").fadeIn();
+ // $("#bact-to-top").hide();
+    if(position > 50){
+      $("#back-to-top").removeClass('d-none');
+      $("#back-to-top").fadeIn();
+    }else{
+      $("#back-to-top").fadeOut();
+    } 
+  });
+});  
       
 // Smooth Scrolling
 $(function () { 
@@ -41,7 +49,7 @@ $(function () {
  
     }); 
   
-});     
+});      
          
  
 // FORM JS     
