@@ -9,6 +9,21 @@ $(function () {
     });
   
 });      
+
+// hide and show scroll to top
+// $(function(){
+//   //const position = window.scrollTop();
+//   $(window).scroll(function() {
+//   const position = $(window).scrollTop();
+//   console.log(position);
+//  // $("#bact-to-top").fadeIn();
+//     if(position > 200){
+//       $("#bact-to-top").fadeIn();
+//     }else{
+//       $("#back-to-top").fadeOut();
+//     } 
+//   });
+// });  
       
 // Smooth Scrolling
 $(function () { 

@@ -1,10 +1,15 @@
-<%- include('../layout/header.ejs') %>    
+<%- include('../layout/header.ejs') %>
+<br><br><br><br>
   <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <img src="/<%= video.path %>" alt="">
-            <div><%= video.author %></div>
+        <div class="col-md-8">
+            <img src="/<%= video.path %>" class="square-img" alt="">
+            <div><%= video.description %></div>
             <div><%= video.publishDate %></div>
+            <br/>
+            <% if(userAuth) { %>
+              <%- include('../partials/_comments.ejs') %> 
+            <% } %> 
         </div>
     </div>
     <a href="/">All videos</a>

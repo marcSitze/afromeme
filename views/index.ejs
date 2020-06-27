@@ -1,9 +1,9 @@
 <%- include('./layout/header.ejs') %> 
-  
+  <br><br><br>
 <div class="container">
 
    <!-- Jumbotron Header -->
-   <header class="jumbotron mb-3 text-center" id="header" style="background: #dbe1e2;">
+   <header class="jumbotron my-3 text-center" id="header" style="background: #dbe1e2;">
     <h1 class="display-3 lead-1">A Warm Welcome!</h1>
     <p class="lead-2">A warm welcome and lots of good wishes on becoming part of our growing team. Congratulations and on behalf of all the members. We are all happy and excited about your inputs and contribution to our Network.</p>
     <!-- <a href="#" class="btn btn-primary btn-lg">Call to action!</a> -->
@@ -17,22 +17,22 @@
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
               <a href="/<%= video.path %>" class="pop-img" title="Add Description">
-              <img class="card-img-top" src="/<%= video.path %>" alt="">
+              <img class="card-img-top home-img" src="/<%= video.path %>" alt="">
               <div class="card-body">
-                <h4 class="card-title" style="text-decoration: none;"><%= video.description %></h4>
+                <h4 class="card-title text-black" style="text-decoration: none;"><%= video.description %></h4>
                 <p class="card-text">published: <%= new Date(Number(video.publishDate)).getDate() %>/<%= new Date(Number(video.publishDate)).getDay() %>/<%= new Date(Number(video.publishDate)).getFullYear() %></p>
               </div>
               
               </a>
               <div class="card-footer">
-                <a href="/individual/<%=video.id %>" class="btn btn-primary" style="background-color: #007bff; color: #fff;">View</a>  
+                <a href="/individual/<%=video.id %>" class="btn btn-info"  color: #fff;">View</a>  
               </div>
-              <div class="comment-box">
+              <!-- <div class="comment-box">
                 <button class="btn btn-info comment">comment</button>
                 <form action="">
                   <input type="text" class="comment-input">
                 </form>
-              </div>
+              </div> -->
             </div>
           </div>
         <% }) %> 
