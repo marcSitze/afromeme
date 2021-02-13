@@ -1,12 +1,8 @@
 const express = require('express');
+const { getProfile, logout } = require('../controllers/me');
+const auth = require('../middlewares/auth/auth');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const auth = require('../auth/auth');
-const User = require('../models/Users');
-const Video = require('../models/video');
-const Profile = require('../models/Profile');
-const config = require('config');
-const jwtSecret = config.get('jwtSecret');
+
  
 // Use the jsonewebtoken middleware
 router.use(auth);
@@ -14,63 +10,14 @@ router.use(auth);
 /*==========================================
             VIEW USER PROFILE
 ============================================*/
-router.get('/', auth, async (req, res) => {
-    //console.log(req.user);
-    // res.send('Welcome to my dashboard ' + req.user.id);
-
-    try {
-       
-        const user = await User.findById( req.user.id ); 
-        const videos = await Video.find({});
-
-        res.render('me/index', {
-            title: 'me',
-            user,
-            videos,
-            userAuth: user
-        }); 
-       // res.render('me/index'); 
-     
-    } catch (err) { 
-        console.log(err);  
-    }
-});
-
-/*==========================================
-            UPDATE USER
-============================================*/
-// router.put('/profile', auth, async(req, res) => {
-
-//     try {
-//         const user = await User.findById( req.user.id );
-
-//         res.render('me/index', {
-//             title: 'me',
-//             user,
-//             videos,
-//             userAuth: user
-//         }); 
-     
-//     } catch (err) { 
-//         console.log(err);  
-//     }
-// });
+router.get('/', auth, getProfile);
 
 /*==========================================
             LOGOUT USER
 ============================================*/
   
 // logout a user
-router.get('/logout', (req, res) => {
-
-    res.cookie('jwt', 'loggedout', { expires: new Date( Date.now() + 10 * 1 ),
-        httpOnly: true
-    }); 
-
-    console.log('You are logged Out');
-    res.redirect('/');
-    
-});
+router.get('/logout', logout);
 
 
  
