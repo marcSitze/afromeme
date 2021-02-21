@@ -1,2 +1,6 @@
 node_modules/
 .env
+
+ups/
+server/src/public/
+server/src/views/
