@@ -1,18 +1,20 @@
-import * as express from 'express';
-const router = express.Router();
-import { isLoggedIn } from '../middlewares/auth/isLoggedIn';
-const { getUsers, getUserById } = require('../controllers/users');
-
-// check if user is logged in (middleware)
-router.use(isLoggedIn);
+import express, { Router } from 'express';
+const router: Router = express.Router();
+import { getUsers, getUserById, createUser, getUser, updateUser, login } from '../controllers/users';
 
 /*======================
         Get all users
 ======================== */
-router.get('/', getUsers);  
- 
+router.post('/', createUser);
+router.get('/', getUsers);
+router.get('/:id', getUserById);
+router.get('/q?', getUser);
+router.put('/:id', updateUser);
+router.post('/login', login);
+// router.get('/account', auth, (req, res) => res.send('hello account'));
+
 /*===============================
         Get an individual user
 ================================= */
-router.get('/:id', getUserById); 
-module.exports = router;
+router.get('/:id', getUserById);
+export default router;

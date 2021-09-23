@@ -19,7 +19,7 @@ router.get('/', (req: Request, res: Response) => {
 
  
 
-module.exports = router;
+export default router;
 
 //client id paypal
 //AWvFzCx3RsmRgJzxNOGS1dmNvlDh3BvljMn45P9DETijVr6ESqEX9WREp2c16dJgzE7itWoamQjYjR0H
