@@ -17,4 +17,4 @@ router.get('/success', getSuccessPage);
 router.post('/', newUpload);
 
 
-module.exports = router;
+export default router;

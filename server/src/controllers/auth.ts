@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 const newSecret = "secret";
 const User = require("../models/Users");
-import * as bcrypt from "bcryptjs";
+import * as bcrypt from "bcrypt";
 
 // export const getRegisterForm = () => {
 //        // to check if user is loggedin
