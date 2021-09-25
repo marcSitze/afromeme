@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { AccountDocument } from '../interfaces/models/AccountModel';
 
 const profileSchema = new mongoose.Schema({
     user: {
@@ -11,6 +12,10 @@ const profileSchema = new mongoose.Schema({
     bio: {
         type: String
     },
+    followers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+     }],
     social: {
         youtube: {
             type: String
@@ -25,11 +30,14 @@ const profileSchema = new mongoose.Schema({
             type: String
         }
     },
-    date: {
+    createdAt: {
         type: Date,
         default: Date.now
-    }
-
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    },
 });
 
-module.exports = mongoose.model('Profile', profileSchema);
+export default mongoose.model<AccountDocument>('Account', profileSchema);

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { SuccessHandler, ErrorHandler } from '../common/response.handler';
 import UserService from '../services/user.service';
+import AccountService from '../services/account.service';
 import { CreateUserDTO } from '../dto/user.dto';
 
 import constants from '../common/constants';
@@ -8,6 +9,7 @@ import { verifyPassword, generateToken } from '../common/auth';
 
 const { httpStatus } = constants;
 const userService = new UserService();
+const accountService = new AccountService();
 
 export const createUser = async (req: Request, res: Response) => {
   const errors = [];
@@ -46,7 +48,8 @@ export const createUser = async (req: Request, res: Response) => {
       password
     };
     // 2 Encrypt password
-    await userService.createUser(user);
+    const newAccount = await userService.createUser(user);
+    await accountService.createAccount({ user: newAccount._id });
 
     console.log("User created");
     SuccessHandler(res, httpStatus.CREATED, {msg: 'User created successfully...'});

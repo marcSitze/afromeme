@@ -1,20 +1,27 @@
 import * as mongoose from 'mongoose';
-import { CommentDocument } from '../interfaces/models/CommentDocument';
+import { MediaDocument } from '../interfaces/models/MediaDocument'
 
-const commentSchema = new mongoose.Schema({
+const mediaSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    path: {
+        type: String,
+        required: true
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     },
-    message: {
-        type: String,
-        required: true,
-    },
     post: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Post'
+    },
+    description: {
+        type: String
     },
     createdAt: {
         type: Date,
@@ -25,7 +32,7 @@ const commentSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
 });
 
-export default mongoose.model<CommentDocument>('Comment', commentSchema);
+export default mongoose.model<MediaDocument>('Media', mediaSchema);
