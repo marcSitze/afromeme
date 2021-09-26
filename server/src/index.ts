@@ -1,6 +1,5 @@
 import express from "express";
 import * as path from "path";
-import * as cookieParser from "cookie-parser";
 import morgan from 'morgan';
 import config from "./config";
 
