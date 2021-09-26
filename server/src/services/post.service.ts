@@ -11,18 +11,18 @@ export default class PostsService implements IPostsService {
   getPosts = async () => {
     return await Post.find({});
   };
-  findOne = async (query) => {
+  findOne = async (query: Partial<CreatePostDTO>) => {
     console.log('query: ', query);
     return await Post.findOne(query).populate("user", { password: 0, __v: 0 });
   };
-  getPostById = async (id) => {
+  getPostById = async (id: string) => {
     return await Post.findById(id).populate('user').select('-password');
   };
   // findPostByQuery: async (query) => {
   //   return await Post.find(query).populate('user').select('-password');
   // },
 
-  updatePost = async (id, query) => {
-    return await Post.findOneAndUpdate(id, query);
+  updatePost = async (id: string, query: Partial<CreatePostDTO>) => {
+    return await Post.findOneAndUpdate({ _id: id }, query);
   };
 }

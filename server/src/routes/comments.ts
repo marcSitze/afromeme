@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { getAccount, logout } from '../controllers/account';
+import { createComment, getComment, getComments, updateComment } from '../controllers/comments';
 import { auth } from '../middlewares/auth/auth';
 const router = express.Router();
 
@@ -7,16 +7,9 @@ const router = express.Router();
 // Use the jsonewebtoken middleware
 // router.use(auth);
 
-/*==========================================
-            VIEW USER PROFILE
-============================================*/
-router.get('/', auth, getAccount);
-
-/*==========================================
-            LOGOUT USER
-============================================*/
-
-// logout a user
-router.get('/logout', logout);
+router.post('/', auth, createComment);
+router.get('/:id', auth, getComment);
+router.get('/', auth, getComments);
+router.put('/:id', auth, updateComment);
 
 export default router;

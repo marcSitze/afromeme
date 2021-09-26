@@ -38,12 +38,6 @@ export const updateAccount = async (req: any, res: Response) => {
     }
 }
 
-export const logout = (req: Request, res: Response) => {
-
-    res.cookie('jwt', 'loggedout', { expires: new Date( Date.now() + 10 * 1 ),
-        httpOnly: true
-    });
-
-    console.log('You are logged Out');
-    res.redirect('/');
+export const getAccounts = async (req: Request, res: Response) => {
+    
 }

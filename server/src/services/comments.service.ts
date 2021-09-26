@@ -1,24 +1,27 @@
 import Comment from '../models/Comment';
+import { CreateCommentDTO } from '../dto/comment.dto';
+import { ICommentsService } from '../interfaces/comments/comments.service.interface';
 
-export default {
-  saveComment: async (Comment) => {
-    const newComment = new Comment(Comment);
+export default class CommentsService implements ICommentsService {
+  constructor() {}
+  createComment = async (comment: CreateCommentDTO) => {
+    const newComment = new Comment(comment);
     return await newComment.save();
-  },
-  findComment: async (query) => {
+  };
+  getComments = async () => {
+    return await Comment.find({});
+  };
+  findOne = async (query: Partial<CreateCommentDTO>) => {
     console.log('query: ', query);
     return await Comment.findOne(query).populate("user", { password: 0, __v: 0 });
-  },
-  findById: async (id) => {
+  };
+  getCommentById = async (id: string) => {
     return await Comment.findById(id).populate('user').select('-password');
-  },
+  };
   // findCommentByQuery: async (query) => {
   //   return await Comment.find(query).populate('user').select('-password');
   // },
-  findComments: async () => {
-    return await Comment.find({});
-  },
-  updateComment: async (id, query) => {
-    return await Comment.findOneAndUpdate(id, query);
-  }
+  updateComment = async (id: string, query: Partial<CreateCommentDTO>) => {
+    return await Comment.findOneAndUpdate({ _id: id }, query);
+  };
 }

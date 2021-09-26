@@ -7,6 +7,7 @@ import constants from '../common/constants';
 
 const { httpStatus } = constants;
 const postsService = new PostsService();
+
 export const createPost = (req: Request, res: Response) => {
   const { author, description, media} : CreatePostDTO = req.body;
   const errors = [];
@@ -28,3 +29,7 @@ export const createPost = (req: Request, res: Response) => {
 
 	// await postsService.createPost()
 }
+
+export const getPost = async (req: Request, res: Response) => {}
+export const getPosts = async (req: Request, res: Response) => {}
+export const updatePost = async (req: Request, res: Response) => {}
