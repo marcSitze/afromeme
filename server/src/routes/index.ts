@@ -6,6 +6,7 @@ import accountsRoute from "./account";
 import usersRoute from "./users";
 import postsRoutes from './posts';
 import commentsRoutes from './comments'
+import mediaRoutes from './media';
 // import donateRoute from "./donate";
 
 import { isLoggedIn } from '../middlewares/auth/isLoggedIn';
@@ -27,6 +28,9 @@ router.use("/accounts", accountsRoute);
 router.use('/posts', postsRoutes);
 // comments routes
 router.use('/comments', commentsRoutes);
+
+// media routes
+router.use('/media', mediaRoutes);
 
 
 // router.use("/", reglogRoute);
