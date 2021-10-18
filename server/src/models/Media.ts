@@ -10,6 +10,10 @@ const mediaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    photo: {
+        data: Buffer,
+        contentType: String,
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
