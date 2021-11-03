@@ -5,11 +5,11 @@ export interface MediaDocument extends Document{
     name: string,
     photo: {
         data: Buffer,
-        contentType: String,
+        contentType: string,
     }
-    path: string,
+    // path: string,
     author: string,
-    post: string,
+    // post: string,
     description: string,
     createdAt?: Date,
     updatedAt?: Date,

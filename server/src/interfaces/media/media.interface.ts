@@ -6,9 +6,8 @@ export default interface IMedia {
 			data: Buffer;
 			contentType: String;
     }
-    path: string;
-    description: string;
-    post: string;
+    // path: string;
+    description?: string;
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
