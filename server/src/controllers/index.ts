@@ -15,7 +15,7 @@ export const getIndex = async (req: Request, res: Response) => {
         //     title: 'AfroMeme',
         //     userAuth: true
         // });
-        // res.status(200).json({ "msg": "Welcome to afromeme",videos });
+        res.status(200).json({ "msg": "Welcome to afromeme" });
     } catch (err) {
         console.error(err);
     }
