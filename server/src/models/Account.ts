@@ -9,6 +9,10 @@ const profileSchema = new mongoose.Schema({
     location: {
         type: String
     },
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }],
     bio: {
         type: String
     },
