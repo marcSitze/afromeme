@@ -3,7 +3,7 @@ export class CreatePostDTO {
     author: string;
     description: string;
     media: string;
-    comments?: string[];
+    comments: string[];
     likes?: string[];
     createdAt?: Date;
     updatedAt?: Date;
