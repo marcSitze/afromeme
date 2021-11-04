@@ -21,7 +21,8 @@ export default class AccountService implements IAccountService {
   // findAccountByQuery: async (query) => {
   //   return await Account.find(query).populate('user').select('-password');
   // },
-  updateAccount = async (id: string, query: Partial<AccountDTO>) => {
-    return await Account.findOneAndUpdate({_id: id}, query);
+  updateAccount = async (filter: Partial<AccountDTO>, query: Partial<AccountDTO>) => {
+    console.log('Account updated...');
+    return await Account.findOneAndUpdate(filter, query);
   };
 }
