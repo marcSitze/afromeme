@@ -1,3 +1,4 @@
+import IPost from '../interfaces/posts/post.interface';
 interface IBio {
     youtube: string;
     twitter: string;
@@ -7,6 +8,7 @@ interface IBio {
 export class AccountDTO {
     _id?: string;
     user: string;
+    posts: string[];
     location?: string;
     followers?: string[];
     bio?: IBio;
