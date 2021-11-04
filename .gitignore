@@ -3,5 +3,6 @@ node_modules/
 
 ups/
 tmp/
+uploads/
 server/src/public/
 server/src/views/
