@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'User'
+        ref: 'Account'
     },
     description: {
         type: String,
@@ -13,12 +13,12 @@ const postSchema = new mongoose.Schema({
     media: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'Video'
+        ref: 'Media'
     },
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'Comment'
         }
     ],
     likes: [
