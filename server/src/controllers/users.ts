@@ -49,7 +49,7 @@ export const createUser = async (req: Request, res: Response) => {
     };
     // 2 Encrypt password
     const newAccount = await userService.createUser(user);
-    await accountService.createAccount({ user: newAccount._id });
+    await accountService.createAccount({ user: newAccount._id, posts: [] });
 
     console.log("User created");
     SuccessHandler(res, httpStatus.CREATED, {msg: 'User created successfully...'});
