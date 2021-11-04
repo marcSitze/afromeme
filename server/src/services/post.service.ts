@@ -22,7 +22,7 @@ export default class PostsService implements IPostsService {
   //   return await Post.find(query).populate('user').select('-password');
   // },
 
-  updatePost = async (id: string, query: Partial<CreatePostDTO>) => {
-    return await Post.findOneAndUpdate({ _id: id }, query);
+  updatePost = async (filter: Partial<CreatePostDTO>, query: Partial<CreatePostDTO>) => {
+    return await Post.findOneAndUpdate(filter, query);
   };
 }
