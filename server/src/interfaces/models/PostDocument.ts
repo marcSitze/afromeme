@@ -5,7 +5,7 @@ export interface PostDocument extends Document {
     author: string;
     description: string;
     media: string;
-    comments?: string[];
+    comments: string[];
     likes?: string[];
     createdAt: Date;
     updatedAt: Date;
