@@ -7,9 +7,9 @@ const router = express.Router();
 // Use the jsonewebtoken middleware
 // router.use(auth);
 
-router.post('/', auth, createComment);
-router.get('/:id', auth, getComment);
-router.get('/', auth, getComments);
+router.post('/', createComment);
+router.get('/:id', getComment);
+router.get('/', getComments);
 router.put('/:id', auth, updateComment);
 
 export default router;
