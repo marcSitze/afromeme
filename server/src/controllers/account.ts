@@ -11,7 +11,8 @@ const accountService = new AccountService();
 export const getAccount = async (req: any, res: Response) => {
 
     try {
-        const account = await accountService.findOne({user: req.user.id});
+        // const account = await accountService.findOne({user: req.user.id});
+        const account = await accountService.findOne({_id: req.params.id});
         if(!account) {
             return ErrorHandler(res, httpStatus.NOT_FOUND, 'User not found');
         }
@@ -39,5 +40,13 @@ export const updateAccount = async (req: any, res: Response) => {
 }
 
 export const getAccounts = async (req: Request, res: Response) => {
-    
+     try {
+         const accounts = await accountService.getAccounts();
+         if(accounts.length === 0) {
+            return ErrorHandler(res, httpStatus.NO_CONTENT, "No accounts yet");
+         }
+				 SuccessHandler(res, httpStatus.OK, accounts);
+     } catch (err) {
+			 console.error(err);
+		 }
 }
