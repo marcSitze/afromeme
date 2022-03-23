@@ -15,19 +15,22 @@ import {
   Text,
   useColorScheme,
   View,
+  LogBox
 } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './src/redux/setup/store';
 import Card from './src/components/Card'
+import Routes from './src/routes/Routes';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
+  LogBox.ignoreLogs(["[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!"])
   return (
     <Provider store={store}>
       <SafeAreaView>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Card text='This is the message'/>
+        <Routes />
       </SafeAreaView>
     </Provider>
   );
