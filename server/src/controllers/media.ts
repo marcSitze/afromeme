@@ -10,19 +10,31 @@ const mediaService = new MediaService();
 
 export const createMedia = async (req: any, res: any) => {
 
+  // author here represents the userID
+  const { name, author } = req.body;
+  const errors = [];
+
+  if(!author) {
+    errors.push({"msg": "An author needs to be passed in order to create a media"});
+  }
+
+  if(errors.length > 0) {
+    return ErrorHandler(res, httpStatus.BAD_REQUEST, { "msg": "please enter valid informations" });
+  }
+
   console.log('req.media: ', req.file);
   if(req.file && req.file.size > 1024 * 1024) {
     fs.unlink(req.file.path, function(err) {
       if(err) throw err;
     });
-    return ErrorHandler(res, httpStatus.BAD_REQUEST, "please upload an image or gif <= 1mo");
+    return ErrorHandler(res, httpStatus.BAD_REQUEST, { "msg": "please upload an image or gif <= 1mo" });
   }
   try {
     const result = await saveMedia({
-      name: 'abcd',
+      name,
       path: req.file.path,
       mimetype: req.file.mimetype
-    }, '61828045c2470b1ac499542b');
+    }, author);
     console.log('result: ', result);
     SuccessHandler(res, httpStatus.CREATED, result);
   } catch(err) {
@@ -51,6 +63,11 @@ export const photo = (req: any, res: any, next: NextFunction) => {
 }
 export const getMedias = async (req: Request, res: Response) => {
   const medias = await mediaService.getMedias();
-  res.send(medias);
+  
+  try {
+    return SuccessHandler(res, httpStatus.OK, medias);
+  } catch (err) {
+    console.error(err);
+  }
 }
 export const updateMedia = async (req: Request, res: Response) => {}
