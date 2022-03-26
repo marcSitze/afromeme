@@ -23,8 +23,8 @@ import type {
   import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
   export type RootStackParamList = {
-    Home: NavigatorScreenParams<HomeTabParamList>;
-    Hello: NavigatorScreenParams<HomeTabParamList>;
+    Home?: NavigatorScreenParams<HomeTabParamList>;
+    Hello?: NavigatorScreenParams<HomeTabParamList>;
     // PostDetails: { id: string };
     // NotFound: undefined;
   };
@@ -35,6 +35,7 @@ import type {
   export type HomeTabParamList = {
     Popular: undefined;
     Latest: undefined;
+    navigate: Function;
   };
 
   export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
