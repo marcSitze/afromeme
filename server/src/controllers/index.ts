@@ -1,5 +1,8 @@
 
 import { Request, Response } from 'express';
+import { SuccessHandler } from '../common/response.handler';
+import constants from '../common/constants';
+const { httpStatus } = constants;
 
 // get Index route
 export const getIndex = async (req: Request, res: Response) => {
@@ -15,7 +18,7 @@ export const getIndex = async (req: Request, res: Response) => {
         //     title: 'AfroMeme',
         //     userAuth: true
         // });
-        res.status(200).json({ "msg": "Welcome to afromeme" });
+        SuccessHandler(res, httpStatus.OK, { "msg": "Welcome to afromeme" } )
     } catch (err) {
         console.error(err);
     }
