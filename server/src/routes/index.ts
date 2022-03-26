@@ -20,6 +20,7 @@ import { getIndex, getIndividual, postComment } from '../controllers';
 =====================================*/
 // Display all the videos and images
 router.get('/', getIndex);
+router.get('/refresh', getIndex);
 // user routes
 router.use("/users", usersRoute);
 // account routes
