@@ -1,0 +1,20 @@
+Done
+- Create user
+- Get user
+- Get Users
+- Login User
+- Get Accounts
+- Get Account  N.B An account here represents a user profile
+- Create Media
+- Get Media
+- Create Post
+- Get Posts
+- Get Post
+- Create a Comment on a Post
+
+To Do
+- Get Comments of a Post
+- Like a Post
+- Follow an account
+- Add Authorization
+- Posts categories
