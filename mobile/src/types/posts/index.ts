@@ -1,6 +1,7 @@
 export interface IPost {
     id: string,
-    message: string
+    message?: string,
+    media: string
 }
 
 export interface IPostState {
