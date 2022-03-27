@@ -1,19 +1,26 @@
-import React from "react";
-// import { View, Text, TouchableOpacity } from 'react-native';
-import { Center, Container, Heading, Text } from 'native-base';
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Image } from 'react-native';
+import { Center, Container, Heading, Text, } from 'native-base';
+import { connect, useDispatch } from "react-redux";
 import styles from './styles';
+import * as types from "../../redux/posts/types";
 import { IPost } from '../../types/posts';
 import { PropsState, HomeTabParamList } from '../../types';
+import config from '../../config';
 
 type Props = {
   text?: string,
   style?: any,
-  posts?: Array<IPost>,
+  posts?: IPost[],
   navigation: HomeTabParamList
 }
 const Card = ({ text = 'Hello Text', style, posts, navigation }: Props) => {
+  const dispatch = useDispatch();
   console.log('posts: ', posts);
+
+  useEffect(() => {
+    dispatch({ type: types.GET_POSTS_REQUEST, payload: []});
+  }, []);
 
   return (
     <Center>
@@ -26,6 +33,8 @@ const Card = ({ text = 'Hello Text', style, posts, navigation }: Props) => {
           NativeBase is a simple, modular and accessible component library that
           gives you building blocks to build you React applications.
         </Text>
+        {posts[0]?.media && <Image style={{width: 100, height: 100, marginBottom: 10}} source={{uri: `${config.API}/api/media/${posts[0].media}`}} />}
+        {posts[0]?.media && <Image style={{width: 100, height: 100}} source={{uri: `${config.API}/api/media/${posts[0].media}`}} />}
     </Container>
     </Center>
   )
