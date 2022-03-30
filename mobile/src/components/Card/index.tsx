@@ -11,7 +11,7 @@ import config from '../../config';
 type Props = {
   text?: string,
   style?: any,
-  posts?: IPost[],
+  posts: IPost[],
   navigation: HomeTabParamList
 }
 const Card = ({ text = 'Hello Text', style, posts, navigation }: Props) => {

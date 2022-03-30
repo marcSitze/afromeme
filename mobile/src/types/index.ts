@@ -25,6 +25,8 @@ import type {
   export type RootStackParamList = {
     Home?: NavigatorScreenParams<HomeTabParamList>;
     Hello?: NavigatorScreenParams<HomeTabParamList>;
+    Login: NavigatorScreenParams<any>;
+    Register: NavigatorScreenParams<any>;
     // PostDetails: { id: string };
     // NotFound: undefined;
   };
