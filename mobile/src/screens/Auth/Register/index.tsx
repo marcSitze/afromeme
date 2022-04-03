@@ -21,16 +21,16 @@ const Register = ({ navigation}: any) => {
         <FormControl isRequired>
           <VStack mb="1/6">
           <Box mb="4">
-            <Input borderRadius="10" px="4" color="gray.100" placeholderTextColor="#f4f4f4" backgroundColor="#252a34" borderColor="#252a34" type="text" defaultValue='example@gmail.com' placeholder='Email' />
+            <Input borderRadius="10" px="4" color="gray.100" placeholderTextColor="#f4f4f4" backgroundColor="#252a34" borderColor="#252a34" type="text" placeholder='Full Name' />
+          </Box>
+          <Box mb="4">
+            <Input borderRadius="10" px="4" color="gray.100" placeholderTextColor="#f4f4f4" backgroundColor="#252a34" borderColor="#252a34" type="text" placeholder='Last Name' />
           </Box>
           <Box mb="4">
             <Input borderRadius="10" px="4" color="gray.100" placeholderTextColor="#f4f4f4" backgroundColor="#252a34" borderColor="#252a34" type="text" defaultValue='example@gmail.com' placeholder='Email' />
           </Box>
           <Box mb="4">
-            <Input borderRadius="10" px="4" color="gray.100" placeholderTextColor="#f4f4f4" backgroundColor="#252a34" borderColor="#252a34" type="text" defaultValue='example@gmail.com' placeholder='Email' />
-          </Box>
-          <Box mb="4">
-            <Input borderRadius="10" px="4" color="gray.100" placeholderTextColor="#f4f4f4" backgroundColor="#252a34" borderColor="#252a34" type="text" defaultValue='example@gmail.com' placeholder='Email' />
+            <Input borderRadius="10" px="4" color="gray.100" placeholderTextColor="#f4f4f4" backgroundColor="#252a34" borderColor="#252a34" type="password" defaultValue='example@gmail.com' placeholder='Email' />
           </Box>
           </VStack>
           <Box>
