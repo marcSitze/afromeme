@@ -23,10 +23,12 @@ import type {
   import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
   export type RootStackParamList = {
-    Home?: NavigatorScreenParams<HomeTabParamList>;
-    Hello?: NavigatorScreenParams<HomeTabParamList>;
-    Login: NavigatorScreenParams<any>;
-    Register: NavigatorScreenParams<any>;
+    HOME?: NavigatorScreenParams<HomeTabParamList>;
+    HELLO?: NavigatorScreenParams<HomeTabParamList>;
+    LOGIN: NavigatorScreenParams<any>;
+    REGISTER: NavigatorScreenParams<any>;
+    BOTTOM_NAVIGATION: NavigatorScreenParams<any>;
+    WAITING_SCREEN: NavigatorScreenParams<any>;
     // PostDetails: { id: string };
     // NotFound: undefined;
   };
