@@ -6,6 +6,8 @@ const router = express.Router();
 
 // Use the jsonewebtoken middleware
 // router.use(auth);
+router.use(auth);
+
 router.get('/:id', getAccount);
 router.get('/', getAccounts);
 router.put('/:id', updateAccount)

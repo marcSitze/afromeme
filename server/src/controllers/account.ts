@@ -11,16 +11,19 @@ const accountService = new AccountService();
 export const getAccount = async (req: any, res: Response) => {
 
     try {
+        console.log('req.token: ', req.token);
+        // const user = req.user.id;
+        console.log('req.user.id: ', req.user);
         // const account = await accountService.findOne({user: req.user.id});
         const account = await accountService.findOne({_id: req.params.id});
         if(!account) {
             return ErrorHandler(res, httpStatus.NOT_FOUND, { "msg": "User not found" });
         }
 
-        SuccessHandler(res, httpStatus.OK, account);
+        return SuccessHandler(res, httpStatus.OK, account);
     } catch (err) {
         console.log(err);
-        ErrorHandler(res, httpStatus.INTERNAL_SERVER_ERROR, 'Something went wrong');
+        return ErrorHandler(res, httpStatus.INTERNAL_SERVER_ERROR, 'Something went wrong');
     }
 }
 
