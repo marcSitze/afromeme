@@ -1,7 +1,8 @@
-Navigation
-Screens
+Navigation - done
+Screens - In Progress
 Colors
 layout
 fonts
+translations
 tests
 Automate processes
