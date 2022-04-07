@@ -7,7 +7,11 @@ type BaseWrapperProp = {
 
 const BaseWrapper = ({ children }: BaseWrapperProp) => {
   return (
-    <Box bg="coolGray.200" height="full" px="2" pt={4}>
+    <Box bg="coolGray.100" height="full" px="2" pt={4}>
+      {/**
+       * @AppHeader @will @come @here
+       */}
+       <Text fontWeight={'bold'} fontSize={'xl'} mb={'4'}>Afromeme</Text>
       {children}
     </Box>
   )
