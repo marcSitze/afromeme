@@ -10,6 +10,7 @@ import Register from '../screens/Auth/Register';
 import Home from '../screens/Home';
 import BottomNavigation from '../navigations/BottomNavigation';
 import WaitingScreen from '../screens/WaitingScreen';
+import Upload from '../screens/Upload';
 
 const stack = createStackNavigator<RootStackParamList>();
 
@@ -26,6 +27,7 @@ export default function Routes() {
         <stack.Screen name={SCREENS.HOME} component={Home} />
         <stack.Screen name={SCREENS.BOTTOM_NAVIGATION} component={BottomNavigation} />
         <stack.Screen name={SCREENS.WAITING_SCREEN} component={WaitingScreen} />
+        <stack.Screen name={SCREENS.UPLOAD} component={Upload} />
       </stack.Navigator>
     </NavigationContainer>
   );
