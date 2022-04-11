@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { Box, Center, Container, Heading, Text, FormControl, Input, VStack, HStack, Button } from 'native-base';
 
 import * as SCREENS from '../../../constants/screens';
@@ -34,11 +35,13 @@ const Register = ({ navigation}: any) => {
           </Box>
           </VStack>
           <Box>
-            <Button onPress={() => navigation.navigate(SCREENS.LOGIN)} backgroundColor="#5568fe" mb="4" borderRadius="10">Sign Up</Button>
+            <Button onPress={() => navigation.navigate(SCREENS.BOTTOM_NAVIGATION)} backgroundColor="#5568fe" mb="4" borderRadius="10">Sign Up</Button>
             <Center>
               <HStack>
                 <Text color="gray.100" mr="2">Have an account? </Text>
-                <Text color="#5568fe">Login</Text>
+                <TouchableOpacity onPress={() => navigation.navigate(SCREENS.LOGIN)}>
+                  <Text color="#5568fe">Login</Text>
+                </TouchableOpacity>
               </HStack>
             </Center>
           </Box>
