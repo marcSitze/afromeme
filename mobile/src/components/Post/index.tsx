@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity, TouchableHighlight} from 'react-native';
 import {Box, HStack, Text, VStack} from 'native-base';
 import LottieView from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -26,7 +26,6 @@ const Post = ({post}: PostProps) => {
   return (
     <Box
       width="100%"
-      height={height / 1.70}
       bg="white"
       borderWidth={1}
       borderColor="coolGray.100"
@@ -44,9 +43,9 @@ const Post = ({post}: PostProps) => {
         </VStack>
       </HStack>
       <VStack>
-        <Box width="full" mb='3' bg={'gray.100'}>
+        <Box width="full" mb='3' bg={'gray.100'} height={height / 2.4}>
           <Image
-            style={{width: '100%', height: height / 2.3 }}
+            style={{width: '100%', height: '100%'}}
             source={Picture}
             resizeMode="contain"
             // source={post.media ? {uri: post.media} : Picture}
