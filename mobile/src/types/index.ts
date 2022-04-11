@@ -29,6 +29,7 @@ import type {
     REGISTER: NavigatorScreenParams<any>;
     BOTTOM_NAVIGATION: NavigatorScreenParams<any>;
     WAITING_SCREEN: NavigatorScreenParams<any>;
+    UPLOAD: NavigatorScreenParams<any>;
     // PostDetails: { id: string };
     // NotFound: undefined;
   };
