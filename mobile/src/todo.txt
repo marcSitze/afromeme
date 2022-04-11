@@ -4,5 +4,6 @@ Colors
 layout
 fonts
 translations
+Add Drawer Navigation in the profile screen for settings options
 tests
 Automate processes
