@@ -7,8 +7,8 @@ import { getPosts as getPostsService } from '../../services/posts';
  */
 function* getPosts(): Generator<any> {
   try {
-    const result = yield getPostsService();
-    const data = yield result.json();
+    const result: any = yield getPostsService();
+    const data: any = yield result.json();
     console.log('dataS: ', data);
     yield put({ type: types.GET_POSTS_SUCCESS, payload: data.data })
   } catch (error) {
