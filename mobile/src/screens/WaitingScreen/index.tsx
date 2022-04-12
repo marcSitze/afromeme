@@ -9,7 +9,7 @@ const WaitingScreen = ({ navigation }: any) => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate(SCREENS.BOTTOM_NAVIGATION);
+      navigation.navigate(SCREENS.LOGIN);
     }, 1500);
   }, []);
 
@@ -23,7 +23,7 @@ const WaitingScreen = ({ navigation }: any) => {
         </Center>
       </Box>
       <Center>
-        <Text fontSize={'2xl'} mb='4' color={'blue.400'}>Chargement...</Text>
+        <Text fontSize={'2xl'} mb='4' color={'blue.400'}>Loading...</Text>
       </Center>
     </Box>
   )

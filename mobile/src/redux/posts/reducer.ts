@@ -11,7 +11,7 @@ import { Action } from '../../types';
 
 
 const intialState: IPostState = {
-  posts: [{id: '1', message: 'first post'}],
+  posts: [],
   loading: false,
   error: '',
   creating: false,
