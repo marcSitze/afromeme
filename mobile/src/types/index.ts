@@ -2,16 +2,18 @@
 // import { NavigatorScreenParams, CompositeScreenProps } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { IPostState } from './posts';
+import { IAuthState } from './auth';
 
 // action type
 export type Action = {
-    type: string,
-    payload: any,
+  type: string,
+  payload: any,
 }
 
 // stateProps
 export type PropsState = {
-    postsReducer: IPostState
+  postsReducer: IPostState,
+  authReducer: IAuthState,
 }
 
 // navigation types
