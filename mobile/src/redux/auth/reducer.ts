@@ -20,7 +20,7 @@ const INITIALSTATE: IAuthState = {
 }
 
 
-function AuthReducer(state = INITIALSTATE, action: Action) {
+function authReducer(state = INITIALSTATE, action: Action) {
   switch(action.type) {
     case types.LOGIN_USER_SUCCESS:
       return {
@@ -55,4 +55,4 @@ function AuthReducer(state = INITIALSTATE, action: Action) {
   }
 };
 
-export default AuthReducer;
+export default authReducer;
