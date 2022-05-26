@@ -2,6 +2,7 @@ import React from 'react';
 import {Image} from 'react-native';
 import {Box, Text, HStack, VStack, Container, Button, Heading} from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
 
 import profile from '../../assets/images/profile.png';
 import { width, height } from '../../constants/layout';
@@ -9,8 +10,16 @@ import BaseWrapper from '../../components/Layout/BaseWrapper';
 import PostProfile from '../../components/PostProfile';
 import { profilePosts } from '../../helpers/defaultData';
 import WhiteSpace from '../../components/Others/WhiteSpace';
+import { PropsState } from '../../types';
+import { IAccount } from '../../types/users';
 
-const Profile = () => {
+type PropsType = {
+  account: IAccount
+}
+
+const Profile = ({ account }: PropsType) => {
+
+  console.log('account: ', account);
   return (
     <BaseWrapper headerText='Profile'>
       <ScrollView>
@@ -25,16 +34,16 @@ const Profile = () => {
         </Box>
         <Container mb={'4'}>
           <Text fontSize={'lg'} textAlign='center' fontWeight={'bold'}>
-            John Doe
+            {account?.user?.username ?? "John Doe"}
           </Text>
         </Container>
         <HStack w={width * 0.80} justifyContent={'space-evenly'} mb='4'>
           <Box alignItems={'center'}>
-            <Text fontWeight={'bold'} fontSize='xl'>10</Text>
+            <Text fontWeight={'bold'} fontSize='xl'>{account?.posts?.length ?? 10}</Text>
             <Text color={'gray.500'}>Posts</Text>
           </Box>
           <Box alignItems={'center'}>
-          <Text fontWeight={'bold'} fontSize='xl'>10</Text>
+          <Text fontWeight={'bold'} fontSize='xl'>{account?.followers.length?? 10}</Text>
             <Text color={'gray.500'}>Followers</Text>
           </Box>
           <Box alignItems={'center'}>
@@ -54,7 +63,7 @@ const Profile = () => {
         }
       </VStack>
         <Box flex={1} flexDirection='row' flexWrap={'wrap'}>
-          {profilePosts.map((data) => <PostProfile key={data.id} media={data.media}/>)}
+          {account.posts.map((data) => <PostProfile key={data._id} media={data.media}/>)}
           <WhiteSpace height={height / 2} />
         </Box>
     </Box>
@@ -63,4 +72,7 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+const mapStateToProps = ({ usersReducer }: PropsState) => ({
+  account: usersReducer.account
+})
+export default connect(mapStateToProps)(Profile);
