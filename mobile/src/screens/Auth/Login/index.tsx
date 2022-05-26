@@ -28,11 +28,11 @@ import * as types from '../../../redux/auth/types';
  * @todo add navigation type
  */
 
-const Login = ({navigation, logging}: any) => {
+const Login = ({navigation, logging }: any) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState<LoginDto>({
-    email: '',
-    password: '',
+    email: 'test@gmail.com',
+    password: '123456',
   });
 console.log('logging: ', logging)
   console.log('form: ', form);
@@ -95,9 +95,11 @@ console.log('logging: ', logging)
               onPress={() => {
                 // navigation.navigate(SCREENS.BOTTOM_NAVIGATION)
                 console.log('pressed')
-                // dispatch(login(form));
-                dispatch({ type: "LOGIN_USER_REQUEST"});
+                // navigation.navigate(SCREENS.BOTTOM_NAVIGATION)
+                dispatch(login(form));
+                // dispatch({ type: types.LOGIN_USER_REQUEST});
                 // dispatch({ type: "GET_POSTS_REQUEST", payload: form});
+                // loginService(form).then(data => data?.json()).then(data => console.log('lData: ', data)).catch(err => console.error('some Err: ', err));
               }}
               py="4"
               mb="4"

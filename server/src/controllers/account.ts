@@ -14,8 +14,9 @@ export const getAccount = async (req: any, res: Response) => {
         console.log('req.token: ', req.token);
         // const user = req.user.id;
         console.log('req.user.id: ', req.user);
-        // const account = await accountService.findOne({user: req.user.id});
-        const account = await accountService.findOne({_id: req.params.id});
+        const account = await accountService.findOne({user: req.user.id});
+        // const account = await accountService.findOne({_id: req.params.id});
+        // console.log('accountS: ', account)
         if(!account) {
             return ErrorHandler(res, httpStatus.NOT_FOUND, { "msg": "User not found" });
         }
