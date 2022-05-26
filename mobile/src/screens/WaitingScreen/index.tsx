@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { Box, Center, Text, Image } from 'native-base';
 import LottieView from 'lottie-react-native'
 
@@ -23,7 +24,8 @@ const WaitingScreen = ({ navigation }: any) => {
         </Center>
       </Box>
       <Center>
-        <Text fontSize={'2xl'} mb='4' color={'blue.400'}>Loading...</Text>
+        {/* <Text fontSize={'2xl'} mb='4' color={'blue.400'}>Loading...</Text> */}
+        <ActivityIndicator size={'large'} />
       </Center>
     </Box>
   )
