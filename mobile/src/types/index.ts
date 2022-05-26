@@ -3,6 +3,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { IPostState } from './posts';
 import { IAuthState } from './auth';
+import { IUserState } from './users';
 
 // action type
 export type Action = {
@@ -14,6 +15,7 @@ export type Action = {
 export type PropsState = {
   postsReducer: IPostState,
   authReducer: IAuthState,
+  usersReducer: IUserState,
 }
 
 // navigation types
@@ -32,6 +34,7 @@ import type {
     BOTTOM_NAVIGATION: NavigatorScreenParams<any>;
     WAITING_SCREEN: NavigatorScreenParams<any>;
     UPLOAD: NavigatorScreenParams<any>;
+    VIEW_PROFILE: NavigatorScreenParams<any>;
     // PostDetails: { id: string };
     // NotFound: undefined;
   };
