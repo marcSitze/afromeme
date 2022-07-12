@@ -13,13 +13,14 @@ export const createMedia = async (req: any, res: any) => {
   // author here represents the userID
   const { name, author } = req.body;
   const errors = [];
-
+console.log('req.body: ', req.body)
   if(!author) {
     errors.push({"msg": "An author needs to be passed in order to create a media"});
   }
 
   if(errors.length > 0) {
-    return ErrorHandler(res, httpStatus.BAD_REQUEST, { "msg": "please enter valid informations" });
+    console.log('errors: ', errors)
+    return ErrorHandler(res, httpStatus.BAD_REQUEST, { "msg": "please enter valid informations", errors});
   }
 
   console.log('req.media: ', req.file);
@@ -27,7 +28,8 @@ export const createMedia = async (req: any, res: any) => {
     fs.unlink(req.file.path, function(err) {
       if(err) throw err;
     });
-    return ErrorHandler(res, httpStatus.BAD_REQUEST, { "msg": "please upload an image or gif <= 1mo" });
+    errors.push({ "msg": "please upload an image or gif <= 1mo" });
+    return ErrorHandler(res, httpStatus.BAD_REQUEST, { "msg": "please upload an image or gif <= 1mo", errors });
   }
   try {
     const result = await saveMedia({

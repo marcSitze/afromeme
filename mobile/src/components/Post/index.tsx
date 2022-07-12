@@ -12,14 +12,11 @@ import Profile from '../../assets/images/profile.png';
 import BaseWrapper from '../Layout/BaseWrapper';
 import {height} from '../../constants/layout';
 import * as SCREENS from '../../constants/screens';
+import { IPost } from '../../types/posts';
+import config from '../../config';
 
 type PostProps = {
-  post: {
-    author: {
-      name: string;
-    };
-    media: string;
-  };
+  post: IPost
 };
 
 const Post = ({post}: PostProps) => {
@@ -48,7 +45,7 @@ const Post = ({post}: PostProps) => {
         </Box>
         <TouchableOpacity onPress={changeScreen}>
           <VStack>
-            <Text>{post.author.name || 'John Doe'}</Text>
+            <Text>{post.author.username || 'John Doe'}</Text>
             <Text fontSize={10} color={'gray.500'}>{'yesterday at 20:30'}</Text>
           </VStack>
         </TouchableOpacity>
@@ -57,7 +54,7 @@ const Post = ({post}: PostProps) => {
         <Box width="full" mb='3' bg={'gray.100'} height={height / 2.4}>
           <Image
             style={{width: '100%', height: '100%'}}
-            source={Picture}
+            source={post?.media ? { uri: config.API + '/api/media/' + post.media } : Picture}
             resizeMode="contain"
             // source={post.media ? {uri: post.media} : Picture}
           />
@@ -78,9 +75,9 @@ const Post = ({post}: PostProps) => {
                 <Icon name="heart" color={'red'} size={16} />
               )}
             </TouchableOpacity>
-            <Text ml={2}>{Math.round(Math.random() * 100)}</Text>
+            <Text ml={2}>{post.likes.length}</Text>
           </HStack>
-          <Text>comments({Math.round(Math.random() * 30)})</Text>
+          <Text>comments({post.comments.length})</Text>
         </HStack>
       </VStack>
     </Box>

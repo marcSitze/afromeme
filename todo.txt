@@ -1,0 +1,2 @@
+Todo:
+Connect Sockets for real time

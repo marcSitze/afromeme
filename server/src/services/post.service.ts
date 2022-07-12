@@ -1,6 +1,6 @@
-import Post from '../models/Post';
-import { IPostsService } from '../interfaces/posts/post.service.interface';
-import { CreatePostDTO } from '../dto/post.dto';
+import Post from "../models/Post";
+import { IPostsService } from "../interfaces/posts/post.service.interface";
+import { CreatePostDTO } from "../dto/post.dto";
 
 export default class PostsService implements IPostsService {
   constructor() {}
@@ -9,20 +9,26 @@ export default class PostsService implements IPostsService {
     return await newPost.save();
   };
   getPosts = async () => {
-    return await Post.find({});
+    return await Post.find({}).populate({
+      path: "author",
+      populate: { path: "user", select: "-password" },
+    });
   };
   findOne = async (query: Partial<CreatePostDTO>) => {
-    console.log('query: ', query);
+    console.log("query: ", query);
     return await Post.findOne(query).populate("user", { password: 0, __v: 0 });
   };
   getPostById = async (id: string) => {
-    return await Post.findById(id).populate('user').select('-password');
+    return await Post.findById(id).populate("user").select("-password");
   };
   // findPostByQuery: async (query) => {
   //   return await Post.find(query).populate('user').select('-password');
   // },
 
-  updatePost = async (filter: Partial<CreatePostDTO>, query: Partial<CreatePostDTO>) => {
+  updatePost = async (
+    filter: Partial<CreatePostDTO>,
+    query: Partial<CreatePostDTO>
+  ) => {
     return await Post.findOneAndUpdate(filter, query);
   };
 }

@@ -1,6 +1,7 @@
 import express from "express";
 import * as path from "path";
 import morgan from 'morgan';
+
 import config from "./config";
 
 const app: express.Application = express();
@@ -9,6 +10,7 @@ const app: express.Application = express();
 import indexRoute from "./routes/index";
 
 // To parse form data
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('combined'));
 

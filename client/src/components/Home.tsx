@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from 'react-redux';
 
-function Home() {
+const Home: any = ({ posts }: any) => {
+
+  console.log('posts: ', posts);
   return (
     <div>
       <div className="container">
@@ -56,4 +59,9 @@ function Home() {
   );
 }
 
-export default Home;
+const mapStateToProps = ({ postsReducer }: any) => ({
+  posts: postsReducer.posts
+});
+
+export default connect<any, {}>(mapStateToProps)(Home);
+// export default Home;
