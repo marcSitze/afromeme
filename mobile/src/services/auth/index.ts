@@ -11,7 +11,7 @@ export const login = async ({email, password}: LoginDto) => {
     password
   });
 
-  var requestOptions = {
+  var requestOptions: any = {
     method: 'POST',
     headers: myHeaders,
     body: raw,
