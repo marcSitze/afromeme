@@ -6,6 +6,7 @@ export interface IUser {
 }
 
 export interface IAccount {
+  _id: string,
   user: any, // todo add user props
   posts: Array<any>, // tobe defined
   followers: Array<any> // tobe defined
