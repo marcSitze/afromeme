@@ -9,4 +9,4 @@ const PORT = config.app.port;
 
 app.listen(PORT, () => {
     console.log(`Server has started! on port ${PORT}`);
-})
+});
