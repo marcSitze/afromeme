@@ -35,7 +35,7 @@ function* createPost({payload}: CreatePostType): Generator<any> {
     // console.log('payloadSAGA: ', payload);
     const data: any = yield createPostService(payload);
     // console.log('dAtaSaga: ', data);
-    put({ type: types.GET_POSTS_REQUEST, payload: []})
+   yield put({ type: types.GET_POSTS_REQUEST, payload: []})
     // RootNavigationRef.goBack()
   } catch (err) {
     console.error('CreatePostSaga: ', err);
