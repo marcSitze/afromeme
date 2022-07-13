@@ -6,6 +6,7 @@ export default {
     name: process.env.APP_NAME,
     port: process.env.PORT || 5000,
     environment: process.env.APPLICATION_ENV,
+    host: 'http://localhost:5000'
   },
   mongo: {
     MONGO_LOCAL: process.env.MONGO_LOCAL || 'mongodb://localhost:27017/afromeme',
@@ -13,6 +14,7 @@ export default {
     MONGO_TEST_DB: process.env.MONGO_TEST_DB,
   },
   auth: {
-    jwt_secret: process.env.JWT_SECRET || 'my-ultra-secret-jwt'
+    jwt_secret: process.env.JWT_SECRET || 'my-ultra-secret-jwt',
+    saltRounds: 10
   },
 };
