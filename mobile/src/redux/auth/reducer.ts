@@ -17,6 +17,8 @@ const INITIALSTATE: IAuthState = {
   registering_message: '',
   error: '',
   token: '',
+  loading_forgetPass: false,
+  forgetPassword_msg: '',
 }
 
 
@@ -72,6 +74,24 @@ function authReducer(state = INITIALSTATE, action: Action) {
         registering_message: action.payload
       }
 
+    case types.FORGET_PASSWORD_REQUEST:
+      console.log('action: ', action);
+      return {
+        ...state,
+        loading_forgetPass: true,
+      }
+      case types.FORGET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading_forgetPass: false,
+        forgetPassword_msg: 'Check your mail box and reset your password'
+      }
+      case types.FORGET_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading_forgetPass: false,
+        forgetPassword_msg: action.payload
+      }
     default: {
       return {
         ...state
