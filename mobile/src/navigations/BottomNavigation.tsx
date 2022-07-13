@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import FIcon from 'react-native-vector-icons/Feather';
 
 import Home from '../screens/Home';
-import Login from '../screens/Auth/Login';
 import * as SCREENS from '../constants/screens';
 import colors from '../constants/colors';
 import Profile from '../screens/Profile';
@@ -25,6 +24,7 @@ function BottomNavigation() {
         options={{
           tabBarIcon: ({ color, focused }) => <Icon name="home" size={30} color={!focused ? colors.light.black: color} />,
           tabBarLabel: 'Home',
+          tabBarShowLabel: false
         }}
         name={SCREENS.HOME}
         component={Home}
