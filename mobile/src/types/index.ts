@@ -35,6 +35,7 @@ import type {
     WAITING_SCREEN: NavigatorScreenParams<any>;
     UPLOAD: NavigatorScreenParams<any>;
     VIEW_PROFILE: NavigatorScreenParams<any>;
+    FORGET_PASSWORD: NavigatorScreenParams<any>;
     // PostDetails: { id: string };
     // NotFound: undefined;
   };
