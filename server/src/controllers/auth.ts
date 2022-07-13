@@ -4,6 +4,9 @@ const newSecret = "secret";
 const User = require("../models/Users");
 import * as bcrypt from "bcrypt";
 
+import { Errors } from "../types";
+import UserService from "../services/user.service";
+
 // export const getRegisterForm = () => {
 //        // to check if user is loggedin
 //    const userAuth = null;
@@ -102,17 +105,6 @@ export const createUser = async (req: Request, res: Response) => {
     res.status(500).send("server error");
     console.error(err);
   }
-};
-
-export const getLoginForm = (req: Request, res: Response) => {
-  // to check if user is loggedin
-  const userAuth = null;
-
-  // res.render('register/login', {
-  //    title: 'Login',
-  //    userAuth
-  // });
-  res.json({ msg: "this is the login form" });
 };
 
 export const login = async (req: Request, res: Response) => {

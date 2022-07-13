@@ -37,3 +37,27 @@ export const getUserAccount = async (userId: string) => {
     console.error('GetUserAccountService: ', err);
   }
 }
+
+export const logoutUser = () => {
+  return true;
+}
+
+export const register = async (payload: RegisterDto) => {
+  console.log('Login service....')
+  var raw = JSON.stringify(payload);
+
+  var requestOptions: any = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  try {
+    const result = await fetch(config.API + '/api/users', requestOptions);
+    const data = await result.json();
+    return data;
+  } catch (err) {
+    console.error('Register err: ', err);
+  }
+}

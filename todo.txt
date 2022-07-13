@@ -1,2 +1,18 @@
 Todo:
-Connect Sockets for real time
+- Validate Client inputs
+- Add #hashtags when creating posts and desc.
+- Edit profile
+- Reset Password
+- Like a post
+- Comment a post
+- View a profile => passing real data
+- View Profile posts (Scrollview)
+- Add Story
+- View Story
+- Comment Story
+- Translations
+- Connect Sockets for real time
+- TimeStamps to know at what time a user loggedIn
+- Check Post data
+- Video Chats
+- Message Chats

@@ -2,15 +2,18 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Box, Center, Text, Image } from 'native-base';
 import LottieView from 'lottie-react-native'
+import { useDispatch } from 'react-redux';
 
 import colors from '../../constants/colors';
 import * as SCREENS from '../../constants/screens';
+import { getLocalSignIn } from '../../redux/auth/actions';
 
 const WaitingScreen = ({ navigation }: any) => {
-
+  const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate(SCREENS.LOGIN);
+      dispatch(getLocalSignIn());
+      // navigation.navigate(SCREENS.LOGIN);
     }, 1500);
   }, []);
 

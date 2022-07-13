@@ -2,7 +2,8 @@ import React from 'react';
 import {Image} from 'react-native';
 import {Box, Text, HStack, VStack, Container, Button, Heading} from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import profile from '../../assets/images/profile.png';
 import { width, height } from '../../constants/layout';
@@ -13,13 +14,19 @@ import WhiteSpace from '../../components/Others/WhiteSpace';
 import { PropsState } from '../../types';
 import { IAccount } from '../../types/users';
 
+import { logout } from '../../redux/auth/actions';
+
 type PropsType = {
   account: IAccount
 }
 
 const Profile = ({ account }: PropsType) => {
+  const dispatch = useDispatch();
 
   console.log('account: ', account);
+  const handleLogout = () => {
+    dispatch(logout());
+  }
   return (
     <BaseWrapper headerText='Profile'>
       <ScrollView>
@@ -52,7 +59,10 @@ const Profile = ({ account }: PropsType) => {
           </Box>
         </HStack>
         <Box mb={'4'}>
+          <HStack>
           <Button>Edit profile</Button>
+          <Button bg={'red.500'} onPress={handleLogout}><MaterialIcon name='logout' /></Button>
+          </HStack>
         </Box>
         <Text mb='4'>this is the bio text space</Text>
 

@@ -14,6 +14,7 @@ const App = () => {
   LogBox.ignoreLogs([
     "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
   ]);
+  LogBox.ignoreLogs(["Require cycle:"]);
   return <Routes />;
 };
 

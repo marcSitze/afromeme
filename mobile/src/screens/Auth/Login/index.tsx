@@ -15,6 +15,7 @@ import {
   HStack,
 } from 'native-base';
 import { connect, useDispatch } from 'react-redux';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import * as SCREENS from '../../../constants/screens';
 import Camera from '../../../assets/images/camera.svg';
@@ -28,7 +29,7 @@ import * as types from '../../../redux/auth/types';
  * @todo add navigation type
  */
 
-const Login = ({navigation, logging }: any) => {
+const Login = ({navigation, logging, logging_message }: any) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState<LoginDto>({
     email: 'test@gmail.com',
@@ -47,6 +48,7 @@ console.log('logging: ', logging)
         </Center>
       </Box>
       <Box mx="10">
+      {Array.isArray(logging_message) && logging_message.length > 0 ? logging_message.map((data, i) => <Text bg={'red.400'} color={'red.500'} key={i}>{data.msg}</Text>): <Text color={'red.500'} >{logging_message}</Text>}
         <FormControl isRequired>
           <Stack mb="1/6">
             <Box mb="4">
@@ -105,7 +107,10 @@ console.log('logging: ', logging)
               mb="4"
               borderRadius="10"
               backgroundColor="#5568fe"
-              w="full">
+              w="full"
+              isLoading={logging}
+              // leftIcon={logging ?<FontAwesome5 name='spinner' color={'#fff'} />: <Text></Text>}
+            >
               Sign In
             </Button>
             <Button
@@ -124,8 +129,8 @@ console.log('logging: ', logging)
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  // navigation.navigate(SCREENS.REGISTER)
-                  dispatch(login(form));
+                  navigation.navigate(SCREENS.REGISTER)
+                  // dispatch(login(form));
                 }}>
                 <Text color="#5568fe">Sign Up</Text>
               </TouchableOpacity>
@@ -138,6 +143,7 @@ console.log('logging: ', logging)
 };
 
 const mapStateToProps = ({ authReducer }: PropsState) => ({
-  logging: authReducer.logging_error
+  logging: authReducer.logging,
+  logging_message: authReducer.logging_error
 })
 export default connect(mapStateToProps)(Login);
