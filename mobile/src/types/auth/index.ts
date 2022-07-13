@@ -15,7 +15,7 @@ export interface IAuthState {
   logging_error: string | void,
   error: string | void,
   registering: Boolean,
-  registering_error: string | void,
+  registering_message: string | void,
   token: string,
 }
 
@@ -27,6 +27,6 @@ export type LoginDto = {
 export type RegisterDto = {
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  username: string;
+  phone: string;
 }
