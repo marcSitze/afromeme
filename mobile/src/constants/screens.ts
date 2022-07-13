@@ -6,3 +6,4 @@ export const WAITING_SCREEN = 'WAITING_SCREEN';
 export const PROFILE = 'PROFILE';
 export const UPLOAD = 'UPLOAD';
 export const VIEW_PROFILE = 'VIEW_PROFILE';
+export const FORGET_PASSWORD = 'FORGET_PASSWORD';
