@@ -17,6 +17,8 @@ export interface IAuthState {
   registering: Boolean,
   registering_message: string | void,
   token: string,
+  loading_forgetPass: Boolean,
+  forgetPassword_msg: string
 }
 
 export type LoginDto = {

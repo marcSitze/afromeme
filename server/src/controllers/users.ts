@@ -176,6 +176,7 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const requestResetPassword = async (req: Request, res: Response) => {
+  console.log('req.body: ', req.body);
   if(!req.body.email) {
     return ErrorHandler(res, httpStatus.BAD_REQUEST, { msg: "Please enter your email"});
   }
@@ -215,7 +216,8 @@ export const requestResetPassword = async (req: Request, res: Response) => {
   });
 
   // return link;
-  res.send({ link, msg: "check your mail" })
+  // res.send({ link, msg: "check your mail" })
+  return SuccessHandler(res, httpStatus.OK, { msg: "Check your mail to reset your password" });
 };
 
 export const resetPassword = async (req: Request, res: Response) => {
