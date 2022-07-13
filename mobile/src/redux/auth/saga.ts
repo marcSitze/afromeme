@@ -8,6 +8,7 @@ import {
   login as loginService,
   logoutUser as logoutUserService,
   register as registerService,
+  forgetPassword as forgetPasswordService
 } from '../../services/auth';
 import {LoginDto, RegisterDto} from '../../types/auth';
 import config from '../../config';
@@ -115,9 +116,30 @@ function* register({ payload }: RegisterType): Generator<any> {
   }
 }
 
+type ForgetPasswordType = {
+  type: typeof types.FORGET_PASSWORD_REQUEST;
+  payload: string;
+}
+function* forgetPassword({ payload }: ForgetPasswordType): Generator<any> {
+  try {
+    console.log('payloadSaga: ', payload);
+    const data: any = yield forgetPasswordService(payload);
+    console.log('result: ', data);
+    if(data.success) {
+      yield put({ type: types.FORGET_PASSWORD_SUCCESS, payload: []});
+    }
+    if(!data.success) {
+      yield put({ type: types.FORGET_PASSWORD_FAILURE, payload: data.data.msg});
+    }
+  } catch (error) {
+    console.error('forgetPasswordService: ', error);
+  }
+}
+
 export default function* AuthSaga() {
   yield takeLatest(types.LOGIN_USER_REQUEST, login);
   yield takeLatest(types.GET_LOCAL_SIGN_IN_REQUEST, localSignIn);
   yield takeLatest(types.LOGOUT_USER_REQUEST, logout);
   yield takeLatest(types.REGISTER_USER_REQUEST, register);
+  yield takeLatest(types.FORGET_PASSWORD_REQUEST, forgetPassword);
 }
