@@ -17,4 +17,9 @@ export const register = (payload: RegisterDto) => ({
 
 export const logout = () => ({
   type: types.LOGOUT_USER_REQUEST
-})
+});
+
+export const forgetPassword = (email: string) => ({
+  type: types.FORGET_PASSWORD_REQUEST,
+  payload: email,
+});
