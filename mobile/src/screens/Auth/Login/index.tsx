@@ -118,8 +118,10 @@ console.log('logging: ', logging)
               borderRadius="10"
               bg="white"
               w="full"
-              leftIcon={<Camera width={20} height={20} />}>
-              Sign In with Google
+              // leftIcon={<Camera width={20} height={20} />}
+              onPress={() => navigation.navigate(SCREENS.FORGET_PASSWORD)}
+            >
+              Forgot password?
             </Button>
           </Box>
           <Center>
