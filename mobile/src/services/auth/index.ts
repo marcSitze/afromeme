@@ -1,21 +1,21 @@
 import config from '../../config';
-import { LoginDto, RegisterDto } from '../../types/auth';
+import {LoginDto, RegisterDto} from '../../types/auth';
 
 var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+myHeaders.append('Content-Type', 'application/json');
 
 export const login = async ({email, password}: LoginDto) => {
-  console.log('Login service....')
+  console.log('Login service....');
   var raw = JSON.stringify({
     email,
-    password
+    password,
   });
 
   var requestOptions: any = {
     method: 'POST',
     headers: myHeaders,
     body: raw,
-    redirect: 'follow'
+    redirect: 'follow',
   };
 
   try {
@@ -27,7 +27,6 @@ export const login = async ({email, password}: LoginDto) => {
   }
 };
 
-
 export const getUserAccount = async (userId: string) => {
   try {
     const request = await fetch(config.API + '/api/accounts/' + userId);
@@ -36,21 +35,21 @@ export const getUserAccount = async (userId: string) => {
   } catch (err) {
     console.error('GetUserAccountService: ', err);
   }
-}
+};
 
 export const logoutUser = () => {
   return true;
-}
+};
 
 export const register = async (payload: RegisterDto) => {
-  console.log('Login service....')
+  console.log('Login service....');
   var raw = JSON.stringify(payload);
 
   var requestOptions: any = {
     method: 'POST',
     headers: myHeaders,
     body: raw,
-    redirect: 'follow'
+    redirect: 'follow',
   };
 
   try {
@@ -60,4 +59,31 @@ export const register = async (payload: RegisterDto) => {
   } catch (err) {
     console.error('Register err: ', err);
   }
-}
+};
+
+export const forgetPassword = async (email: string) => {
+  var myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+console.log('email: ', email)
+  var raw = JSON.stringify({
+    email
+  });
+
+  var requestOptions: any = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow',
+  };
+
+  try {
+    const response = await fetch(
+      config.API + '/api/users/auth/requestResetPassword',
+      requestOptions,
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
