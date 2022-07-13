@@ -31,7 +31,13 @@ export default class UserService implements IUserService {
   // findUsers: async () => {
   //   return await User.find({});
   // },
-  // updateUser: async (id, query) => {
-  //   return await User.findOneAndUpdate({ _id: id}, query);
-  // }
+  updateUser = async (id: string, query: any) => {
+    return await User.findOneAndUpdate({ _id: id}, query);
+  }
 }
+
+// await User.updateOne(
+//   { _id: userId },
+//   { $set: { password: hash } },
+//   { new: true }
+// );
