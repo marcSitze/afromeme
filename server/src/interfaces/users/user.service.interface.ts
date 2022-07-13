@@ -6,4 +6,5 @@ export interface IUserService{
     getUsers(): Promise<IUser[] | void>;
     findOne(query: any): Promise<IUser | void | any>;
     getUserById(id: string): Promise<IUser | void | any>;
+    updateUser(id: string, query: any): Promise<IUser | void | any>;
 }
