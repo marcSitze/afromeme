@@ -12,6 +12,7 @@ import BottomNavigation from '../navigations/BottomNavigation';
 import WaitingScreen from '../screens/WaitingScreen';
 import Upload from '../screens/Upload';
 import ViewProfile from '../screens/ViewProfile';
+import ForgetPassword from '../screens/Auth/ForgetPassword';
 import { navigationRef } from '../navigations/RootNavigation';
 
 const stack = createStackNavigator<RootStackParamList>();
@@ -31,6 +32,7 @@ export default function Routes() {
         <stack.Screen name={SCREENS.WAITING_SCREEN} component={WaitingScreen} />
         <stack.Screen name={SCREENS.UPLOAD} component={Upload} />
         <stack.Screen name={SCREENS.VIEW_PROFILE} component={ViewProfile} />
+        <stack.Screen name={SCREENS.FORGET_PASSWORD} component={ForgetPassword} />
       </stack.Navigator>
     </NavigationContainer>
   );
