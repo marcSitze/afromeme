@@ -76,4 +76,50 @@ export const getPosts = async (req: Request, res: Response) => {
 		console.error(err);
 	}
 }
-export const updatePost = async (req: Request, res: Response) => {}
+export const updatePost = async (req: any, res: Response) => {}
+
+export const likePost = async (req: any, res: Response) => {
+	console.log(req.params);
+	const id = req.params.id;
+	// if(!id) {
+	// 	return ErrorHandler(res, httpStatus.BAD_REQUEST, { msg: "Cannot like post"});
+	// }
+	try {
+		// Find post un db
+		const post = await postsService.getPostById(id);
+		if(!post) {
+			return ErrorHandler(res, httpStatus.NOT_FOUND, {"msg": "Post not found..."});
+		}
+
+		// get User account ID who wants to like the post
+	const userId = req.user.id;
+	let account = await accountsService.findOne({ user: userId})
+		// update likes
+
+		// first check if this user exists
+		if(!account) {
+			return ErrorHandler(res, httpStatus.BAD_REQUEST, {msg: "Account not found"});
+		}
+
+		if(account) {
+			let newLikes: string[] = [];
+			const like = post.likes.find(item => String(item) === String(account?._id));
+			console.log('like: ', like);
+			if(like) {
+			// 	// this means that we want to unlike the post
+				newLikes = post.likes.filter(item => item !== like);
+			}
+			if(!like) {
+				newLikes = [...post.likes, account._id]
+			}
+	console.log('newLikes: ', newLikes)
+			await postsService.updatePost(post._id, { likes: [...newLikes]})
+	
+			// return res.json({msg: 'Post liked updated'})
+			return SuccessHandler(res, httpStatus.OK, { msg: "Like updated"});
+		}
+		res.send('REqest')
+	}catch(err) {
+		console.error('Like Err: ', err);
+	}
+}
