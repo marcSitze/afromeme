@@ -1,10 +1,15 @@
-import {GET_POSTS_REQUEST, CREATE_POST_REQUEST} from './types';
+import * as types from './types';
 
 export const getPosts = () => ({
-  type: GET_POSTS_REQUEST,
+  type: types.GET_POSTS_REQUEST,
 });
 
 export const createPost = (payload: any) => ({
-  type: CREATE_POST_REQUEST,
+  type: types.CREATE_POST_REQUEST,
   payload,
 });
+
+export const likePost = (payload: any) => ({
+  type: types.LIKE_POST_REQUEST,
+  payload
+})
