@@ -4,6 +4,7 @@ import { Action } from '../../types'
 
 const INITIALSTATE: IAuthState = {
   account: {
+    _id: '',
     user: ''
   },
   user: {
