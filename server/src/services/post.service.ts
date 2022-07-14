@@ -9,10 +9,13 @@ export default class PostsService implements IPostsService {
     return await newPost.save();
   };
   getPosts = async () => {
-    return await Post.find({}).populate({
-      path: "author",
-      populate: { path: "user", select: "-password" },
-    });
+    return await Post.find({})
+      .populate({
+        path: "author",
+        populate: { path: "user", select: "-password" },
+      })
+      .populate({ path: "comments", select: '-__v'})
+      // .exec();
   };
   findOne = async (query: Partial<CreatePostDTO>) => {
     console.log("query: ", query);
@@ -25,10 +28,7 @@ export default class PostsService implements IPostsService {
   //   return await Post.find(query).populate('user').select('-password');
   // },
 
-  updatePost = async (
-    filter: Partial<CreatePostDTO>,
-    query: Partial<CreatePostDTO>
-  ) => {
-    return await Post.findOneAndUpdate(filter, query);
+  updatePost = async (id: string, query: any) => {
+    return await Post.findOneAndUpdate({ _id: id }, query);
   };
 }
