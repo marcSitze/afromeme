@@ -5,6 +5,7 @@ export interface IUser {
 }
 
 export interface IAccount {
+  _id: string,
   user: string,
 }
 

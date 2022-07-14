@@ -3,8 +3,8 @@ Todo:
 - Add #hashtags when creating posts and desc.
 - Edit profile
 - Reset Password
-- Like a post
-- Comment a post
+#- Like a post
+#- Comment a post
 - View a profile => passing real data
 - View Profile posts (Scrollview)
 - Add Story
@@ -16,3 +16,8 @@ Todo:
 - Check Post data
 - Video Chats
 - Message Chats
+- CI/CD
+
+Done
+- Like a post
+- Comment a post

@@ -40,7 +40,7 @@ export const createComment = async (req: Request, res: Response) => {
       post
     });
 
-    const newpost = await postsService.updatePost({ _id: post}, { comments: [...postToUpdate.comments, comment._id] });
+    const newpost = await postsService.updatePost(post, { comments: [...postToUpdate.comments, comment._id] });
     // console.log('newpost: ', newpost);
     SuccessHandler(res, httpStatus.CREATED, comment);
     // res.send('ok')
@@ -63,3 +63,20 @@ export const getComments = async (req: Request, res: Response) => {
   }
 }
 export const updateComment = (req: Request, res: Response) => {}
+
+export const getCommentsByQuery = async (req: any, res: Response) => {
+  try {
+    const query = {
+      // ...req.query
+      post: req.query.post
+    }
+    console.log('query: ', query);
+    if(Object.keys(query).length === 0) {
+      return ErrorHandler(res, httpStatus.BAD_REQUEST, { msg: "queries info missing"})
+    }
+    const comments = await commentsService.getCommentsByQuery(query);
+    return SuccessHandler(res, httpStatus.OK, comments)
+  } catch (err) {
+    console.log('getCommentsByQueryErr: ', err);
+  }
+}

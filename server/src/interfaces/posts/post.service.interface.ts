@@ -6,4 +6,5 @@ export interface IPostsService{
     getPosts(): Promise<IPost[] | void>;
     findOne(query: any): Promise<IPost | void | any>;
     getPostById(id: string): Promise<IPost | void | any>;
+    updatePost(id: string, query: any): Promise<IPost | void | any>;
 }

@@ -4,7 +4,10 @@ import {
   GET_POSTS_FAILURE,
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
-  CREATE_POST_FAILURE
+  CREATE_POST_FAILURE,
+  LIKE_POST_REQUEST,
+  LIKE_POST_SUCCESS,
+  LIKE_POST_FAILURE
 } from './types';
 import { IPostState } from '../../types/posts';
 import { Action } from '../../types';
@@ -16,6 +19,8 @@ const intialState: IPostState = {
   error: '',
   creating: false,
   creatingError: '',
+  liking: false,
+  liking_msg: ''
 }
 
 function postsReducer(state = intialState, action: Action) {
@@ -53,6 +58,24 @@ function postsReducer(state = intialState, action: Action) {
         creating: false,
         creatingError: action.payload
     }
+
+    case LIKE_POST_REQUEST:
+      return {
+        ...state,
+        liking: true,
+      }
+    case LIKE_POST_SUCCESS:
+      return {
+        ...state,
+        liking: false,
+        liking_msg: 'success',
+      }
+    case LIKE_POST_FAILURE:
+      return {
+        ...state,
+        liking: false,
+        liking_msg: 'failure'
+      }
     default:
     return {
       ...state

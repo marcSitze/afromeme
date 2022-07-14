@@ -55,7 +55,7 @@ const Profile = ({ account }: PropsType) => {
           </Box>
           <Box alignItems={'center'}>
           <Text fontWeight={'bold'} fontSize='xl'>10</Text>
-            <Text color={'gray.500'}>Following</Text>
+            <Text color={'gray.500'}>Likes</Text>
           </Box>
         </HStack>
         <Box mb={'4'}>
