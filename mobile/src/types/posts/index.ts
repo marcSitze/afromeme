@@ -1,6 +1,6 @@
 import {IUser} from '../users';
 export interface IPost {
-  id: string;
+  _id: string;
   message?: string;
   media: string;
   author: IUser;
@@ -14,4 +14,6 @@ export interface IPostState {
   error: string | void;
   creating: Boolean;
   creatingError: string | void;
+  liking: Boolean;
+  liking_msg: string;
 }
