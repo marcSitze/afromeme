@@ -1,9 +1,19 @@
 import config from '../../config';
 
-export const getPosts = async () => {
+export const getPosts = async (token: string) => {
   console.log('getPostsService...');
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token)
+
+  var requestOptions: any = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow',
+  };
+
+
   try {
-    const result = await fetch(config.API + '/api/posts');
+    const result = await fetch(config.API + '/api/posts', requestOptions);
     const data = await result.json();
     return data;
   } catch (err) {
@@ -20,10 +30,11 @@ type PostType = {
 var myHeaders = new Headers();
 myHeaders.append('Content-Type', 'application/json');
 
-export const createPost = async (payload: PostType) => {
+export const createPost = async (token: string, payload: PostType) => {
+
   try {
     console.log('payloadSe: ', payload);
-    const media: any = await createMedia({
+    const media: any = await createMedia(token, {
       author: payload.author,
       photo: payload.photo,
     });
@@ -31,6 +42,7 @@ export const createPost = async (payload: PostType) => {
 
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append("Authorization", "Bearer " + token)
 
     var raw = JSON.stringify({
       author: payload.author,
@@ -59,9 +71,11 @@ type mediaType = {
   name?: string;
 };
 
-const createMedia = async (payload: mediaType) => {
+const createMedia = async (token: string, payload: mediaType) => {
   // myHeaders.append('Accept', 'multipart/form-data');
   // myHeaders.append('Content-Type', 'multipart/form-data');
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token)
   try {
     var formdata = new FormData();
     // formdata.append("photo", fileInput.files[0], "real-estate-6688945_1920.jpg");
@@ -72,6 +86,7 @@ const createMedia = async (payload: mediaType) => {
     var requestOptions: any = {
       method: 'POST',
       body: formdata,
+      headers: myHeaders,
       redirect: 'follow',
     };
 
@@ -83,3 +98,30 @@ const createMedia = async (payload: mediaType) => {
     console.log('error Media service', error);
   }
 };
+
+
+export const likePost = async (token: string, payload: any) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer " + token);
+
+  // var raw = JSON.stringify({
+  //   author: payload.author,
+  //   description: payload.description,
+  //   media: media.data._id,
+  // });
+console.log('payloadService: ', payload);
+  var requestOptions: any = {
+    method: 'POST',
+    // body: raw,
+    headers: myHeaders,
+    redirect: 'follow',
+  };
+  try {
+    const request = await fetch(config.API + '/api/posts/' + payload.post + '/like', requestOptions);
+    const result = await request.json();
+    console.log('Result: ', result);
+    return result;
+  } catch (error) {
+    console.error('LikeServiceErr: ', error);
+  }
+}
