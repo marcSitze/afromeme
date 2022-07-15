@@ -113,10 +113,10 @@ export const likePost = async (req: any, res: Response) => {
 				newLikes = [...post.likes, account._id]
 			}
 	console.log('newLikes: ', newLikes)
-			await postsService.updatePost(post._id, { likes: [...newLikes]})
+		const updated =	await postsService.updatePost(post._id, { likes: [...newLikes]})
 	
 			// return res.json({msg: 'Post liked updated'})
-			return SuccessHandler(res, httpStatus.OK, { msg: "Like updated"});
+			return SuccessHandler(res, httpStatus.OK, { msg: "Like updated", post: updated});
 		}
 		res.send('REqest')
 	}catch(err) {
