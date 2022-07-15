@@ -24,19 +24,30 @@ import {PropsState} from '../../types';
 import {IAccount} from '../../types/users';
 
 import {logout} from '../../redux/auth/actions';
+import colors from '../../constants/colors';
 
 type PropsType = {
   account: IAccount;
+  bg: string;
 };
 
-const Profile = ({account}: PropsType) => {
+const Profile = ({account, bg}: PropsType) => {
   const dispatch = useDispatch();
-  const [showPosts, setShowPosts] = useState(true);
+  const [showPosts, setShowPosts] = useState(false);
 
   console.log('account: ', account);
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const formatText = (length: number, text: string) => {
+    if (text.length > length) {
+      return `${text.slice(0, length)}...`;
+    }
+
+    return `${text.slice(0, length)}`;
+  };
+
   return (
     <BaseWrapper backArrowAction={() => {}} headerText="Profile">
       <ScrollView>
@@ -50,8 +61,8 @@ const Profile = ({account}: PropsType) => {
               />
             </Box>
             <Container mb={'4'}>
-              <Text fontSize={'lg'} textAlign="center" fontWeight={'bold'}>
-                {account?.user?.username ?? 'John Doe'}
+              <Text fontSize={16} textAlign="center" fontWeight={'bold'}>
+                {`@${account?.user?.username ?? 'John Doe'}`}
               </Text>
             </Container>
             <HStack w={width * 0.8} justifyContent={'space-evenly'} mb="4">
@@ -76,24 +87,66 @@ const Profile = ({account}: PropsType) => {
             </HStack>
             <Box mb={'4'}>
               <HStack>
-                <Button>Edit profile</Button>
-                <Button bg={'red.500'} onPress={handleLogout}>
+                <Button
+                  borderColor={colors.light.gray}
+                  borderWidth={1}
+                  bg={colors.light.white}
+                  px={width * 0.15}
+                  mr={2}>
+                  Edit profile
+                </Button>
+                <Button
+                  bg={colors.light.white}
+                  borderColor={colors.light.gray}
+                  borderWidth={1}
+                  _text={{color: colors.light.black}}
+                  onPress={handleLogout}
+                  _focus={{backgroundColor: 'red.500'}}>
                   <MaterialIcon name="logout" />
                 </Button>
               </HStack>
             </Box>
-            <Text mb="4">this is the bio text space</Text>
+            <Box width={width * 0.9} mb="4" alignItems={'center'}>
+              <Text textAlign={'center'} fontSize={13} color={'#000'}>
+                {formatText(
+                  100,
+                  'this is the bio text this is the bio text space this is the bio text space this is the bio text space',
+                )}
+              </Text>
+            </Box>
 
             {/**
              * @add @posts here
              */}
           </VStack>
-          <HStack bg='red.300' justifyContent={'space-evenly'}>
-            <Pressable style={{flex: 1, width: '100%'}} onPress={() => setShowPosts(false)}>
-              <Text bg={'blue.400'} w={'50%'} textAlign="center">Normal</Text>
+          <HStack mb={2} justifyContent={'space-evenly'}>
+            <Pressable
+              style={{flex: 1, width: '100%'}}
+              onPress={() => setShowPosts(false)}>
+              <Text
+                borderBottomWidth={2}
+                borderColor={
+                  !showPosts ? colors.light.primary : colors.light.white
+                }
+                pb={2}
+                w={'100%'}
+                textAlign="center">
+                Normal
+              </Text>
             </Pressable>
-            <Pressable style={{flex: 1, width: '100%'}} onPress={() => setShowPosts(true)}>
-              <Text bg={'orange.500'} w={'50%'} textAlign="center">grid</Text>
+            <Pressable
+              style={{flex: 1, width: '100%'}}
+              onPress={() => setShowPosts(true)}>
+              <Text
+                borderBottomWidth={2}
+                borderColor={
+                  showPosts ? colors.light.primary : colors.light.white
+                }
+                pb={2}
+                w={'100%'}
+                textAlign="center">
+                grid
+              </Text>
             </Pressable>
           </HStack>
           <Box flex={1} flexDirection="row" flexWrap={'wrap'}>
