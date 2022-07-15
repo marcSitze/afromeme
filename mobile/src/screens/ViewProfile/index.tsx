@@ -10,6 +10,7 @@ import {
   Heading,
 } from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
+import {connect, useDispatch} from 'react-redux';
 
 import profile from '../../assets/images/profile.png';
 import {width, height} from '../../constants/layout';
@@ -17,10 +18,28 @@ import BaseWrapper from '../../components/Layout/BaseWrapper';
 import PostProfile from '../../components/PostProfile';
 import {profilePosts} from '../../helpers/defaultData';
 import WhiteSpace from '../../components/Others/WhiteSpace';
+import {PropsState} from '../../types';
+import {IAccount} from '../../types/users';
+import { clearViewProfile} from '../../redux/users/actions'
 
-const ViewProfile = () => {
+type PropTypes = {
+  view_profile: IAccount;
+  view_profile_msg: string;
+  view_profile_loading: Boolean;
+};
+const ViewProfile = ({
+  view_profile,
+  view_profile_msg,
+  view_profile_loading,
+}: PropTypes) => {
+  const dispatch = useDispatch();
+
+  console.log('viewProfile: ', view_profile);
+
   return (
-    <BaseWrapper backArrow={true} headerText="John Doe">
+    <BaseWrapper backArrowAction={() => {
+      dispatch(clearViewProfile())
+    }} backArrow={true} headerText={view_profile?.user?.username}>
       <ScrollView style={{paddingHorizontal: 5}}>
         <Box flex={1} py="4">
           <HStack flex={1} alignItems="center" justifyContent={'space-evenly'}>
@@ -34,8 +53,9 @@ const ViewProfile = () => {
               </Box>
             </Box>
             <Box alignItems={'center'}>
+              {/* <Text>{JSON.stringify(view_profile)}</Text> */}
               <Text fontWeight={'bold'} fontSize="xl">
-                10
+                {view_profile?.posts?.length > 0 ? view_profile.posts.length: 0}
               </Text>
               <Text color={'gray.500'}>Posts</Text>
             </Box>
@@ -49,7 +69,7 @@ const ViewProfile = () => {
               <Text fontWeight={'bold'} fontSize="xl">
                 10
               </Text>
-              <Text color={'gray.500'}>Following</Text>
+              <Text color={'gray.500'}>Likes</Text>
             </Box>
 
             {/**
@@ -57,13 +77,13 @@ const ViewProfile = () => {
              */}
           </HStack>
           <Text fontSize={'lg'} fontWeight={'bold'} ml={7}>
-            John Doe
+            {view_profile?.user?.username}
           </Text>
           <WhiteSpace height={10} />
           <Button mb={4}>Follow</Button>
           <Box flex={1} flexDirection="row" flexWrap={'wrap'}>
-            {profilePosts.map(data => (
-              <PostProfile key={data.id} media={data.media} />
+            {view_profile?.posts?.map((data, i) => (
+              <PostProfile openPosts={() => {}} key={i} post={data} />
             ))}
             <WhiteSpace height={height / 2} />
           </Box>
@@ -73,4 +93,10 @@ const ViewProfile = () => {
   );
 };
 
-export default ViewProfile;
+const mapStateToProps = ({usersReducer}: PropsState) => ({
+  view_profile: usersReducer.view_profile,
+  view_profile_loading: usersReducer.view_profile_loading,
+  view_profile_msg: usersReducer.view_profile_msg,
+});
+
+export default connect(mapStateToProps)(ViewProfile);
