@@ -12,7 +12,6 @@ import {
 import { IPostState } from '../../types/posts';
 import { Action } from '../../types';
 
-
 const intialState: IPostState = {
   posts: [],
   loading: false,
@@ -65,10 +64,17 @@ function postsReducer(state = intialState, action: Action) {
         liking: true,
       }
     case LIKE_POST_SUCCESS:
+      let temp = [...state.posts];
+      temp.map((post, index) => {
+        if(String(post._id) === String(action.payload.post._id)) {
+          temp[index] = action.payload.post;
+        }
+      })
       return {
         ...state,
         liking: false,
         liking_msg: 'success',
+        posts: temp,
       }
     case LIKE_POST_FAILURE:
       return {
