@@ -27,6 +27,7 @@ import Comments from '../Comments';
 import {getComments} from '../../redux/comments/actions';
 import {IComment} from '../../types/comments';
 import { viewProfile } from '../../redux/users/actions';
+import colors from '../../constants/colors';
 
 type PostProps = {
   post: IPost;
@@ -144,7 +145,7 @@ const Post = ({post, liking, liking_msg, account, comments}: PostProps) => {
               )}
             </TouchableOpacity>
             <Text ml={2}>
-              {likes.length} {`${hasliked(post.likes)}`}
+              {likes.length}
             </Text>
           </HStack>
           <TouchableOpacity
@@ -152,11 +153,15 @@ const Post = ({post, liking, liking_msg, account, comments}: PostProps) => {
               setShowComments(true);
               dispatch(getComments(post._id));
             }}>
+            <HStack alignItems={'center'}>
+            <Icon name='comments' size={18} />
             <TextInput
               editable={false}
-              value={`comments ${commentsNum.length}`}
+              style={{color: colors.light.black}}
+              value={` ${commentsNum.length}`}
               onPressIn={() => setShowComments(true)}
             />
+            </HStack>
             {/* <Text>comments({post.comments.length})</Text> */}
           </TouchableOpacity>
         </HStack>
