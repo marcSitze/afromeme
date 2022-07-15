@@ -4,6 +4,8 @@ import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 
+import colors from '../../../constants/colors'
+
 type BaseWrapperProp = {
   children: React.ReactNode;
   headerText?: string;
@@ -16,10 +18,11 @@ const BaseWrapper = ({
   headerText = 'Afromeme',
   backArrow = false,
   backArrowAction = () => {},
+  ...rest
 }: BaseWrapperProp) => {
   const navigation: any = useNavigation();
   return (
-    <Box bg="coolGray.100" height="full" px="2" pt={4}>
+    <Box bg={colors.light.white} height="full" px="2" pt={4} {...rest}>
       {/**
        * @AppHeader @will @come @here
        */}
