@@ -11,7 +11,7 @@ type PropTypes = {
 
 const PostsView = ({posts}: PropTypes) => {
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: 'red'}}>
+    <ScrollView style={{ flex: 1}}>
       {posts.map((post, index) => (
         <Post key={index} post={post} />
       ))}
