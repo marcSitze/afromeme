@@ -13,9 +13,9 @@ import {connect, useDispatch} from 'react-redux';
 
 import {PropsState} from '../../types';
 import {IPost} from '../../types/posts';
-import {createComment} from '../../redux/comments/actions';
+import {createComment, clearComments, getComments} from '../../redux/comments/actions';
 import {IAccount} from '../../types/users';
-import { IComment } from '../../types/comments';
+import {IComment} from '../../types/comments';
 
 type PropTypes = {
   visible: boolean;
@@ -25,9 +25,19 @@ type PropTypes = {
   creating_comment: boolean;
   comments: IComment[];
   loading_comments: boolean;
+  hasCommented: Function;
 };
 
-const Comments = ({visible, onClose, post, account, creating_comment, loading_comments, comments}: PropTypes) => {
+const Comments = ({
+  visible,
+  onClose,
+  post,
+  account,
+  creating_comment,
+  loading_comments,
+  comments,
+  hasCommented,
+}: PropTypes) => {
   const dispatch = useDispatch();
   const [keyboardStatus, setKeyboardStatus] = useState<string>('');
   const [comment, setComment] = useState<string>('');
@@ -49,9 +59,13 @@ const Comments = ({visible, onClose, post, account, creating_comment, loading_co
 
   return (
     <Modal animationType="slide" visible={visible}>
-      <Box bg={'white'}>
+      <Box bg={'white'} flex={1}>
         <Text>This is the comments section</Text>
-        <Pressable onPress={() => onClose()}>
+        <Pressable onPress={() => {
+          onClose()
+          dispatch(clearComments());
+          hasCommented(false)
+        }}>
           <Text bg="red.500" py={3}>
             close comments
           </Text>
@@ -81,11 +95,20 @@ const Comments = ({visible, onClose, post, account, creating_comment, loading_co
                   message: comment,
                 }),
               );
+              // dispatch(getComments(post._id));
+              hasCommented(true);
+              onClose();
             }}>
             comment
           </Button>
-          {loading_comments && <ActivityIndicator size={'large'} color="blue" />}
-          {comments.map((item, i) => <View key={i}><Text bg={'blue.300'}>{`${JSON.stringify(item)} dasd${i}`}</Text></View>)}
+          {loading_comments && (
+            <ActivityIndicator size={'large'} color="blue" />
+          )}
+          {comments.map((item, i) => (
+            <View style={{backgroundColor: "green"}} key={i}>
+              <Text bg={'blue.300'} h={10} mb={2}>{item.message}</Text>
+            </View>
+          ))}
         </View>
       </Box>
     </Modal>
