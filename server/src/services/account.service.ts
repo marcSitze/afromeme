@@ -8,8 +8,10 @@ export default class AccountService implements IAccountService {
     const newAccount = new Account(account);
     return await newAccount.save();
   };
-  getAccounts = async () => {
-    return await Account.find({});
+  getAccounts = async (query: any) => {
+    return await Account.find(query)
+      .populate("user", { password: 0, __v: 0 })
+      .populate("posts");
   };
   findOne = async (query: any) => {
     // console.log("query: ", query);

@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createComment as createCommentService, getComments as getCommentService } from '../../services/comments';
-import * as types from './types'
+import * as types from './types';
 import { CommentDto } from '../../types/comments'
 
 type CreateCommentType = {
@@ -17,7 +17,8 @@ function* createComment({ payload }: CreateCommentType ): Generator<any>{
     const data: any = yield createCommentService(token, payload);
     console.log('dataSa: ', data);
     if(data.success) {
-      yield put({ type: types.CREATE_COMMENT_SUCCESS, payload: {msg: "comment create success..."}})
+      yield put({ type: types.CREATE_COMMENT_SUCCESS, payload: {msg: "comment create success..."}});
+      yield put({ type: types.GET_COMMENTS_REQUEST, payload: payload.post})
     }
     if(!data.success) {
       yield put({ type: types.CREATE_COMMENT_SUCCESS, payload: {msg: "comment create failure..."}})
@@ -40,7 +41,7 @@ function* getComments({ payload }: GetCommentsType): Generator<any> {
     console.log('dataSa: ', data);
     yield(3000)
     if(data.success) {
-      yield put({ type: types.GET_COMMENTS_SUCCESS, payload: {msg: "get comments success..."}})
+      yield put({ type: types.GET_COMMENTS_SUCCESS, payload: {comments: data.data, msg: "get comments success..."}})
     }
     if(!data.success) {
       yield put({ type: types.GET_COMMENTS_FAILURE, payload: {msg: "get comments failure..."}})

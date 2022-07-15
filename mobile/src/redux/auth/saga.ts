@@ -8,7 +8,7 @@ import {
   login as loginService,
   logoutUser as logoutUserService,
   register as registerService,
-  forgetPassword as forgetPasswordService
+  forgetPassword as forgetPasswordService,
 } from '../../services/auth';
 import {LoginDto, RegisterDto} from '../../types/auth';
 import config from '../../config';
@@ -32,22 +32,23 @@ function* login({payload}: LoginType): Generator<any> {
   try {
     const data: any = yield loginService(payload);
     console.log('dataLogin: ', data);
-    yield delay(1000)
-    if(!data.success) {
-      yield put({ type: types.LOGIN_USER_FAILURE, payload: data.data})
+    yield delay(1000);
+    if (!data.success) {
+      yield put({type: types.LOGIN_USER_FAILURE, payload: data.data});
       return;
     }
+    /**
+     * @todo: Save token data to localStorage
+     */
+    yield AsyncStorage.setItem('@token', data?.data?.token);
     yield put({type: types.LOGIN_USER_SUCCESS, payload: data.data});
     // dispatch get User Account
     yield put({
       type: typesUser.GET_USER_ACCOUNT_REQUEST,
       payload: data.data.token,
     });
-    /**
-     * @todo: Save token data to localStorage
-     */
-    yield AsyncStorage.setItem('@token', data?.data?.token);
-    RootNavigation.navigate(SCREENS.BOTTOM_NAVIGATION);
+
+    // RootNavigation.navigate(SCREENS.BOTTOM_NAVIGATION);
   } catch (error) {
     console.error('err: ', error);
   }
@@ -99,19 +100,19 @@ type RegisterType = {
   payload: RegisterDto;
 };
 
-function* register({ payload }: RegisterType): Generator<any> {
+function* register({payload}: RegisterType): Generator<any> {
   try {
     const result: any = yield registerService(payload);
-    if(result.success) {
-      yield put({ type: types.REGISTER_USER_SUCCESS, payload: []})
+    if (result.success) {
+      yield put({type: types.REGISTER_USER_SUCCESS, payload: []});
       yield delay(1000);
-      RootNavigation.navigate(SCREENS.LOGIN)
+      RootNavigation.navigate(SCREENS.LOGIN);
     }
-    if(!result.success) {
-      yield put({ type: types.REGISTER_USER_FAILURE, payload: result.data})
+    if (!result.success) {
+      yield put({type: types.REGISTER_USER_FAILURE, payload: result.data});
     }
   } catch (error) {
-    yield put({ type: types.REGISTER_USER_FAILURE, payload: []})
+    yield put({type: types.REGISTER_USER_FAILURE, payload: []});
     console.error('Register saga: ', error);
   }
 }
@@ -119,17 +120,17 @@ function* register({ payload }: RegisterType): Generator<any> {
 type ForgetPasswordType = {
   type: typeof types.FORGET_PASSWORD_REQUEST;
   payload: string;
-}
-function* forgetPassword({ payload }: ForgetPasswordType): Generator<any> {
+};
+function* forgetPassword({payload}: ForgetPasswordType): Generator<any> {
   try {
     console.log('payloadSaga: ', payload);
     const data: any = yield forgetPasswordService(payload);
     console.log('result: ', data);
-    if(data.success) {
-      yield put({ type: types.FORGET_PASSWORD_SUCCESS, payload: []});
+    if (data.success) {
+      yield put({type: types.FORGET_PASSWORD_SUCCESS, payload: []});
     }
-    if(!data.success) {
-      yield put({ type: types.FORGET_PASSWORD_FAILURE, payload: data.data.msg});
+    if (!data.success) {
+      yield put({type: types.FORGET_PASSWORD_FAILURE, payload: data.data.msg});
     }
   } catch (error) {
     console.error('forgetPasswordService: ', error);

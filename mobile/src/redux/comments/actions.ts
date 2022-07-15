@@ -9,4 +9,8 @@ export const createComment = (payload: CommentDto) => ({
 export const getComments = (payload: string) => ({
   type: types.GET_COMMENTS_REQUEST,
   payload
+});
+
+export const clearComments = () => ({
+  type: types.CLEAR_COMMENTS
 })

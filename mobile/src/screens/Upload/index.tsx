@@ -58,22 +58,7 @@ const Upload = ({ account }: UploadType) => {
   // console.log('accountUp: ', account)
 const [submit, setSubmit] = useState(false);
   useEffect(() => {
-    // var formdata = new FormData();
-    // // formdata.append("photo", fileInput.files[0], "real-estate-6688945_1920.jpg");
-    // formdata.append("photo", input);
-    // formdata.append("author", "623ec37dd65ad319c55093cf");
-    // formdata.append("name", "this is the name");
-    // console.log('input: ', input)
-    // var requestOptions: any = {
-    //   method: 'POST',
-    //   body: formdata,
-    //   redirect: 'follow'
-    // };
 
-    // fetch("http://192.168.42.60:5000/api/media", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log('error', error));
   }, [post, submit])
 
   return (
@@ -92,8 +77,8 @@ const [submit, setSubmit] = useState(false);
             <Box justifyContent={'center'} alignItems={'center'}>
               <Icon
                 name="camera"
-                size={72}
-                color={colors.light.primary || 'blue'}
+                size={40}
+                color={colors.light.primary}
               />
               <Text>Click here to choose an image</Text>
             </Box>
@@ -104,10 +89,10 @@ const [submit, setSubmit] = useState(false);
             <Box justifyContent={'center'} alignItems={'center'} height={'1/3'}>
               <IconFA5
                 name="pen"
-                size={52}
-                color={colors.light.primary || 'blue'}
+                size={40}
+                color={colors.light.primary}
               />
-              <Text>Click here to write article</Text>
+              <Text>Click here to write an article</Text>
               <Text>Coming soon...</Text>
             </Box>
           </TouchableOpacity>
@@ -115,7 +100,7 @@ const [submit, setSubmit] = useState(false);
       ) : (
         <Modal animationType='slide'>
           <Box flex={1} p={5}>
-          <Text>Post preview</Text>
+          <Text fontSize={18}>Post preview</Text>
           <Image source={{ uri: picture.uri}} style={{height: 300}} />
           <FormControl my={5}>
           <Input placeholder='Add a post legend' mb={3} />
@@ -123,7 +108,7 @@ const [submit, setSubmit] = useState(false);
           </FormControl>
           <HStack justifyContent={'space-between'}>
             <Button w={'1/3'} bg={'red.500'} onPress={() => setPicture('')}>Cancel</Button>
-            <Button w={'1/3'} onPress={() => {
+            <Button w={'1/3'} bg={colors.light.primary} _text={{color: colors.light.white}} onPress={() => {
               Alert.alert('Post Created')
               dispatch(createPost({author: account._id, photo: picture}));
               // setSubmit(!submit);

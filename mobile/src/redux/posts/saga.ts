@@ -61,7 +61,7 @@ function* likePost({ payload }: LikePostType): Generator<any> {
     const data: any = yield likePostService(token, payload);
     console.log('dataSL: ', data);
     if(data.success) {
-      yield put({ type: types.LIKE_POST_SUCCESS, payload: 'like updated'});
+      yield put({ type: types.LIKE_POST_SUCCESS, payload: {msg: 'like updated', post: data.data.post}});
     }
     if(!data.success) {
       yield put({ type: types.LIKE_POST_FAILURE, payload: 'unable to update like'});

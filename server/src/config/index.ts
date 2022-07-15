@@ -11,7 +11,7 @@ export default {
   mongo: {
     MONGO_LOCAL: process.env.MONGO_LOCAL || 'mongodb://localhost:27017/afromeme',
     MONGO_ONLINE: process.env.MONGO_ONLINE,
-    MONGO_TEST_DB: process.env.MONGO_TEST_DB,
+    MONGO_TEST_DB: process.env.MONGO_TEST_DB || 'mongodb://localhost:27017/testAfromeme',
   },
   auth: {
     jwt_secret: process.env.JWT_SECRET || 'my-ultra-secret-jwt',

@@ -26,6 +26,7 @@ export const auth = (req: any, res: Response, next: NextFunction) => {
         console.log('middleware executed...');
        next();
     } catch (err) {
+        console.log('AuthError: ', err)
         res.status(500).json({ "msg": "Server error" });
     }
 
