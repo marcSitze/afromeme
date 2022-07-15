@@ -17,6 +17,8 @@ Todo:
 - Video Chats
 - Message Chats
 - CI/CD
+- Profile image generators
+- Sort Data by date
 
 Done
 - Like a post
