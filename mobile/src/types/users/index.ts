@@ -15,5 +15,8 @@ export interface IAccount {
 export interface IUserState {
   user: IUser,
   account: IAccount,
-  error: string | void
+  error: string | void,
+  view_profile: IAccount,
+  view_profile_loading: Boolean,
+  view_profile_msg: string,
 }
