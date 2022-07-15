@@ -1,4 +1,6 @@
+import { IPost } from "../../types/posts";
 export type PropTypes = {
-  media: string;
+  post: IPost;
+  openPosts: Function;
 }
 
