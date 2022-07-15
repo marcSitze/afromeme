@@ -1,9 +1,9 @@
 import config from '../../config';
 
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
 
-export const getUserAccount = async (token: string) => {
+export const getUserAccount = async (token: string, accountId: string) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
   var requestOptions = {
     method: 'GET',
     headers: myHeaders,
@@ -11,10 +11,28 @@ export const getUserAccount = async (token: string) => {
 
   try {
     myHeaders.append("Authorization", "Bearer " + token)
-    const request = await fetch(config.API + '/api/accounts/' + '123', requestOptions);
+    const request = await fetch(`${config.API}/api/accounts/${accountId ?? 1234}`, requestOptions);
     const result = await request.json();
     return result;
   } catch (err) {
     console.error('GetUserAccountService: ', err);
+  }
+}
+
+export const viewProfile = async (token: string, accountId: string) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+  };
+
+  try {
+    myHeaders.append("Authorization", "Bearer " + token)
+    const request = await fetch(`${config.API}/api/accounts/query/q?_id=${accountId}`, requestOptions);
+    const result = await request.json();
+    return result;
+  } catch (err) {
+    console.error('ViewProfileErr: ', err);
   }
 }
