@@ -2,13 +2,13 @@ import {
   Modal,
   Pressable,
   Keyboard,
-  TextInput,
+  Image,
   StyleSheet,
   View,
   ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import {Box, Text, Button} from 'native-base';
+import {Box, Text, Button, Input, HStack} from 'native-base';
 import {connect, useDispatch} from 'react-redux';
 
 import {PropsState} from '../../types';
@@ -16,6 +16,8 @@ import {IPost} from '../../types/posts';
 import {createComment, clearComments, getComments} from '../../redux/comments/actions';
 import {IAccount} from '../../types/users';
 import {IComment} from '../../types/comments';
+import colors from '../../constants/colors';
+import img from '../../assets/images/profile.png';
 
 type PropTypes = {
   visible: boolean;
@@ -59,35 +61,20 @@ const Comments = ({
 
   return (
     <Modal animationType="slide" visible={visible}>
-      <Box bg={'white'} flex={1}>
-        <Text>This is the comments section</Text>
+      <Box bg={'white'} flex={1} px={4}>
+        {/* <Text>This is the comments section</Text> */}
+        <HStack justifyContent={'space-between'} alignItems={'center'}>
         <Pressable onPress={() => {
           onClose()
           dispatch(clearComments());
           hasCommented(false)
+          setComment('');
         }}>
-          <Text bg="red.500" py={3}>
-            close comments
+          <Text fontSize={40}>
+            &times;
           </Text>
         </Pressable>
-        <View style={style.container}>
-          <TextInput
-            style={style.input}
-            placeholder="Click here…"
-            autoFocus
-            onSubmitEditing={Keyboard.dismiss}
-            onChangeText={text => setComment(text)}
-            value={comment}
-          />
-          <Text style={style.status}>{keyboardStatus}</Text>
-          <Button
-            py={3}
-            // bg={'red.500'}
-            isLoading={creating_comment}
-            h={10}
-            color={'white'}
-            _text={{color: 'white'}}
-            onPress={() => {
+        <Pressable onPress={() => {
               dispatch(
                 createComment({
                   author: account._id,
@@ -96,19 +83,36 @@ const Comments = ({
                 }),
               );
               // dispatch(getComments(post._id));
+              setComment('');
               hasCommented(true);
               onClose();
             }}>
-            comment
-          </Button>
+          <Text bg={colors.light.primary} borderRadius={20} p={2} color={colors.light.white} fontWeight={'semibold'}>
+            Comment
+          </Text>
+        </Pressable>
+        </HStack>
+        <View style={style.container}>
+          <Input
+            width={'full'}
+            style={style.input}
+            placeholder="Click here…"
+            autoFocus
+            onSubmitEditing={Keyboard.dismiss}
+            onChangeText={text => setComment(text)}
+            value={comment}
+          />
           {loading_comments && (
             <ActivityIndicator size={'large'} color="blue" />
           )}
-          {comments.map((item, i) => (
-            <View style={{backgroundColor: "green"}} key={i}>
-              <Text bg={'blue.300'} h={10} mb={2}>{item.message}</Text>
-            </View>
-          ))}
+          <Box flex={1} mt={5}>
+            {comments.map((item, i) => (
+                <HStack key={i} alignItems={'center'} borderBottomWidth={1} borderColor={'gray.200'} mb={2} pb={2}>
+                  <Image source={img} style={{width: 30, height: 30}} resizeMode={'contain'} />
+                  <Text ml={2}>{item.message}</Text>
+                </HStack>
+            ))}
+          </Box>
         </View>
       </Box>
     </Modal>
@@ -126,7 +130,7 @@ export default connect(mapStateToProps)(Comments);
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 36,
+    // padding: 36,
   },
   input: {
     padding: 10,
