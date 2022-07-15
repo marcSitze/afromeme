@@ -29,6 +29,11 @@ export default class PostsService implements IPostsService {
   // },
 
   updatePost = async (id: string, query: any) => {
-    return await Post.findOneAndUpdate({ _id: id }, query);
+    return await Post.findOneAndUpdate({ _id: id }, query, { new: true }).populate({
+      path: "author",
+      populate: { path: "user", select: "-password" },
+    })
+    .populate({ path: "comments", select: '-__v'})
+    // .exec();
   };
 }
