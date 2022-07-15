@@ -64,13 +64,19 @@ const CommentsReducer = (state = INITIAL_STATE, action: Action) => {
         ...state,
         loading_comments: false,
         loading_msg: 'success',
+        comments: action.payload.comments
       };
-    case types.GET_COMMENTS_REQUEST:
+    case types.GET_COMMENTS_FAILURE:
       return {
         ...state,
         loading_comments: false,
         loading_msg: 'failure',
       };
+    case types.CLEAR_COMMENTS:
+      return {
+        ...state,
+        comments: []
+      }
     default:
       return {
         ...state,
