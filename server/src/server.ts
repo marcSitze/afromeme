@@ -6,7 +6,7 @@ import app from './index';
 mongoConnection(config.mongo.MONGO_LOCAL);
 
 const PORT = config.app.port;
-
+console.log('configs: ', config)
 app.listen(PORT, () => {
     console.log(`Server has started! on port ${PORT}`);
 });

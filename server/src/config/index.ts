@@ -6,7 +6,7 @@ export default {
     name: process.env.APP_NAME,
     port: process.env.PORT || 5000,
     environment: process.env.APPLICATION_ENV,
-    host: 'http://localhost:5000'
+    host: process.env.HOST || 'http://localhost:5000'
   },
   mongo: {
     MONGO_LOCAL: process.env.MONGO_LOCAL || 'mongodb://localhost:27017/afromeme',

@@ -11,11 +11,11 @@ Done
 - Get Posts
 - Get Post
 - Create a Comment on a Post
-
-To Do
 - Get Comments of a Post
 - Like a Post
-- Follow an account
 - Add Authorization
+
+To Do
+- Follow an account
 - Posts categories
 - Refactor Error messages
