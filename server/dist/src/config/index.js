@@ -24,7 +24,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv = __importStar(require("dotenv"));
-dotenv.config();
+if (process.env.NODE_ENV != 'production') {
+    dotenv.config();
+}
 exports.default = {
     app: {
         name: process.env.APP_NAME,
