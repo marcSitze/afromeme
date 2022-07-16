@@ -1,4 +1,4 @@
-export type CreatePostDTO = {
+export declare type CreatePostDTO = {
     _id?: string;
     author: string;
     description: string;
@@ -8,4 +8,4 @@ export type CreatePostDTO = {
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
-}
+};

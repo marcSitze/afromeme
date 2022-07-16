@@ -1,4 +1,4 @@
-export type CreateUserDTO = {
+export declare type CreateUserDTO = {
     _id?: string;
     username: string;
     email: string;
@@ -7,4 +7,4 @@ export type CreateUserDTO = {
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
-}
+};

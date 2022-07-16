@@ -1,5 +1,5 @@
-export type CreatePostDTO = {
-    _id?: string;
+export default interface IPost {
+    _id: string;
     author: string;
     description: string;
     media: string;

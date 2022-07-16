@@ -1,4 +1,4 @@
-export type CreateCommentDTO = {
+export default interface IComment {
     _id?: string;
     author: string;
     message: string;

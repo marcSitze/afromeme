@@ -7,7 +7,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "start:dev": "nodemon --exec ts-node ./src/server.ts --watch src --ext .ts",
-    "test": "jest src/**/*.test.ts"
+    "test": "jest src/**/*.test.ts",
+    "tsc": "tsc",
+    "start:prod": "node dist/src/server.js"
   },
   "keywords": [],
   "author": "theblackdev",

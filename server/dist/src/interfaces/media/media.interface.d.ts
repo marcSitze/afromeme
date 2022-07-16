@@ -1,12 +1,12 @@
-export type CreateMediaDTO = {
+/// <reference types="node" />
+export default interface IMedia {
     _id?: string;
     name: string;
     author: string;
-    // path: string;
     photo: {
         data: Buffer;
-        contentType: string;
-}
+        contentType: String;
+    };
     description?: string;
     createdAt?: Date;
     updatedAt?: Date;

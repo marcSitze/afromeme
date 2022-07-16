@@ -1,4 +1,4 @@
-export type CreateCommentDTO = {
+export declare type CreateCommentDTO = {
     _id?: string;
     author: string;
     message: string;
@@ -6,4 +6,4 @@ export type CreateCommentDTO = {
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
-}
+};
