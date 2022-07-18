@@ -19,6 +19,7 @@ Todo:
 - CI/CD
 - Profile image generators
 - Sort Data by date
+- unique tags with variants
 
 Done
 - Like a post

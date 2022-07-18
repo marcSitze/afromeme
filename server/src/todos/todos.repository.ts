@@ -8,20 +8,29 @@ export default function makeTodosRepository ({ database }: any) {
     remove,
   });
 
-  async function add (todo: { message: string, done: boolean}) {
-    const db = await database;
-    const result = await db.save(makeTodo(todo));
+  async function add (todo: any) {
+    // const db = await database;
+    console.log('todoRepo: ', todo);
+    console.log('database: ', database);
+    try {
+      const result = new database.save(makeTodo(todo));
+      // const result = await newTodo.save(todo);
+  
+      return {
+        success: true,
+        created: result,
+      }
 
-    return {
-      success: true,
-      created: result,
+    }catch(err) {
+      console.error('RepoErr: ', err);
+      throw Error('RepoErr');
     }
   }
 
   async function getTodos() {
     const db = await database;
     const result = await db.find({});
-
+console.log('result: ', result);
     return {
       success: true,
       todos: result,

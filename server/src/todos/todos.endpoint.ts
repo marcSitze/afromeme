@@ -23,8 +23,10 @@ export default function makeTodosEndpointHandler({ todosRepository }: any) {
     }
 
     try {
+      console.log('TodoInfo: ', todoInfo)
       const todo = makeTodo(todoInfo);
       const result = await todosRepository.add(todo);
+      console.log('result01: ', result);
       return {
         headers: {
           "Content-Type": "application/json",

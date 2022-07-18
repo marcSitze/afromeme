@@ -25,6 +25,7 @@ import {IAccount} from '../../types/users';
 
 import {logout} from '../../redux/auth/actions';
 import colors from '../../constants/colors';
+import { countLikes } from '../../helpers/helper'
 
 type PropsType = {
   account: IAccount;
@@ -80,7 +81,7 @@ const Profile = ({account, bg}: PropsType) => {
               </Box>
               <Box alignItems={'center'}>
                 <Text fontWeight={'bold'} fontSize="xl">
-                  10
+                  {countLikes(account.posts)}
                 </Text>
                 <Text color={'gray.500'}>Likes</Text>
               </Box>

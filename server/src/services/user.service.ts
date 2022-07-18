@@ -11,7 +11,7 @@ export default class UserService implements IUserService {
     return await newUser.save();
   };
   getUsers = async () => {
-    return await User.find({}).select('-password');
+    return await User.find({}).select('-password').sort({ createdAt: -1});
   };
   findOne = async (query: any) => {
     return await User.findOne(query);

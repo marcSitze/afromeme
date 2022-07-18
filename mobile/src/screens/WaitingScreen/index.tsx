@@ -26,10 +26,9 @@ const WaitingScreen = ({ navigation }: any) => {
           </Box>
         </Center>
       </Box>
-      <Center>
-        {/* <Text fontSize={'2xl'} mb='4' color={'blue.400'}>Loading...</Text> */}
+      {/* <Center>
         <ActivityIndicator size={'large'} />
-      </Center>
+      </Center> */}
     </Box>
   )
 }

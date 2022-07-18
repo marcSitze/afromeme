@@ -17,7 +17,7 @@ const intialState: IPostState = {
   loading: false,
   error: '',
   creating: false,
-  creatingError: '',
+  creating_msg: '',
   liking: false,
   liking_msg: ''
 }
@@ -45,17 +45,19 @@ function postsReducer(state = intialState, action: Action) {
       return {
         ...state,
         creating: true,
+        creating_msg: '',
       }
     case CREATE_POST_SUCCESS:
       return {
         ...state,
         creating: false,
+        creating_msg: 'success',
     }
     case CREATE_POST_FAILURE:
       return {
         ...state,
         creating: false,
-        creatingError: action.payload
+        creating_msg: 'failure'
     }
 
     case LIKE_POST_REQUEST:
