@@ -6,3 +6,5 @@ tmp/
 uploads/
 server/src/public/
 server/src/views/
+
+dist/
