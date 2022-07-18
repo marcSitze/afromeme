@@ -1,5 +1,9 @@
-import * as dotenv from "dotenv";
-dotenv.config()
+if(process.env.NODE_ENV != 'production') {
+  import("dotenv")
+  .then((dotenv) => {
+    dotenv.config();
+  });
+}
 
 export default {
   app: {

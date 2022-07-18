@@ -1,4 +1,4 @@
-export class CreateUserDTO {
+export type CreateUserDTO = {
     _id?: string;
     username: string;
     email: string;

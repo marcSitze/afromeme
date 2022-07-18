@@ -1,4 +1,4 @@
-export class CreateCommentDTO {
+export type CreateCommentDTO = {
     _id?: string;
     author: string;
     message: string;

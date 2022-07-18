@@ -5,7 +5,7 @@ interface IBio {
     facebook: string;
     instagram: string;
 }
-export class AccountDTO {
+export type AccountDTO = {
     _id?: string;
     user: string;
     posts: string[];

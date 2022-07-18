@@ -13,7 +13,7 @@ export interface IPostState {
   loading: Boolean;
   error: string | void;
   creating: Boolean;
-  creatingError: string | void;
+  creating_msg: string | void;
   liking: Boolean;
   liking_msg: string;
 }

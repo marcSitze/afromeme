@@ -4,10 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node dist/src/server.js",
     "dev": "nodemon server.js",
     "start:dev": "nodemon --exec ts-node ./src/server.ts --watch src --ext .ts",
-    "test": "jest src/**/*.test.ts"
+    "test": "jest src/**/*.test.ts",
+    "tsc": "tsc",
+    "start:prod": "node dist/src/server.js"
   },
   "keywords": [],
   "author": "theblackdev",
@@ -21,6 +23,7 @@
     "express-fileupload": "^1.1.7-alpha.3",
     "formidable": "^1.2.2",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.8.0",
     "mongoose": "^5.9.14",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",

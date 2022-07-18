@@ -1,7 +1,7 @@
 export default {
     light: {
       white: "#fff",
-      whiteTrans: 'rgba(255, 255, 255, 0)',
+      whiteTrans: 'rgba(255, 255, 255, 0.3)',
       gray: "#808080",
       black: "#000",
       primary: "#0B8AD4",

@@ -9,7 +9,7 @@ export default class CommentsService implements ICommentsService {
     return await newComment.save();
   };
   getComments = async () => {
-    return await Comment.find({});
+    return await Comment.find({}).sort({ createdAt: -1 });
   };
   findOne = async (query: Partial<CreateCommentDTO>) => {
     console.log("query: ", query);
@@ -31,6 +31,10 @@ export default class CommentsService implements ICommentsService {
   getCommentsByQuery = async (query: any) => {
     return await Comment.find(query)
       .populate({ path: "post" })
-      .populate({ path: "author", populate: { path: "user", select: "-password"} });
+      .populate({
+        path: "author",
+        populate: { path: "user", select: "-password" },
+      })
+      .sort({ createdAt: -1 });
   };
 }

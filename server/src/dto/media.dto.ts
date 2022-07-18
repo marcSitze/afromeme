@@ -1,4 +1,4 @@
-export class CreateMediaDTO {
+export type CreateMediaDTO = {
     _id?: string;
     name: string;
     author: string;

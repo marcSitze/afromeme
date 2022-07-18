@@ -1,4 +1,4 @@
-export class CreatePostDTO {
+export type CreatePostDTO = {
     _id?: string;
     author: string;
     description: string;
