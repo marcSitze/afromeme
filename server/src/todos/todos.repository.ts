@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import makeTodo from "./todo.entity";
+import Todo from '../models/Todo';
 
 export default function makeTodosRepository ({ database }: any) {
   return Object.freeze({
@@ -9,16 +10,17 @@ export default function makeTodosRepository ({ database }: any) {
   });
 
   async function add (todo: any) {
-    // const db = await database;
+    const db = await database;
     console.log('todoRepo: ', todo);
     console.log('database: ', database);
+    console.log('database: ', db);
     try {
-      const result = new database.save(makeTodo(todo));
+      const newTodo = await db.create(makeTodo(todo));
       // const result = await newTodo.save(todo);
-  
+
       return {
         success: true,
-        created: result,
+        created: newTodo,
       }
 
     }catch(err) {

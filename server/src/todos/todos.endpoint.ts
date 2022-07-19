@@ -42,6 +42,13 @@ export default function makeTodosEndpointHandler({ todosRepository }: any) {
   async function getTodosService(httpRequest: any) {
     try {
       const todos = await todosRepository.getTodos();
+      return {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        statusCode: 200,
+        data: JSON.stringify(todos),
+      };
     } catch (error) {
       throw new Error("Unable to create todo, service");
     }
