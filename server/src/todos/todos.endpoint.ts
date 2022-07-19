@@ -50,7 +50,7 @@ export default function makeTodosEndpointHandler({ todosRepository }: any) {
         data: JSON.stringify(todos),
       };
     } catch (error) {
-      throw new Error("Unable to create todo, service");
+      throw new Error("Unable to get todo, service");
     }
   }
 }

@@ -9,17 +9,17 @@ export default async function makeDb (model: string) {
   // const client = new MongoClient(url, { useNewUrlParser: true })
   // await client.connect()
   let db: any;
-  console.log('model: ', model)
+  console.log('modelMakeDb: ', model)
   // const db = mongoose.model(model, new mongoose.Schema({ message: String, done: Boolean }));
-  // switch(model) {
-  //   case 'todos':
-  //     db = Todo;
-  //   default:
-  //     db = null;
-  // }
+  switch(String(model)) {
+    case String('Todo'):
+      db = Todo;
+    default:
+      db = null;
+  }
   // const db = await client.db(dbName)
   // db.makeId = makeIdFromString
-  return Todo;
+  return db;
 }
 // function makeIdFromString (id) {
 //   return new mongodb.ObjectID(id)

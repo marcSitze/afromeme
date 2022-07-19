@@ -15,12 +15,12 @@ export default function makeTodosRepository ({ database }: any) {
     console.log('database: ', database);
     console.log('database: ', db);
     try {
-      const newTodo = await db.create(makeTodo(todo));
+      // const newTodo = await db.create(makeTodo(todo));
       // const result = await newTodo.save(todo);
 
       return {
         success: true,
-        created: newTodo,
+        created: makeTodo(todo),
       }
 
     }catch(err) {
