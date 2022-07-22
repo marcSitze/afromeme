@@ -29,5 +29,5 @@ jobs:
         with:
           node-version: 16
       - run: cd server
-      - run: npm ci
-      - run: npm run tsc
+      - run: yarn install --frozen-lockfile # || npm ci
+      - run: yarn run tsc # || npm run tsc
