@@ -25,11 +25,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Install dependencies of server
+      - run: |
+          yarn install --frozen-lockfile
         working-directory: ./server
-      - run: yarn install --frozen-lockfile # || npm ci
-        working-directory: ./server
+        # working-directory: ./server
+      # - run: yarn install --frozen-lockfile # || npm ci
       - run: yarn run tsc # || npm run tsc
