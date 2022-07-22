@@ -29,8 +29,7 @@ jobs:
         with:
           node-version: 16
         name: Install dependencies of server
-      - run: yarn
-        working-directory: ./server
+      - run: cd ./server
+        # working-directory: ./server
       - run: yarn install --frozen-lockfile # || npm ci
-        working-directory: ./server
       - run: yarn run tsc # || npm run tsc
