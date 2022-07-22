@@ -28,6 +28,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      - run: cd server
+      - name: Install dependencies of server
+        working-directory: ./server
       - run: yarn install --frozen-lockfile # || npm ci
+        working-directory: ./server
       - run: yarn run tsc # || npm run tsc
