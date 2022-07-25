@@ -12,6 +12,7 @@ import mediaRoutes from './media';
 import { isLoggedIn } from '../middlewares/auth/isLoggedIn';
 import { getIndex, getIndividual, postComment } from '../controllers';
 import todosController from '../todos/todosController';
+import PostsController from '../posts/posts.controller';
 
 // Check if user is loggedIn
 // router.use(isLoggedIn);
@@ -27,7 +28,8 @@ router.use("/users", usersRoute);
 // account routes
 router.use("/accounts", accountsRoute);
 // posts routes
-router.use('/posts', postsRoutes);
+// router.use('/posts', postsRoutes);
+router.use('/posts', PostsController);
 // comments routes
 router.use('/comments', commentsRoutes);
 
