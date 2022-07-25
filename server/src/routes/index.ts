@@ -28,8 +28,8 @@ router.use("/users", usersRoute);
 // account routes
 router.use("/accounts", accountsRoute);
 // posts routes
-// router.use('/posts', postsRoutes);
-router.use('/posts', PostsController);
+router.use('/posts', postsRoutes);
+// router.use('/posts', PostsController);
 // comments routes
 router.use('/comments', commentsRoutes);
 
