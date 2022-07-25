@@ -16,6 +16,7 @@ import { connect, useDispatch } from 'react-redux';
 import { LOGIN } from '../../../constants/screens';
 import { forgetPassword } from '../../../redux/auth/actions';
 import { PropsState } from '../../../types';
+import colors from '../../../constants/colors';
 
 const ForgetPassword = ({ navigation, forgetPassword_msg, loading_forgetPass }: any) => {
   const dispatch = useDispatch();
@@ -23,65 +24,67 @@ const ForgetPassword = ({ navigation, forgetPassword_msg, loading_forgetPass }: 
 console.log('forgetPassword_msg: ', forgetPassword_msg);
 console.log('email: ', email);
   return (
-    <Box backgroundColor="#181920" height="full">
-      <Box justifyContent="center" height="1/3">
+    <Box backgroundColor={colors.light.white} height="full">
+      <Box px={2} justifyContent="flex-end" height="1/3" pb={5}>
         <Center>
-          <Heading color="white" mb="2">
+          {/* <Heading color={colors.light.white} mb="2">
             Welcome Back
-          </Heading>
-          <Text color="gray.400">Please Login into your account</Text>
+          </Heading> */}
+          <Text color={colors.light.black} fontSize={'2xl'} mb={2}>Forgot your password?</Text>
+          <Text textAlign={'center'}>
+            Enter your email address and we will send you instructions to reset your password.
+          </Text>
         </Center>
       </Box>
       <Box mx="10">
         {forgetPassword_msg.length > 0 && <Text bg={'red.400'} color={'red.500'}>{forgetPassword_msg}</Text>}
         <FormControl isRequired>
-          <Stack mb="1/6">
+          <Stack>
             <Box mb="4">
               <Input
                 onChangeText={text => setEmail(text)}
                 value={email}
                 borderRadius="10"
                 px="4"
-                color="gray.100"
-                placeholderTextColor="#f4f4f4"
-                backgroundColor="#252a34"
-                borderColor="#252a34"
+                py="3"
+                shadow={'0'}
+                color={colors.light.black}
+                placeholderTextColor={colors.light.gray}
+                backgroundColor={colors.light.gray__0}
+                borderColor={colors.light.lightGray}
                 type="text"
-                defaultValue="example@gmail.com"
                 placeholder="Email"
               />
-              {/* <FormControl.HelperText>is Required</FormControl.HelperText> */}
-              <FormControl.ErrorMessage>
-                you should fill this input
-              </FormControl.ErrorMessage>
             </Box>
           </Stack>
           <Box alignItems="center" mb="4">
             <Button
+            _text={{ fontWeight: 'bold'}}
               onPress={() => {
                 console.log('pressed');
                 dispatch(forgetPassword(email))
               }}
               py="4"
               mb="4"
+              shadow={3}
               borderRadius="10"
-              backgroundColor="#5568fe"
+              backgroundColor={colors.light.primary}
               w="full"
               isLoading={loading_forgetPass}
             >
-              Reset Password
+              Continue
             </Button>
           </Box>
           <Center>
             <HStack>
-              <Text color="gray.100" mr="2">
-                Don't have an account yet ?
+              <Text color={colors.light.gray} mr="2">
+                go back ?
               </Text>
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate(LOGIN);
                 }}>
-                <Text color="#5568fe">Sign In</Text>
+                <Text color={colors.light.primary} fontWeight={'bold'}>Sign In</Text>
               </TouchableOpacity>
             </HStack>
           </Center>
