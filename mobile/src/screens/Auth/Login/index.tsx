@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, Image} from 'react-native';
 import {
   Box,
   Container,
@@ -11,44 +11,59 @@ import {
   Text,
   Button,
   Icon,
-  Image,
   HStack,
 } from 'native-base';
-import { connect, useDispatch } from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import * as SCREENS from '../../../constants/screens';
 import Camera from '../../../assets/images/camera.svg';
 import {LoginDto} from '../../../types/auth';
-import { login } from '../../../redux/auth/actions';
-import { PropsState } from '../../../types';
+import {login} from '../../../redux/auth/actions';
+import {PropsState} from '../../../types';
 import * as types from '../../../redux/auth/types';
+import colors from '../../../constants/colors';
+import Logo from '../../../assets/images/logo.png';
 
 /**
  *
  * @todo add navigation type
  */
 
-const Login = ({navigation, logging, logging_message }: any) => {
+const Login = ({navigation, logging, logging_message}: any) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState<LoginDto>({
     email: 'test@gmail.com',
     password: '123456',
   });
-console.log('logging: ', logging)
+  const [show, setShow] = useState(false);
+
+  console.log('logging: ', logging);
   console.log('form: ', form);
   return (
-    <Box backgroundColor="#181920" height="full">
-      <Box justifyContent="center" height="1/3">
+    <Box backgroundColor={colors.light.white} height="full">
+      <Box justifyContent="flex-end" height="1/3">
         <Center>
-          <Heading color="white" mb="2">
+          {/* <Heading color="white" mb="2">
             Welcome Back
-          </Heading>
-          <Text color="gray.400">Please Login into your account</Text>
+          </Heading> */}
+          <Image source={Logo} style={{width: 100, height: 100, marginBottom: 10}} resizeMode='contain' />
+          <Text color={colors.light.black} fontWeight={'bold'} fontSize={'3xl'}>
+            Login into your account
+          </Text>
         </Center>
       </Box>
       <Box mx="10">
-      {Array.isArray(logging_message) && logging_message.length > 0 ? logging_message.map((data, i) => <Text bg={'red.400'} color={'red.500'} key={i}>{data.msg}</Text>): <Text color={'red.500'} >{logging_message}</Text>}
+        {Array.isArray(logging_message) && logging_message.length > 0 ? (
+          logging_message.map((data, i) => (
+            <Text bg={'red.400'} color={'red.500'} key={i}>
+              {data.msg}
+            </Text>
+          ))
+        ) : (
+          <Text color={'red.500'}>{logging_message}</Text>
+        )}
         <FormControl isRequired>
           <Stack mb="1/6">
             <Box mb="4">
@@ -57,10 +72,12 @@ console.log('logging: ', logging)
                 value={form.email}
                 borderRadius="10"
                 px="4"
-                color="gray.100"
-                placeholderTextColor="#f4f4f4"
-                backgroundColor="#252a34"
-                borderColor="#252a34"
+                py="3"
+                shadow={'0'}
+                color={colors.light.black}
+                placeholderTextColor={colors.light.gray}
+                backgroundColor={colors.light.gray__0}
+                borderColor={colors.light.lightGray}
                 type="text"
                 defaultValue="example@gmail.com"
                 placeholder="Email"
@@ -71,23 +88,32 @@ console.log('logging: ', logging)
               </FormControl.ErrorMessage>
             </Box>
             <Box>
+              <HStack alignItems={'center'}>
               <Input
                 onChangeText={text => setForm({...form, password: text})}
                 value={form.password}
                 borderRadius="10"
                 px="4"
-                color="gray.100"
-                placeholderTextColor="#f4f4f4"
-                backgroundColor="#252a34"
-                borderColor="#252a34"
-                type="password"
-                defaultValue="12345"
+                py="3"
+                shadow={'0'}
+                color={colors.light.black}
+                placeholderTextColor={colors.light.gray}
+                backgroundColor={colors.light.gray__0}
+                borderColor={colors.light.lightGray}
+                type={show ? "text": "password"}
                 placeholder="password"
+                flex={1}
               />
+              <TouchableOpacity onPress={() => setShow(!show)} style={{ position: 'absolute', right: 10}}>
+              <MaterialIcons size={20} name={show ? 'visibility' : 'visibility-off'}
+                      />
+              </TouchableOpacity>
+              </HStack>
+
               {/* <FormControl.HelperText>is required</FormControl.HelperText> */}
               <Box alignItems="flex-end">
-                <Text fontSize="xs" color="gray.400">
-                  you should fill this input
+                <Text fontSize="xs" color={colors.light.gray}>
+                  reveal password
                 </Text>
               </Box>
             </Box>
@@ -96,7 +122,7 @@ console.log('logging: ', logging)
             <Button
               onPress={() => {
                 // navigation.navigate(SCREENS.BOTTOM_NAVIGATION)
-                console.log('pressed')
+                console.log('pressed');
                 // navigation.navigate(SCREENS.BOTTOM_NAVIGATION)
                 dispatch(login(form));
                 // dispatch({ type: types.LOGIN_USER_REQUEST});
@@ -106,35 +132,32 @@ console.log('logging: ', logging)
               py="4"
               mb="4"
               borderRadius="10"
-              backgroundColor="#5568fe"
+              backgroundColor={colors.light.primary}
               w="full"
+              _text={{fontWeight: 'bold'}}
               isLoading={logging}
-              // leftIcon={logging ?<FontAwesome5 name='spinner' color={'#fff'} />: <Text></Text>}
+              shadow={3}
             >
               Sign In
             </Button>
-            <Button
-              py="4"
-              borderRadius="10"
-              bg="white"
-              w="full"
-              // leftIcon={<Camera width={20} height={20} />}
-              onPress={() => navigation.navigate(SCREENS.FORGET_PASSWORD)}
-            >
-              Forgot password?
-            </Button>
+            <TouchableOpacity onPress={() => navigation.navigate(SCREENS.FORGET_PASSWORD)}>
+              <Text py="4"
+              borderRadius="10" color={colors.light.gray}>Forgot password?</Text>
+            </TouchableOpacity>
           </Box>
           <Center>
             <HStack>
-              <Text color="gray.100" mr="2">
+              <Text color={colors.light.gray} mr="2">
                 Don't have an account yet ?
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate(SCREENS.REGISTER)
+                  navigation.navigate(SCREENS.REGISTER);
                   // dispatch(login(form));
                 }}>
-                <Text color="#5568fe">Sign Up</Text>
+                <Text color={colors.light.primary} fontWeight={'bold'}>
+                  Sign Up
+                </Text>
               </TouchableOpacity>
             </HStack>
           </Center>
@@ -144,8 +167,8 @@ console.log('logging: ', logging)
   );
 };
 
-const mapStateToProps = ({ authReducer }: PropsState) => ({
+const mapStateToProps = ({authReducer}: PropsState) => ({
   logging: authReducer.logging,
-  logging_message: authReducer.logging_error
-})
+  logging_message: authReducer.logging_error,
+});
 export default connect(mapStateToProps)(Login);
