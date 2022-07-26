@@ -6,6 +6,7 @@ export interface IPost {
   author: IAccount;
   likes: Array<any>; // todo add like data type
   comments: Array<any>; // todo add comment data type
+  createdAt: string;
 }
 
 export interface IPostState {
