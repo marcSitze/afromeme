@@ -21,6 +21,8 @@ import WhiteSpace from '../../components/Others/WhiteSpace';
 import {PropsState} from '../../types';
 import {IAccount} from '../../types/users';
 import { clearViewProfile} from '../../redux/users/actions'
+import { countLikes } from '../../helpers/helper';
+import Gravatar from '../../components/Others/Gravatar'
 
 type PropTypes = {
   view_profile: IAccount;
@@ -45,11 +47,12 @@ const ViewProfile = ({
           <HStack flex={1} alignItems="center" justifyContent={'space-evenly'}>
             <Box alignItems={'center'}>
               <Box width={100} height={100}>
-                <Image
+                {/* <Image
                   style={{width: '100%', height: '100%', minHeight: 80}}
                   resizeMode="contain"
                   source={profile}
-                />
+                /> */}
+                <Gravatar username={view_profile.user?.username} />
               </Box>
             </Box>
             <Box alignItems={'center'}>
@@ -61,13 +64,13 @@ const ViewProfile = ({
             </Box>
             <Box alignItems={'center'}>
               <Text fontWeight={'bold'} fontSize="xl">
-                10
+                {view_profile?.followers?.length > 0 ? view_profile?.followers?.length: 0}
               </Text>
               <Text color={'gray.500'}>Followers</Text>
             </Box>
             <Box alignItems={'center'}>
               <Text fontWeight={'bold'} fontSize="xl">
-                10
+                {countLikes(view_profile.posts)}
               </Text>
               <Text color={'gray.500'}>Likes</Text>
             </Box>

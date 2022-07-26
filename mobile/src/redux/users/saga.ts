@@ -6,6 +6,7 @@ import * as SCREENS from '../../constants/screens';
 import {
   getUserAccount as getUserAccountService,
   viewProfile as viewProfileService,
+  getUsersAccounts as getUsersAccountsService
 } from '../../services/users';
 import {LoginDto} from '../../types/auth';
 import config from '../../config';
@@ -88,9 +89,27 @@ function* viewProfile({payload}: ViewProfileType): Generator<any> {
   }
 }
 
+function* getUsersAccounts (): Generator<any> {
+
+  try {
+    const token: any = yield AsyncStorage.getItem('@token');
+    const data: any = yield getUsersAccountsService(token);
+    console.log('users: ', data);
+    if(data?.success) {
+      yield put({ type: types.GET_USERS_ACCOUNTS_SUCCESS, payload: data.data})
+    }
+    if(!data.success) {
+      yield put({ type: types.GET_LOCAL_USER_ACCOUNT_FAILURE, payload: []})
+    }
+  } catch (error) {
+    console.error('GetUsersAccountsErr: ', error);
+  }
+}
+
 
 export default function* AuthSaga() {
   yield takeLatest(types.GET_USER_ACCOUNT_REQUEST, getUserAccount);
   yield takeLatest(types.GET_LOCAL_USER_ACCOUNT_REQUEST, getLocalUserAccount);
   yield takeLatest(types.VIEW_PROFILE_REQUEST, viewProfile);
+  yield takeLatest(types.GET_USERS_ACCOUNTS_REQUEST, getUsersAccounts);
 }

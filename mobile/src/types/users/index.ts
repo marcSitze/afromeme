@@ -19,4 +19,5 @@ export interface IUserState {
   view_profile: IAccount,
   view_profile_loading: Boolean,
   view_profile_msg: string,
+  accounts: IAccount[],
 }

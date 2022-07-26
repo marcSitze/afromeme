@@ -10,6 +10,7 @@ import LottieView from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {connect, useDispatch} from 'react-redux';
+import Moment from 'moment';
 
 import Camera from '../../assets/images/camera.svg';
 // import Picture from '../../assets/images/image.png';
@@ -28,6 +29,7 @@ import {getComments} from '../../redux/comments/actions';
 import {IComment} from '../../types/comments';
 import { viewProfile } from '../../redux/users/actions';
 import colors from '../../constants/colors';
+import Gravatar from '../Others/Gravatar'
 
 type PostProps = {
   post: IPost;
@@ -97,17 +99,18 @@ const Post = ({post, liking, liking_msg, account, comments}: PostProps) => {
         }}
       />
       <HStack alignItems={'center'} mb="4">
-        <Box bg={'blue.500'} borderRadius={20} mr={2}>
+        <Box borderRadius={20} mr={2}>
           {/* <Camera width={30} height={30} /> */}
           <TouchableOpacity onPress={changeScreen}>
-            <Image style={{width: 40, height: 40}} source={Profile} />
+            {/* <Image style={{width: 40, height: 40}} source={Profile} /> */}
+            <Gravatar size={50} username={post?.author?.user?.username} />
           </TouchableOpacity>
         </Box>
         <TouchableOpacity onPress={changeScreen}>
           <VStack>
-            <Text>{post?.author?.user?.username || 'John Doe'}</Text>
+            <Text fontWeight={'bold'}>{post?.author?.user?.username || 'John Doe'}</Text>
             <Text fontSize={10} color={'gray.500'}>
-              {'yesterday at 20:30'}
+              {Moment(post.createdAt).fromNow() ?? 'yesterday at 20:30'}
             </Text>
           </VStack>
         </TouchableOpacity>

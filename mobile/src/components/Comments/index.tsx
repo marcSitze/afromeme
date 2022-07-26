@@ -18,6 +18,7 @@ import {IAccount} from '../../types/users';
 import {IComment} from '../../types/comments';
 import colors from '../../constants/colors';
 import img from '../../assets/images/profile.png';
+import Gravatar from '../Others/Gravatar';
 
 type PropTypes = {
   visible: boolean;
@@ -108,7 +109,8 @@ const Comments = ({
           <Box flex={1} mt={5}>
             {comments.map((item, i) => (
                 <HStack key={i} alignItems={'center'} borderBottomWidth={1} borderColor={'gray.200'} mb={2} pb={2}>
-                  <Image source={img} style={{width: 30, height: 30}} resizeMode={'contain'} />
+                  {/* <Image source={img} style={{width: 30, height: 30}} resizeMode={'contain'} /> */}
+                  <Gravatar size={30} username={item.author.user?.username} />
                   <Text ml={2}>{item.message}</Text>
                 </HStack>
             ))}
