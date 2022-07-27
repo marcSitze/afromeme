@@ -10,22 +10,27 @@ import Profile from '../../components/Profile';
 import * as data from '../../helpers/defaultData';
 import {PropsState} from '../../types';
 import {IPost} from '../../types/posts';
+import { IAccount } from '../../types/users';
 import {getPosts} from '../../redux/posts/actions';
+import { getUsersAccounts } from '../../redux/users/actions';
+import { sortAccounts } from '../../helpers/helper';
 
 type PropTypes = {
   posts: IPost[];
   loading: Boolean;
+  accounts: IAccount[]
 };
 const wait = (timeout: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
-const Home = ({posts, loading}: PropTypes) => {
+const Home = ({posts, loading, accounts}: PropTypes) => {
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getUsersAccounts());
   }, []);
   // console.log('posts: ', posts);
 
@@ -36,23 +41,11 @@ const Home = ({posts, loading}: PropTypes) => {
 
   return (
     <BaseWrapper backArrowAction={() => {}}>
-      <ScrollView
-        contentContainerStyle={{flex: 1}}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
+      <ScrollView>
         <Box mb={4}>
           <ScrollView horizontal={true}>
-            <Profile />
-            <Profile />
-            <Profile />
-            <Profile />
-            <Profile />
-            <Profile />
-            <Profile />
-            <Profile />
-            <Profile />
-            <Profile />
+            {/* <Profile account={{_id: '', followers: [], posts: [], user: {}}} /> */}
+            {sortAccounts(accounts).map((account: IAccount, key: number) => <Profile key={key} account={account} />)}
           </ScrollView>
         </Box>
         {loading && <ActivityIndicator />}
@@ -66,9 +59,10 @@ const Home = ({posts, loading}: PropTypes) => {
   );
 };
 
-const mapStateToProps = ({postsReducer}: PropsState) => ({
+const mapStateToProps = ({postsReducer, usersReducer}: PropsState) => ({
   posts: postsReducer.posts,
   loading: postsReducer.loading,
+  accounts: usersReducer.accounts
 });
 
 export default connect(mapStateToProps)(Home);

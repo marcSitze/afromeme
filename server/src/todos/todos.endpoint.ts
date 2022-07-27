@@ -32,7 +32,7 @@ export default function makeTodosEndpointHandler({ todosRepository }: any) {
           "Content-Type": "application/json",
         },
         statusCode: 201,
-        data: JSON.stringify(result),
+        data: result,
       };
     } catch (error) {
       throw new Error("Unable to create todo, service");
@@ -42,8 +42,15 @@ export default function makeTodosEndpointHandler({ todosRepository }: any) {
   async function getTodosService(httpRequest: any) {
     try {
       const todos = await todosRepository.getTodos();
+      return {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        statusCode: 200,
+        data: todos,
+      };
     } catch (error) {
-      throw new Error("Unable to create todo, service");
+      throw new Error("Unable to get todo, service");
     }
   }
 }

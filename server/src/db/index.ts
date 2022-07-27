@@ -1,17 +1,23 @@
 // import mongodb from 'mongodb'
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import Todo from "../models/Todo";
+import Post from "../models/Post";
 
-export default async function makeDb (model: string) {
-  // const MongoClient = mongodb.MongoClient
-  // const url = 'mongodb://localhost:27017'
-  // const dbName = 'mm_api_demo'
-  // const client = new MongoClient(url, { useNewUrlParser: true })
-  // await client.connect()
-  const db = mongoose.model(model, new mongoose.Schema({ message: String, done: Boolean }));
-  // const db = await client.db(dbName)
-  // db.makeId = makeIdFromString
+export default async function makeDb(model: string) {
+  let db: any;
+  switch (String(model)) {
+    case "Todo":
+      console.log("modelMakeDb: ", model);
+      db = Todo;
+      break;
+    case "Post":
+      console.log("PostModel: ", model);
+      db = Post;
+      break;
+    default:
+      console.log("DefaultMakeDb: ", model);
+      db = null;
+  }
+
   return db;
 }
-// function makeIdFromString (id) {
-//   return new mongodb.ObjectID(id)
-// }

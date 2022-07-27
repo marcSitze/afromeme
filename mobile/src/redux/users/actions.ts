@@ -18,3 +18,7 @@ export const viewProfile = (accountId: string) => ({
 export const clearViewProfile = () => ({
   type: types.CLEAR_VIEW_PROFILE
 })
+
+export const getUsersAccounts = () => ({
+  type: types.GET_USERS_ACCOUNTS_REQUEST
+})

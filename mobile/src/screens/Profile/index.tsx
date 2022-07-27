@@ -26,6 +26,7 @@ import {IAccount} from '../../types/users';
 import {logout} from '../../redux/auth/actions';
 import colors from '../../constants/colors';
 import { countLikes } from '../../helpers/helper'
+import Gravatar from '../../components/Others/Gravatar';
 
 type PropsType = {
   account: IAccount;
@@ -55,11 +56,12 @@ const Profile = ({account, bg}: PropsType) => {
         <Box flex={1} py="4">
           <VStack flex={1} alignItems="center">
             <Box alignItems={'center'} height={'1/5'} width={'1/2'} mb={5}>
-              <Image
+              {/* <Image
                 style={{width: '100%', height: '100%', minHeight: 80}}
                 resizeMode="contain"
                 source={profile}
-              />
+              /> */}
+              <Gravatar username={account.user.username} size={100} style={{paddingVertical: 15, borderRadius: 60}} />
             </Box>
             <Container mb={'4'}>
               <Text fontSize={16} textAlign="center" fontWeight={'bold'}>
@@ -73,12 +75,12 @@ const Profile = ({account, bg}: PropsType) => {
                 </Text>
                 <Text color={'gray.500'}>Posts</Text>
               </Box>
-              <Box alignItems={'center'}>
+              {/* <Box alignItems={'center'}>
                 <Text fontWeight={'bold'} fontSize="xl">
                   {account?.followers.length ?? 10}
                 </Text>
                 <Text color={'gray.500'}>Followers</Text>
-              </Box>
+              </Box> */}
               <Box alignItems={'center'}>
                 <Text fontWeight={'bold'} fontSize="xl">
                   {countLikes(account.posts)}

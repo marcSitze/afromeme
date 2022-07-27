@@ -1,9 +1,9 @@
 import * as types from './types';
 import {LOGOUT_USER_SUCCESS} from '../auth/types';
 import {Action} from '../../types';
-import {IUserState} from '../../types/users';
+import {IUserState, IAccount} from '../../types/users';
 
-const INITIAL_STATE = {
+const INITIAL_STATE: IUserState = {
   account: {
     _id: '',
     followers: [],
@@ -20,6 +20,7 @@ const INITIAL_STATE = {
   view_profile_msg: '',
   error: '',
   user: {_id: '', lastName: '', username: '', firstName: ''},
+  accounts: [],
 };
 
 function UsersReducer(state = INITIAL_STATE, action: Action) {
@@ -75,6 +76,13 @@ function UsersReducer(state = INITIAL_STATE, action: Action) {
         view_profile_loading: true,
         view_profile_msg: '',
       }
+
+    case types.GET_USERS_ACCOUNTS_SUCCESS:
+      return {
+        ...state,
+        accounts: action.payload
+      }
+
     default:
       return state;
   }
