@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { makeCallback } from "../../_libs";
+
 import {
   getAccount,
   getAccounts,
@@ -7,10 +9,10 @@ import {
 
 const router = Router();
 
-router.get("/:id", getAccount);
+router.get("/:id", makeCallback(getAccount));
 
-router.get("/", getAccounts);
+router.get("/", makeCallback(getAccounts));
 
-router.put("/:id", updateAccount);
+router.put("/:id", makeCallback(updateAccount));
 
 export default router;
