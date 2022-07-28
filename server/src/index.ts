@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Express, RequestHandler} from "express";
 import * as path from "path";
 import morgan from "morgan";
 
@@ -11,9 +11,9 @@ import indexRoute from "./routes/index";
 import indexRoutesV2 from "./routes/v2";
 
 // To parse form data
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(morgan("combined"));
+app.use(express.urlencoded({ extended: true }) as RequestHandler);
+app.use(express.json() as RequestHandler);
+app.use(morgan("combined") as RequestHandler);
 
 // Set view engine
 app.set("view engine", "ejs");

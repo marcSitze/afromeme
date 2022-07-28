@@ -2,6 +2,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
+import { TokenDocument } from "../interfaces/models/TokenDocument";
 const tokenSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
@@ -20,4 +21,4 @@ const tokenSchema = new Schema({
   },
 });
 
-export default mongoose.model("Token", tokenSchema);
+export default mongoose.model<TokenDocument>("Token", tokenSchema);
