@@ -18,4 +18,4 @@ const profileSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<IAccount>("Account", profileSchema);
+export default mongoose.model<IAccount>("Account_v2", profileSchema);
