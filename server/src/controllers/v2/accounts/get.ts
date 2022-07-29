@@ -1,6 +1,6 @@
-export function makeGet({ accountService, useController }: any) {
+export function makeGet({ findOne, useController }: any) {
   return async function (httpReq: any) {
-    return useController(accountService.findOne, {
+    return useController(findOne, {
       data: { _id: httpReq.params.id },
     });
   };

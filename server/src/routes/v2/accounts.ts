@@ -6,8 +6,11 @@ import {
   getAccounts,
   updateAccount,
 } from "../../controllers/v2/accounts";
+import { auth } from "../../middlewares/auth/auth";
 
 const router = Router();
+
+router.use(auth);
 
 router.get("/:id", makeCallback(getAccount));
 

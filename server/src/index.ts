@@ -1,8 +1,5 @@
-import express, { Express, RequestHandler} from "express";
-import * as path from "path";
+import express, { RequestHandler } from "express";
 import morgan from "morgan";
-
-import config from "./config";
 
 const app: express.Application = express();
 

@@ -1,5 +1,5 @@
-export function makeGetMany({ accountService, useController }: any) {
+export function makeGetMany({ getAccounts, useController }: any) {
   return async function (httpReq: any) {
-    return useController(accountService.getAccounts, { data: httpReq.query });
+    return useController(getAccounts, { data: httpReq.query });
   };
 }

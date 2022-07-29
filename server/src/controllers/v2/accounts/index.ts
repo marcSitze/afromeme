@@ -1,17 +1,23 @@
 import { useController } from "../../../_libs";
 
-import AccountService from "../../../services/account.service";
+import {
+  findOne,
+  getAccounts,
+  updateAccount,
+} from "../../../models/v2/accounts/service";
 
 import { makeGet } from "./get";
 import { makeGetMany } from "./get-many";
 import { makePut } from "./put";
 
-const accountService = new AccountService();
+const getAccount = makeGet({ findOne, useController });
 
-const getAccount = makeGet({ accountService, useController });
+const _getAccounts = makeGetMany({ getAccounts, useController });
 
-const getAccounts = makeGetMany({ accountService, useController });
+const _updateAccount = makePut({ updateAccount, useController });
 
-const updateAccount = makePut({ accountService, useController });
-
-export { getAccount, getAccounts, updateAccount };
+export {
+  getAccount,
+  _getAccounts as getAccounts,
+  _updateAccount as updateAccount,
+};

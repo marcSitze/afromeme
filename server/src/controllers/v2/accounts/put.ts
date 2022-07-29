@@ -1,5 +1,5 @@
-export function makePut({ accountService, useController }: any) {
+export function makePut({ updateAccount, useController }: any) {
   return async function (httpReq: any) {
-    throw new Error("PUT Accounts v2 has not yet been implemented");
+    return useController(updateAccount, { data: httpReq.body });
   };
 }
