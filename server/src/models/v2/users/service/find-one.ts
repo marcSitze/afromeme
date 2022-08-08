@@ -1,5 +1,4 @@
-export function makeFindOne({ userDb }: any) {
-  return async (query: any) => {
-    return userDb.findOne(query);
-  };
+export function makeFindOne({ userDb, sanitize }: any) {
+  return (query: any) =>
+    userDb.findOne(sanitize(query, { replace: { id: "_id" } }));
 }
