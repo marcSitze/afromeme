@@ -19,6 +19,6 @@ router.get("/:id", makeCallback(getAccount));
 
 router.get("/", makeCallback(getAccounts));
 
-router.put("/:id", makeCallback(updateAccount));
+router.put("/", makeCallback(updateAccount));
 
 export default router;
