@@ -128,6 +128,7 @@ export const login = async (req: Request, res: Response) => {
   if (!email) {
     errors.push({ msg: "Please enter your email" });
   }
+
   if (!password) {
     errors.push({ msg: "Please enter your password" });
   }
@@ -176,14 +177,18 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const requestResetPassword = async (req: Request, res: Response) => {
-  console.log('req.body: ', req.body);
-  if(!req.body.email) {
-    return ErrorHandler(res, httpStatus.BAD_REQUEST, { msg: "Please enter your email"});
+  console.log("req.body: ", req.body);
+  if (!req.body.email) {
+    return ErrorHandler(res, httpStatus.BAD_REQUEST, {
+      msg: "Please enter your email",
+    });
   }
   const user = await userService.findOne({ email: req.body.email });
   if (!user) {
-    return ErrorHandler(res, httpStatus.BAD_REQUEST, { msg: "Email does not exist"});
-  };
+    return ErrorHandler(res, httpStatus.BAD_REQUEST, {
+      msg: "Email does not exist",
+    });
+  }
 
   let token = await Token.findOne({ userId: user._id });
   if (token) await token.deleteOne();
@@ -217,27 +222,35 @@ export const requestResetPassword = async (req: Request, res: Response) => {
 
   // return link;
   // res.send({ link, msg: "check your mail" })
-  return SuccessHandler(res, httpStatus.OK, { msg: "Check your mail to reset your password" });
+  return SuccessHandler(res, httpStatus.OK, {
+    msg: "Check your mail to reset your password",
+  });
 };
 
 export const resetPassword = async (req: Request, res: Response) => {
   const { userId, token, password } = req.body;
-console.log('req.body: ', req.body);
-    if(!userId || !token || !password) {
-      return ErrorHandler(res, httpStatus.BAD_REQUEST, { msg: "userId, token, password are missing"});
-    }
+  console.log("req.body: ", req.body);
+  if (!userId || !token || !password) {
+    return ErrorHandler(res, httpStatus.BAD_REQUEST, {
+      msg: "userId, token, password are missing",
+    });
+  }
 
   try {
     let passwordResetToken = await Token.findOne({ userId });
 
     if (!passwordResetToken) {
-      return ErrorHandler(res, httpStatus.BAD_REQUEST, { msg: "Invalid or expired password reset token"});
+      return ErrorHandler(res, httpStatus.BAD_REQUEST, {
+        msg: "Invalid or expired password reset token",
+      });
     }
 
     const isValid = await bcrypt.compare(token, passwordResetToken.token);
 
     if (!isValid) {
-      return ErrorHandler(res, httpStatus.BAD_REQUEST, { msg: "Invalid or expired password reset token"});
+      return ErrorHandler(res, httpStatus.BAD_REQUEST, {
+        msg: "Invalid or expired password reset token",
+      });
     }
 
     const hash = await bcrypt.hash(password, Number(config.auth.saltRounds));
@@ -248,27 +261,26 @@ console.log('req.body: ', req.body);
     //   { new: true }
     // );
 
-  await userService.updateUser(userId, { password: hash });
+    await userService.updateUser(userId, { password: hash });
 
     const user = await userService.findOne({ _id: userId });
-    if(user){
-        // sendEmail(
-        //   user.email,
-        //   "Password Reset Successfully",
-        //   {
-        //     name: user.name,
-        //   },
-        //   "./template/resetPassword.handlebars"
-        // );
-        await emailService.newmailjet({
-          subject: "Password Reset Successfully",
-          text: "Account password has been reset successfully... \n",
-          to: user.email,
-        });
+    if (user) {
+      // sendEmail(
+      //   user.email,
+      //   "Password Reset Successfully",
+      //   {
+      //     name: user.name,
+      //   },
+      //   "./template/resetPassword.handlebars"
+      // );
+      await emailService.newmailjet({
+        subject: "Password Reset Successfully",
+        text: "Account password has been reset successfully... \n",
+        to: user.email,
+      });
 
-        await passwordResetToken.deleteOne();
+      await passwordResetToken.deleteOne();
     }
-
 
     return res.send("Password updated successfully");
   } catch (err) {

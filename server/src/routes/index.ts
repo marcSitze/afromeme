@@ -1,18 +1,16 @@
-import express, { Router } from 'express';
+import express, { Router } from "express";
 const router: Router = express.Router();
 
 // routes
 import accountsRoute from "./account";
 import usersRoute from "./users";
-import postsRoutes from './posts';
-import commentsRoutes from './comments'
-import mediaRoutes from './media';
+import postsRoutes from "./posts";
+import commentsRoutes from "./comments";
+import mediaRoutes from "./media";
 // import donateRoute from "./donate";
 
-import { isLoggedIn } from '../middlewares/auth/isLoggedIn';
-import { getIndex, getIndividual, postComment } from '../controllers';
-import todosController from '../todos/todosController';
-import PostsController from '../posts/posts.controller';
+import { getIndex, getIndividual, postComment } from "../controllers";
+import todosController from "../todos/todosController";
 
 // Check if user is loggedIn
 // router.use(isLoggedIn);
@@ -21,23 +19,22 @@ import PostsController from '../posts/posts.controller';
     Index page route get all memes
 =====================================*/
 // Display all the videos and images
-router.get('/', getIndex);
-router.get('/refresh', getIndex);
+router.get("/", getIndex);
+router.get("/refresh", getIndex);
 // user routes
 router.use("/users", usersRoute);
 // account routes
 router.use("/accounts", accountsRoute);
 // posts routes
-router.use('/posts', postsRoutes);
+router.use("/posts", postsRoutes);
 // router.use('/posts', PostsController);
 // comments routes
-router.use('/comments', commentsRoutes);
+router.use("/comments", commentsRoutes);
 
 // media routes
-router.use('/media', mediaRoutes);
+router.use("/media", mediaRoutes);
 
-router.all('/todos', todosController)
-
+router.all("/todos", todosController);
 
 // router.use("/", reglogRoute);
 // app.use("/upload", uploadRoute);
