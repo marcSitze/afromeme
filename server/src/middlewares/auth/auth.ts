@@ -13,19 +13,17 @@ export const auth = (req: any, res: Response, next: NextFunction) => {
     token = req.headers.authorization.split(" ")[1];
   }
 
-  console.log("token:", token);
+  // console.log("token:", token);
 
-  if (!token) {
-    return res.status(401).json({ msg: "Not authorized" });
-  }
+  if (!token) return res.status(401).json({ msg: "Not authorized" });
 
   try {
     const decoded: any = jwt.verify(token, config.auth.jwt_secret);
     req.user = decoded.user;
-    console.log("middleware executed...");
+    // console.log("middleware executed...");
     next();
   } catch (err) {
-    console.log("AuthError: ", err);
+    // console.log("AuthError: ", err);
     res.status(500).json({ msg: "Server error" });
   }
 };

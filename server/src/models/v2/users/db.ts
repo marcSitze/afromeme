@@ -1,1 +1,3 @@
-export { User as db } from "../../Users";
+import { User } from "../../Users";
+
+export default User;
