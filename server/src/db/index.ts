@@ -7,15 +7,15 @@ export default async function makeDb(model: string) {
   let db: any;
   switch (String(model)) {
     case "Todo":
-      console.log("modelMakeDb: ", model);
+      // console.log("modelMakeDb: ", model);
       db = Todo;
       break;
     case "Post":
-      console.log("PostModel: ", model);
+      // console.log("PostModel: ", model);
       db = Post;
       break;
     default:
-      console.log("DefaultMakeDb: ", model);
+      // console.log("DefaultMakeDb: ", model);
       db = null;
   }
 
