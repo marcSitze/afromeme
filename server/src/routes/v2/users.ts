@@ -1,10 +1,15 @@
 import { Router } from "express";
-import { getUser, getUserById, getUsers } from "../../controllers/v2/users";
+import {
+  createUser,
+  getUser,
+  getUserById,
+  getUsers,
+} from "../../controllers/v2/users";
 import { makeCallback } from "../../_libs";
 
 const router = Router();
 
-// router.post("/", createUser);
+router.post("/", makeCallback(createUser));
 
 router.get("/:id", makeCallback(getUserById));
 

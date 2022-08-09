@@ -1016,10 +1016,10 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
-"apitoolz@^0.2.0":
-  "integrity" "sha512-DAUf/JoOAtTBl+rbpwbyuy2Jl5uAhF5bgjTOYJ/g3l/h9eZn4hOcsdPIAKlgyjh9TerovSg8ehWz3LJKeYg9YQ=="
-  "resolved" "https://registry.npmjs.org/apitoolz/-/apitoolz-0.2.0.tgz"
-  "version" "0.2.0"
+"apitoolz@^0.2.1":
+  "integrity" "sha512-vfIYrWefGuXwp32o2WQ0UecQWDMZGzXSeK+R8uJwPxCa63PmHrL9AganQx33+taI7IttAvSiQS1xbtGQO4S4iA=="
+  "resolved" "https://registry.npmjs.org/apitoolz/-/apitoolz-0.2.1.tgz"
+  "version" "0.2.1"
   dependencies:
     "@types/node" "^18.0.0"
     "callsite" "^1.0.0"
