@@ -1,37 +1,38 @@
-export const makeLogin = ({ generateToken, userDb, verifyPassword }: any) => {
+export const makeLogin = ({
+  ApiError,
+  generateToken,
+  userDb,
+  verifyPassword,
+}: any) => {
   return async (data: any) => {
     const { email, password } = data;
 
-    const errors = [];
+    const error = new ApiError({ message: "Validation Error" });
 
-    if (!email) errors.push({ msg: "Please enter your email" });
+    if (!email) error.add("email", "Please enter your email");
+    if (!password) error.add("password", "Please enter your password");
 
-    if (!password) errors.push({ msg: "Please enter your password" });
-
-    if (errors.length > 0) return { data: errors, success: false };
+    if (error.isPayloadLoaded) throw error;
 
     const user = await userDb.findOne({ email });
 
-    if (!user)
-      return { data: [{ msg: "Invalid credidentials" }], success: false };
+    const InvalidCredentialsError = new ApiError({
+      message: "Invalid credidentials", // credentials
+    });
+
+    if (!user) throw InvalidCredentialsError;
 
     const isMatch = await verifyPassword(password, user.password);
 
-    if (!isMatch)
-      return { data: [{ msg: "Invalid credidentials" }], success: false };
-
-    const payload = { user: { id: user._id } };
+    if (!isMatch) throw InvalidCredentialsError;
 
     // sign a user token
-    const token = await generateToken(payload);
+    const token = await generateToken({ user: { id: user._id } });
 
     return {
-      data: {
-        msg: "User loggedin successfully...",
-        token_type: "Bearer token",
-        token,
-      },
-      success: true,
+      msg: "User loggedin successfully...",
+      token_type: "Bearer token",
+      token,
     };
   };
 };

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 
-import { sanitize } from "../../../../_libs";
+import { ApiError, sanitize } from "../../../../_libs";
 
 import config from "../../../../config";
 import { EmailService } from "../../../../services/email.service";
@@ -28,7 +28,7 @@ const createUser = makeCreateUser({ encryptPassword, userDb });
 const findOne = makeFindOne({ userDb });
 const findById = makeFindById({ userDb });
 const find = makeFind({ userDb, sanitize });
-const login = makeLogin({ generateToken, userDb, verifyPassword });
+const login = makeLogin({ ApiError, generateToken, userDb, verifyPassword });
 
 const resetPassword = makeResetPassword({
   bcrypt,
