@@ -4,6 +4,6 @@ export function makeCreateUser({ encryptPassword, userDb }: any) {
   return async (user: CreateUserDTO) => {
     user.password = await encryptPassword(user.password);
 
-    return userDb.insert(user);
+    return userDb.create(user);
   };
 }

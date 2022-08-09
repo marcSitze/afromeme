@@ -4,6 +4,7 @@ import {
   getUser,
   getUserById,
   getUsers,
+  login,
 } from "../../controllers/v2/users";
 import { makeCallback } from "../../_libs";
 
@@ -19,7 +20,7 @@ router.get("/q?", makeCallback(getUser));
 
 // router.put("/:id", updateUser);
 
-// router.post("/login", login);
+router.post("/login", makeCallback(login));
 
 // router.post("/auth/requestResetPassword", requestResetPassword);
 
