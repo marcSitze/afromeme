@@ -10,8 +10,8 @@ export default class UserService implements IUserService {
     let newUser = new User(user);
     return await newUser.save();
   };
-  getUsers = async () => {
-    return await User.find({}).select('-password').sort({ createdAt: -1});
+  getUsers = async (query: any) => {
+    return await User.find(query).select('-password').sort({ createdAt: -1});
   };
   findOne = async (query: any) => {
     return await User.findOne(query);
@@ -22,6 +22,9 @@ export default class UserService implements IUserService {
   // findOneByQuery: async (query) => {
   //   return await User.findOne(query);
   // },
+  findUsersByQuery = async (query: any) => {
+    return await User.find(query).select('-password').sort({ createdAt: -1 });
+  };
   // findUserById: async (id) => {
   //   return await User.findById(id).select('-password');
   // },
