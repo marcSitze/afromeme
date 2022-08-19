@@ -1,4 +1,4 @@
-import express from "express";
+import express, { RequestHandler } from "express";
 import * as path from "path";
 import morgan from 'morgan';
 
@@ -10,9 +10,9 @@ const app: express.Application = express();
 import indexRoute from "./routes/index";
 
 // To parse form data
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(morgan('combined'));
+app.use(express.urlencoded({ extended: true }) as RequestHandler);
+app.use(express.json() as RequestHandler);
+app.use(morgan("combined") as RequestHandler);
 
 // Set view engine
 app.set('view engine', 'ejs');
