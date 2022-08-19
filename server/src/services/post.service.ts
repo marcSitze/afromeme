@@ -8,8 +8,8 @@ export default class PostsService implements IPostsService {
     const newPost = new Post(post);
     return await newPost.save();
   };
-  getPosts = async () => {
-    return await Post.find({})
+  getPosts = async (query: any) => {
+    return await Post.find(query)
       .populate({
         path: "author",
         populate: { path: "user", select: "-password" },
