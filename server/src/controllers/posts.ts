@@ -67,7 +67,7 @@ export const getPost = async (req: Request, res: Response) => {
 export const getPosts = async (req: Request, res: Response) => {
 
 	try {
-		const posts = await postsService.getPosts();
+		const posts = await postsService.getPosts({});
 		if(!posts) {
 			return ErrorHandler(res, httpStatus.NO_CONTENT, 'No posts yet...');
 		}
