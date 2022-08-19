@@ -7,6 +7,7 @@ import usersRoute from "./users";
 import postsRoutes from './posts';
 import commentsRoutes from './comments'
 import mediaRoutes from './media';
+import searchRoutes from './search';
 // import donateRoute from "./donate";
 
 import { isLoggedIn } from '../middlewares/auth/isLoggedIn';
@@ -35,6 +36,8 @@ router.use('/comments', commentsRoutes);
 
 // media routes
 router.use('/media', mediaRoutes);
+
+router.use('/search', searchRoutes);
 
 router.all('/todos', todosController)
 
