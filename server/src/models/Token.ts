@@ -1,5 +1,6 @@
 
 import mongoose from "mongoose";
+import { TokenDocument } from "../interfaces/models/TokenDocument";
 const Schema = mongoose.Schema;
 
 const tokenSchema = new Schema({
@@ -20,4 +21,4 @@ const tokenSchema = new Schema({
   },
 });
 
-export default mongoose.model("Token", tokenSchema);
+export default mongoose.model<TokenDocument>("Token", tokenSchema);
