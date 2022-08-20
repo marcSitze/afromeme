@@ -78,13 +78,16 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const getUsers = async (req: Request, res: Response) => {
   // let searchOptions = {name: ''};
+  const query = {}
+
+  console.log('query: ', query)
   if (req.query.search != null && req.query.search !== "") {
     // searchOptions.name = new RegExp(req.query.search, 'i');
   }
   try {
     // const users = await Users.find({});
     //    const users = await Users.find(searchOptions);
-    const users = await userService.getUsers();
+    const users = await userService.getUsers(query);
     SuccessHandler(res, httpStatus.OK, users);
   } catch (err) {
     console.error(err);
