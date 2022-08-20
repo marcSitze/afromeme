@@ -5,6 +5,7 @@ import { IPostState } from './posts';
 import { IAuthState } from './auth';
 import { IUserState } from './users';
 import { ICommentState } from './comments';
+import { ISearchState } from './search';
 
 // action type
 export type Action = {
@@ -18,6 +19,7 @@ export type PropsState = {
   authReducer: IAuthState,
   usersReducer: IUserState,
   commentsReducer: ICommentState,
+  searchReducer: ISearchState,
 }
 
 // navigation types
