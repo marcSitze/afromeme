@@ -20,9 +20,5 @@ export const searchByQuery = async (req: any, res: Response) => {
 
   const users = await userService.findUsersByQuery({ username: new RegExp(req.query.term,"gi") })
   const posts = await postsService.getPosts({description: new RegExp(req.query.term,"gi") });
-  res.send({
-    term: req.query.term,
-    users,
-    posts,
-  })
+  SuccessHandler(res, httpStatus.OK, { users, posts })
 }
