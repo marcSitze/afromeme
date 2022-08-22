@@ -1,11 +1,15 @@
-import express, { RequestHandler } from "express";
+import express, { RequestHandler, Request } from "express";
 import * as path from "path";
 import morgan from 'morgan';
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 import config from "./config";
 
 const app: express.Application = express();
 
+const socketServer = createServer(app)
+export const io = new Server(socketServer)
 // import routes
 import indexRoute from "./routes/index";
 
@@ -20,15 +24,43 @@ app.set('views', __dirname + '/views');
 
 // static folders
 // app.use(express.static(path.join(__dirname, "/public")));
-// app.use(express.static(path.join(__dirname, "/ups")));
+app.use(express.static(path.join(__dirname, "../uploads")));
 
 //get timestamp
-// app.use((req, res, next) => {
-//     req.requestTime = new Date().toISOString();
-//     console.log(req.headers);
-// });
+app.use((req: any, res, next) => {
+    req.requestTime = new Date().toISOString();
+    console.log('req.ip: ', req.ip)
+    console.log(req.headers);
+
+    next()
+});
 
 // Entry point routes
 app.use("/api", indexRoute);
 
-export default app;
+const users: any = [];
+
+io.on("connection", (socket) => {
+  console.log('IO connected...');
+
+  socket.on('connected', (data) => {
+    const newUser = {
+      socket,
+      id: data.id,
+      name: data.name
+    }
+
+    users.push(newUser)
+    console.log('data: ', data)
+    // console.log('users: ', users)
+    socket.emit('connected', data)
+  })
+
+  socket.on('like', (data) => {
+    console.log('liked...')
+    console.log('like: ', data)
+    io.emit(data.userId, data)
+  })
+})
+
+export default socketServer;
