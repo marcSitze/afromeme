@@ -37,7 +37,6 @@ const Profile = ({account, bg}: PropsType) => {
   const dispatch = useDispatch();
   const [showPosts, setShowPosts] = useState(false);
 
-  console.log('account: ', account);
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -61,7 +60,7 @@ const Profile = ({account, bg}: PropsType) => {
                 resizeMode="contain"
                 source={profile}
               /> */}
-              <Gravatar username={account.user.username} size={100} style={{paddingVertical: 15, borderRadius: 60}} />
+              <Gravatar username={account.user.username} size={70} />
             </Box>
             <Container mb={'4'}>
               <Text fontSize={16} textAlign="center" fontWeight={'bold'}>

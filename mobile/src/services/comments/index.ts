@@ -32,7 +32,6 @@ export const createComment = async (token: string, payload: CommentDto) => {
 export const getComments = async (token: string, post: string) => {
   try {
     var myHeaders = new Headers();
-    console.log({"post": post, token});
     myHeaders.append('Authorization', 'Bearer ' + token);
     var requestOptions: any = {
       method: 'GET',

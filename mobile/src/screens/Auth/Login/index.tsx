@@ -39,8 +39,7 @@ const Login = ({navigation, logging, logging_message}: any) => {
   });
   const [show, setShow] = useState(false);
 
-  console.log('logging: ', logging);
-  console.log('form: ', form);
+
   return (
     <Box backgroundColor={colors.light.white} height="full">
       <Box justifyContent="flex-end" height="1/3">
@@ -122,7 +121,6 @@ const Login = ({navigation, logging, logging_message}: any) => {
             <Button
               onPress={() => {
                 // navigation.navigate(SCREENS.BOTTOM_NAVIGATION)
-                console.log('pressed');
                 // navigation.navigate(SCREENS.BOTTOM_NAVIGATION)
                 dispatch(login(form));
                 // dispatch({ type: types.LOGIN_USER_REQUEST});

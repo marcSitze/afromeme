@@ -9,7 +9,6 @@ function* searchByTerm({payload}: any): Generator<any> {
   try {
     const token: any = yield AsyncStorage.getItem('@token');
     const data: any = yield searchByTermService(token, payload);
-    console.log('SearchData: ', data);
 
     if(data.success) {
       yield put({ type: types.SEARCH_TERM_SUCCESS, payload: data.data })

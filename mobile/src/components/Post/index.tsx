@@ -62,7 +62,6 @@ const Post = ({post, liking, liking_msg, account, comments}: PostProps) => {
   const navigation: any = useNavigation();
   const changeScreen = () => {
     dispatch(viewProfile(post.author._id))
-    console.log('post.author._id: ', post.author._id);
     navigation.navigate(SCREENS.VIEW_PROFILE);
   };
 
@@ -137,7 +136,6 @@ const Post = ({post, liking, liking_msg, account, comments}: PostProps) => {
                 setTimeout(() => {
                   setShowAnim(false);
                 }, 1000);
-                console.log('post.id: ', post._id);
                 dispatch(likePost({post: post._id}));
                 handleToggleLike();
               }}>

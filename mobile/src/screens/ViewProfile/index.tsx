@@ -36,7 +36,6 @@ const ViewProfile = ({
 }: PropTypes) => {
   const dispatch = useDispatch();
 
-  console.log('viewProfile: ', view_profile);
 
   return (
     <BaseWrapper backArrowAction={() => {

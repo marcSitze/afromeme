@@ -76,7 +76,6 @@ function authReducer(state = INITIALSTATE, action: Action) {
       }
 
     case types.FORGET_PASSWORD_REQUEST:
-      console.log('action: ', action);
       return {
         ...state,
         loading_forgetPass: true,

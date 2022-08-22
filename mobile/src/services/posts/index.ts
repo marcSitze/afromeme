@@ -1,7 +1,6 @@
 import config from '../../config';
 
 export const getPosts = async (token: string) => {
-  console.log('getPostsService...');
   var myHeaders = new Headers();
   myHeaders.append("Authorization", "Bearer " + token)
 
@@ -33,12 +32,10 @@ myHeaders.append('Content-Type', 'application/json');
 export const createPost = async (token: string, payload: PostType) => {
 
   try {
-    console.log('payloadSe: ', payload);
     const media: any = await createMedia(token, {
       author: payload.author,
       photo: payload.photo,
     });
-    console.log('medIaS: ', media);
 
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -92,7 +89,6 @@ const createMedia = async (token: string, payload: mediaType) => {
 
     const request = await fetch(config.API + '/api/media', requestOptions);
     const result = await request.json();
-    console.log('Result: ', result);
     return result;
   } catch (error) {
     console.log('error Media service', error);
@@ -109,7 +105,6 @@ export const likePost = async (token: string, payload: any) => {
   //   description: payload.description,
   //   media: media.data._id,
   // });
-console.log('payloadService: ', payload);
   var requestOptions: any = {
     method: 'POST',
     // body: raw,
@@ -119,7 +114,6 @@ console.log('payloadService: ', payload);
   try {
     const request = await fetch(config.API + '/api/posts/' + payload.post + '/like', requestOptions);
     const result = await request.json();
-    console.log('Result: ', result);
     return result;
   } catch (error) {
     console.error('LikeServiceErr: ', error);

@@ -5,7 +5,6 @@ var myHeaders = new Headers();
 myHeaders.append('Content-Type', 'application/json');
 
 export const login = async ({email, password}: LoginDto) => {
-  console.log('Login service....');
   var raw = JSON.stringify({
     email,
     password,
@@ -64,7 +63,6 @@ export const register = async (payload: RegisterDto) => {
 export const forgetPassword = async (email: string) => {
   var myHeaders = new Headers();
   myHeaders.append('Content-Type', 'application/json');
-console.log('email: ', email)
   var raw = JSON.stringify({
     email
   });

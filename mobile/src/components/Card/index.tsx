@@ -16,7 +16,6 @@ type Props = {
 }
 const Card = ({ text = 'Hello Text', style, posts, navigation }: Props) => {
   const dispatch = useDispatch();
-  console.log('posts: ', posts);
 
   useEffect(() => {
     dispatch({ type: types.GET_POSTS_REQUEST, payload: []});
