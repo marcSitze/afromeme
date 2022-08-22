@@ -24,14 +24,15 @@ console.log('req.body: ', req.body)
   }
 
   console.log('req.media: ', req.file);
-  if(req.file && req.file.size > 1024 * 1024) {
+  if(req.file && req.file.size > 10 * 1024 * 1024) {
     fs.unlink(req.file.path, function(err) {
       if(err) throw err;
     });
-    errors.push({ "msg": "please upload an image or gif <= 1mo" });
-    return ErrorHandler(res, httpStatus.BAD_REQUEST, { "msg": "please upload an image or gif <= 1mo", errors });
+    errors.push({ "msg": "please upload an image or gif <= 10mo" });
+    return ErrorHandler(res, httpStatus.BAD_REQUEST, { "msg": "please upload an image or gif <= 10mo", errors });
   }
   try {
+    console.log('file path: ', req.file.path)
     const result = await saveMedia({
       name,
       path: req.file.path,
