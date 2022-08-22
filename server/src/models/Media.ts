@@ -6,10 +6,9 @@ const mediaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // path: {
-    //     type: String,
-    //     required: true
-    // },
+    path: {
+        type: String,
+    },
     photo: {
         data: Buffer,
         contentType: String,
@@ -19,11 +18,6 @@ const mediaSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    // post: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: 'Post'
-    // },
     description: {
         type: String
     },
