@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
-import {ActivityIndicator, RefreshControl} from 'react-native';
+import {ActivityIndicator, RefreshControl, View, Button} from 'react-native';
 import {Box} from 'native-base';
 import {connect, useDispatch} from 'react-redux';
+import Video from 'react-native-video';
 
 import BaseWrapper from '../../components/Layout/BaseWrapper';
 import Post from '../../components/Post';
@@ -10,15 +11,17 @@ import Profile from '../../components/Profile';
 import * as data from '../../helpers/defaultData';
 import {PropsState} from '../../types';
 import {IPost} from '../../types/posts';
-import { IAccount } from '../../types/users';
+import {IAccount} from '../../types/users';
 import {getPosts} from '../../redux/posts/actions';
-import { getUsersAccounts } from '../../redux/users/actions';
-import { sortAccounts } from '../../helpers/helper';
+import {getUsersAccounts} from '../../redux/users/actions';
+import {sortAccounts} from '../../helpers/helper';
+import config from '../../config';
+import { height, width } from '../../constants/layout';
 
 type PropTypes = {
   posts: IPost[];
   loading: Boolean;
-  accounts: IAccount[]
+  accounts: IAccount[];
 };
 const wait = (timeout: number) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -39,17 +42,51 @@ const Home = ({posts, loading, accounts}: PropTypes) => {
     wait(300).then(() => setRefreshing(false));
   }, []);
 
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isMuted, setIsMuted] = React.useState(false);
   return (
     <BaseWrapper backArrowAction={() => {}}>
       <ScrollView>
         <Box mb={4}>
           <ScrollView horizontal={true}>
             {/* <Profile account={{_id: '', followers: [], posts: [], user: {}}} /> */}
-            {sortAccounts(accounts).map((account: IAccount, key: number) => <Profile key={key} account={account} />)}
+            {sortAccounts(accounts).map((account: IAccount, key: number) => (
+              <Profile key={key} account={account} />
+            ))}
           </ScrollView>
         </Box>
         {loading && <ActivityIndicator />}
         <ScrollView>
+          <View style={{
+            width,
+            height,
+            position: 'relative'
+          }}>
+            <Video
+              source={{uri: config.API + '/user-1661205745551.mp4'}}
+              paused={!isPlaying}
+              controls={true}
+              resizeMode='contain'
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                width: '100%',
+                backgroundColor: 'red',
+              }}
+              muted={isMuted}
+            />
+            <Button
+              onPress={() => setIsPlaying(p => !p)}
+              title={isPlaying ? 'Stop' : 'Play'}
+            />
+            <Button
+              onPress={() => setIsMuted(m => !m)}
+              title={isMuted ? 'Unmute' : 'Mute'}
+            />
+          </View>
           {posts.map((post, index) => (
             <Post key={index} post={post} />
           ))}
@@ -62,7 +99,7 @@ const Home = ({posts, loading, accounts}: PropTypes) => {
 const mapStateToProps = ({postsReducer, usersReducer}: PropsState) => ({
   posts: postsReducer.posts,
   loading: postsReducer.loading,
-  accounts: usersReducer.accounts
+  accounts: usersReducer.accounts,
 });
 
 export default connect(mapStateToProps)(Home);
