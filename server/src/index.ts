@@ -5,6 +5,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 import config from "./config";
+import { createNotification } from './sockets/notifications'
 
 const app: express.Application = express();
 
@@ -59,6 +60,7 @@ io.on("connection", (socket) => {
   socket.on('like', (data) => {
     console.log('liked...')
     console.log('like: ', data)
+    createNotification(data);
     io.emit(data.userId, data)
   })
 })
