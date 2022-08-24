@@ -4,7 +4,8 @@ import { NotificationDocument } from '../interfaces/models/NotificationDocument'
 const notificationSchema = new mongoose.Schema({
     type: {
         type: String,
-        required: true
+        required: true,
+        enum: ['LIKE', 'COMMENT', 'POST']
     },
     message: {
         type: String,
@@ -14,19 +15,15 @@ const notificationSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    description: {
-        type: String
-    },
-    createdAt: {
-        type: Date,
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        default: Date.now
+        ref: 'Post'
     },
-    updatedAt: {
-        type: Date,
-        required: true,
-        default: Date.now
-    },
-});
+    hasViewed: {
+        type: Boolean,
+        default: false,
+    }
+}, { timestamps: true });
 
 export default mongoose.model<NotificationDocument>('Notification', notificationSchema);
