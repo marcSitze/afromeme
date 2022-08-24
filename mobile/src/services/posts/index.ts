@@ -23,6 +23,7 @@ export const getPosts = async (token: string) => {
 type PostType = {
   author: string;
   description: string;
+  tags?: string;
   photo: any;
 };
 
@@ -45,6 +46,8 @@ export const createPost = async (token: string, payload: PostType) => {
       author: payload.author,
       description: payload.description,
       media: media.data._id,
+      tags: payload.tags,
+      tag: payload.tags,
     });
 
     var requestOptions: any = {
@@ -54,6 +57,8 @@ export const createPost = async (token: string, payload: PostType) => {
       redirect: 'follow',
     };
 
+    const tagsReq = await fetch(config.API + '/api/tags', requestOptions);
+    const tagsRes = await tagsReq.json()
     const request = await fetch(config.API + '/api/posts', requestOptions);
     const result = await request.json();
     return result;
