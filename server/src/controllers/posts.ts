@@ -32,6 +32,7 @@ export const createPost = async (req: Request, res: Response) => {
 	let post = {
 		author,
 		description: req.body.description ? req.body.description: '',
+		tags: req.body.tags ?? '',
 		media,
 		comments: [],
 	}
