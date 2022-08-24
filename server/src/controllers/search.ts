@@ -7,8 +7,6 @@ import PostsService from "../services/post.service";
 import { CreateUserDTO } from "../dto/user.dto";
 
 import constants from "../common/constants";
-import { verifyPassword, generateToken } from "../common/auth";
-import config from "../config";
 
 const { httpStatus } = constants;
 const userService = new UserService();
