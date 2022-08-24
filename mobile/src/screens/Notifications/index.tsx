@@ -5,17 +5,25 @@ import socket from '../../helpers/socket.io';
 
 const Notifications = () => {
   const [response, setResponse] = useState(false);
+  const [current] = useState({
+    userId: 'asdas987da9sda9sdasd',
+    name: 'jorel'
+  })
 
   useEffect(() => {
 
     socket.emit('connected', {id: 1, name: 'marc'})
 
+    socket.on('connected', data => {
+      console.log('User connected: ', data);
+    })
+
       console.log('response: ', response)
       // socket.emit('soya', "hello soya")
 
-      socket.emit('like', { userId: 'likedevent', name: 'jorel'})
+      socket.emit('like', current)
 
-      socket.on('likedevent', data => {
+      socket.on(current.userId, data => {
         console.log('Liked by: ', data);
       })
   }, [response])
