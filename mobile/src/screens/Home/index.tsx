@@ -3,11 +3,13 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {ActivityIndicator, RefreshControl, View, Button} from 'react-native';
 import {Box} from 'native-base';
 import {connect, useDispatch} from 'react-redux';
-import Video from 'react-native-video';
+// import Video from 'react-native-video'
 
 import BaseWrapper from '../../components/Layout/BaseWrapper';
 import Post from '../../components/Post';
 import Profile from '../../components/Profile';
+import Video from '../../components/Video';
+
 import * as data from '../../helpers/defaultData';
 import {PropsState} from '../../types';
 import {IPost} from '../../types/posts';
@@ -44,6 +46,7 @@ const Home = ({posts, loading, accounts}: PropTypes) => {
 
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [isMuted, setIsMuted] = React.useState(false);
+
   return (
     <BaseWrapper backArrowAction={() => {}}>
       <ScrollView>
@@ -57,36 +60,6 @@ const Home = ({posts, loading, accounts}: PropTypes) => {
         </Box>
         {loading && <ActivityIndicator />}
         <ScrollView>
-          <View style={{
-            width,
-            height,
-            position: 'relative'
-          }}>
-            <Video
-              source={{uri: config.API + '/user-1661205745551.mp4'}}
-              paused={!isPlaying}
-              controls={true}
-              resizeMode='contain'
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0,
-                width: '100%',
-                backgroundColor: 'red',
-              }}
-              muted={isMuted}
-            />
-            <Button
-              onPress={() => setIsPlaying(p => !p)}
-              title={isPlaying ? 'Stop' : 'Play'}
-            />
-            <Button
-              onPress={() => setIsMuted(m => !m)}
-              title={isMuted ? 'Unmute' : 'Mute'}
-            />
-          </View>
           {posts.map((post, index) => (
             <Post key={index} post={post} />
           ))}
