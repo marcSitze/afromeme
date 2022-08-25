@@ -1,5 +1,5 @@
-import React from 'react';
-import {Image} from 'react-native';
+import React, { useState} from 'react';
+import {Image, Pressable} from 'react-native';
 import {
   Box,
   Text,
@@ -23,6 +23,8 @@ import {IAccount} from '../../types/users';
 import { clearViewProfile} from '../../redux/users/actions'
 import { countLikes } from '../../helpers/helper';
 import Gravatar from '../../components/Others/Gravatar'
+import PostsView from '../../components/PostsView'
+import colors from '../../constants/colors'
 
 type PropTypes = {
   view_profile: IAccount;
@@ -34,7 +36,9 @@ const ViewProfile = ({
   view_profile_msg,
   view_profile_loading,
 }: PropTypes) => {
+
   const dispatch = useDispatch();
+  const [showPosts, setShowPosts] = useState(false);
 
 
   return (
@@ -61,12 +65,12 @@ const ViewProfile = ({
               </Text>
               <Text color={'gray.500'}>Posts</Text>
             </Box>
-            <Box alignItems={'center'}>
+            {/* <Box alignItems={'center'}>
               <Text fontWeight={'bold'} fontSize="xl">
                 {view_profile?.followers?.length > 0 ? view_profile?.followers?.length: 0}
               </Text>
               <Text color={'gray.500'}>Followers</Text>
-            </Box>
+            </Box> */}
             <Box alignItems={'center'}>
               <Text fontWeight={'bold'} fontSize="xl">
                 {countLikes(view_profile.posts)}
@@ -82,12 +86,54 @@ const ViewProfile = ({
             {view_profile?.user?.username}
           </Text>
           <WhiteSpace height={10} />
-          <Button mb={4}>Follow</Button>
-          <Box flex={1} flexDirection="row" flexWrap={'wrap'}>
+          {/* <Button mb={4}>Follow</Button> */}
+          {/* <Box flex={1} flexDirection="row" flexWrap={'wrap'}>
             {view_profile?.posts?.map((data, i) => (
               <PostProfile openPosts={() => {}} key={i} post={data} />
             ))}
             <WhiteSpace height={height / 2} />
+          </Box> */}
+          <HStack mb={2} justifyContent={'space-evenly'}>
+            <Pressable
+              style={{flex: 1, width: '100%'}}
+              onPress={() => setShowPosts(false)}>
+              <Text
+                borderBottomWidth={2}
+                borderColor={
+                  !showPosts ? colors.light.primary : colors.light.white
+                }
+                pb={2}
+                w={'100%'}
+                textAlign="center">
+                Normal
+              </Text>
+            </Pressable>
+            <Pressable
+              style={{flex: 1, width: '100%'}}
+              onPress={() => setShowPosts(true)}>
+              <Text
+                borderBottomWidth={2}
+                borderColor={
+                  showPosts ? colors.light.primary : colors.light.white
+                }
+                pb={2}
+                w={'100%'}
+                textAlign="center">
+                grid
+              </Text>
+            </Pressable>
+          </HStack>
+          <Box flex={1} flexDirection="row" flexWrap={'wrap'}>
+            {!showPosts &&
+              view_profile?.posts.map(data => (
+                <PostProfile
+                  key={data._id}
+                  post={data}
+                  openPosts={() => setShowPosts(true)}
+                />
+              ))}
+            {showPosts && <WhiteSpace height={height / 2} />}
+            {showPosts && <PostsView posts={view_profile.posts} />}
           </Box>
         </Box>
       </ScrollView>
