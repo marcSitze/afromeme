@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
   socket.on('like', (data) => {
     console.log('liked...')
     console.log('like: ', data)
-    createNotification(data);
+    // createNotification(data);
     io.emit(data.userId, data)
   })
 })
