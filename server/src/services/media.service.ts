@@ -9,7 +9,7 @@ export default class MediaService implements IMediaService {
     return await newMedia.save();
   };
   getMedias = async () => {
-    return await Media.find({}).sort({ createdAt: -1});
+    return await Media.find({}).sort({ createdAt: -1}).select('-photo');
   };
   findOne = async (query: Partial<CreateMediaDTO>) => {
     console.log('query: ', query);

@@ -15,6 +15,7 @@ export default class PostsService implements IPostsService {
         populate: { path: "user", select: "-password" },
       })
       .populate({ path: "comments", select: '-__v'}).sort({ createdAt: -1})
+      .populate({ path: "media", select: 'path photo.contentType'}).sort({ createdAt: -1})
       // .exec();
   };
   findOne = async (query: Partial<CreatePostDTO>) => {
