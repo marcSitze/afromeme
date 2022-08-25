@@ -1,27 +1,44 @@
 import multer from 'multer';
 import * as path from 'path';
 import fs from 'fs';
+import { v4 as uuidV4 } from 'uuid';
 import MediaService from '../services/media.service';
 
 const UPLOAD_PATH: string = 'uploads';
 const mediaService = new MediaService();
 
-const imageFilter = function (req: any, file: any, cb: any) {
+const mediaFilter = function (req: any, file: any, cb: any) {
   console.log('file: ', req.file);
   req.media = req.file;
   // accept image only
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif|3gp|mov|avi|mp4|flv)$/)) {
     return cb(new Error('Only image files are allowed!'), false);
   }
   cb(null, true);
 };
 
-export const upload = multer({ dest: `${UPLOAD_PATH}/`, fileFilter: imageFilter }); // apply filter
+const storage = multer.diskStorage({
+  destination: function(req, file, callback) {
+
+    callback(null, `./${UPLOAD_PATH}`);
+},
+  filename: function (req: any, file, callback) {
+
+    //  console.log(req.user);
+      const ext = file.mimetype.split('/')[1];
+       callback(null, `${uuidV4()}.${ext}`);
+      // callback(null, `user-${Date.now()}.${ext}`);
+  }
+})
+
+// export const upload = multer({ dest: `${UPLOAD_PATH}/`, fileFilter: mediaFilter }); // apply filter
+export const upload = multer({ storage, fileFilter: mediaFilter }); // apply filter
 
 export const createMedia = async (file: any, userId: string) => {
   const media = {
     name: file.name,
     author: userId,
+    path: file.path,
     photo: {
       data: fs.readFileSync(file.path),
       contentType: file.mimetype

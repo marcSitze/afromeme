@@ -3,6 +3,7 @@ export type CreatePostDTO = {
     author: string;
     description: string;
     media: string;
+    tags?: string;
     comments: string[];
     likes?: string[];
     createdAt?: Date;

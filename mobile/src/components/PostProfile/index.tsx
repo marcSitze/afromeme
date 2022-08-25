@@ -10,7 +10,7 @@ const PostProfile = ({ post, openPosts }: PropTypes) => {
   return (
     <Box width={(width / 3) - 10} height={height / 6} borderWidth={2} borderColor={'white'}>
       <TouchableOpacity onPress={() => openPosts()}>
-        <Image style={{ width: '100%', height: '100%'}} source={{ uri: config.API + '/api/media/' + post.media}} />
+        <Image style={{ width: '100%', height: '100%'}} source={{ uri: config.API + '/api/media/' + post.media._id}} />
       </TouchableOpacity>
     </Box>
   )

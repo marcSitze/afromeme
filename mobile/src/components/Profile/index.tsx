@@ -29,10 +29,10 @@ const Profile = ({account}: PropTypes) => {
       <Box my={2} alignItems={'center'} mr={4}>
         <Box borderRadius={40} mb={1}>
           {/* <Image style={{width: 70, height: 70}} source={ProfileImage} /> */}
-          <Gravatar size={70} username={account.user?.username} />
+          <Gravatar size={70} username={account?.user?.username} />
         </Box>
         <Text fontSize={12} fontWeight={'semibold'}>
-          {account.user.username ?? 'John Doe'}
+          {account?.user?.username ?? 'John Doe'}
         </Text>
       </Box>
     </TouchableOpacity>

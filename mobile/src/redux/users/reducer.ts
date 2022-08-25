@@ -35,7 +35,6 @@ function UsersReducer(state = INITIAL_STATE, action: Action) {
         account: action.payload,
       };
     case types.GET_LOCAL_USER_ACCOUNT_REQUEST:
-      console.log('action: ', action);
       return {
         ...state,
       };

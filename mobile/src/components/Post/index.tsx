@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {connect, useDispatch} from 'react-redux';
 import Moment from 'moment';
+import * as mime from 'react-native-mime-types';
 
 import Camera from '../../assets/images/camera.svg';
 // import Picture from '../../assets/images/image.png';
@@ -30,6 +31,9 @@ import {IComment} from '../../types/comments';
 import { viewProfile } from '../../redux/users/actions';
 import colors from '../../constants/colors';
 import Gravatar from '../Others/Gravatar'
+import Video from '../Video'
+
+import { formatText } from '../../helpers/helper'
 
 type PostProps = {
   post: IPost;
@@ -62,7 +66,6 @@ const Post = ({post, liking, liking_msg, account, comments}: PostProps) => {
   const navigation: any = useNavigation();
   const changeScreen = () => {
     dispatch(viewProfile(post.author._id))
-    console.log('post.author._id: ', post.author._id);
     navigation.navigate(SCREENS.VIEW_PROFILE);
   };
 
@@ -116,18 +119,21 @@ const Post = ({post, liking, liking_msg, account, comments}: PostProps) => {
         </TouchableOpacity>
       </HStack>
       <VStack>
-        <Box width="full" mb="3" bg={'gray.100'} height={height / 2.4}>
-          <Image
-            style={{width: '100%', height: '100%'}}
-            source={
-              post?.media
-                ? {uri: config.API + '/api/media/' + post.media}
-                : Picture
-            }
-            resizeMode="contain"
-            // source={post.media ? {uri: post.media} : Picture}
-          />
+        <Box width="full" mb="3" bg={'gray.100'} height={height / 2.4} position="relative">
+          {/* <Text>{JSON.stringify(post.media)}</Text> */}
+          {post?.media?.photo?.contentType?.split('/')[0] === 'video' ?
+          <Video link={config.API + '/api/media/' + post.media._id} isMuted={false} /> :
+            <Image
+              style={{width: '100%', height: '100%'}}
+              source={{uri: config.API + '/api/media/' + post.media._id}}
+              resizeMode="contain"
+              // source={post.media ? {uri: post.media} : Picture}
+            />
+        }
         </Box>
+        <HStack>
+          {formatText(70,post.tags).split(',').map((tag, i) => <Text key={i} mr={2} color={colors.light.primary}>{tag ? `#${tag}`: ""}</Text>)}
+        </HStack>
         <HStack width="full" justifyContent="space-around">
           <HStack alignItems={'center'}>
             {/* <LottieView style={{width: 50, height: 50}} source={require('../../assets/lottie/like.json')} autoPlay /> */}
@@ -137,7 +143,6 @@ const Post = ({post, liking, liking_msg, account, comments}: PostProps) => {
                 setTimeout(() => {
                   setShowAnim(false);
                 }, 1000);
-                console.log('post.id: ', post._id);
                 dispatch(likePost({post: post._id}));
                 handleToggleLike();
               }}>

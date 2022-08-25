@@ -54,9 +54,8 @@ const Upload = ({account, creating, creating_msg}: any) => {
   const pickImage = async () => {
     try {
       const res = await DocumentPicker.pickSingle({
-        type: [DocumentPicker.types.images],
+        type: [DocumentPicker.types.images, DocumentPicker.types.video],
       });
-      console.log('res: ', res);
       setPicture(res);
       setInput(res);
       setPost({...post, photo: res});
@@ -70,7 +69,6 @@ const Upload = ({account, creating, creating_msg}: any) => {
   };
 
   // console.log('picture: ', picture);
-  console.log('creating: ', creating);
   // console.log('accountUp: ', account)
   const [submit, setSubmit] = useState(false);
   useEffect(() => {}, [post, submit]);

@@ -66,7 +66,7 @@ function BottomNavigation() {
         name={SCREENS.UPLOAD}
         component={Upload}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         options={{
           tabBarIcon: ({color, focused}) => (
             <Icon
@@ -79,23 +79,16 @@ function BottomNavigation() {
         }}
         name={SCREENS.NOTIFICATION}
         component={Notifications}
-      />
+      /> */}
       <Tab.Screen
         options={{
           tabBarIcon: ({color, focused}) =>
-            isAuth ? (
               <Icon
                 name="user"
                 size={18}
                 color={!focused ? colors.light.black : color}
               />
-            ) : (
-              <Icon
-                name="user-secret"
-                size={18}
-                color={!focused ? '#000' : color}
-              />
-            ),
+            ,
           tabBarLabel: 'Profile',
         }}
         name={SCREENS.PROFILE}

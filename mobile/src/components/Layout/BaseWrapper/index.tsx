@@ -15,7 +15,7 @@ type BaseWrapperProp = {
 
 const BaseWrapper = ({
   children,
-  headerText = 'Afromeme',
+  headerText = 'Funtime',
   backArrow = false,
   backArrowAction = () => {},
   ...rest

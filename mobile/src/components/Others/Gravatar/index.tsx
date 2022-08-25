@@ -10,7 +10,7 @@ type PropsTypes = {
 }
 const index = ({ username, size, style }: PropsTypes) => {
   return (
-    <Gravatar style={[style ? style: {}]} size={size ?? 100} name={username} />
+    <Gravatar size={size ?? 100} name={username} />
   )
 }
 

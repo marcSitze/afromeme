@@ -28,10 +28,8 @@ type ReturnType = {
 };
 
 function* login({payload}: LoginType): Generator<any> {
-  console.log('payloadSaga: ', payload);
   try {
     const data: any = yield loginService(payload);
-    console.log('dataLogin: ', data);
     yield delay(1000);
     if (!data.success) {
       yield put({type: types.LOGIN_USER_FAILURE, payload: data.data});
@@ -58,8 +56,7 @@ function* localSignIn(): Generator<any> {
   try {
     const data: any = yield AsyncStorage.getItem('@user');
     // const account: any = yield AsyncStorage.getItem("@account");
-    console.log('LocalUsertype: ', typeof data);
-    console.log('LocalUser: ', JSON.parse(data));
+
     if (data === null || data === '') {
       return RootNavigation.navigate(SCREENS.LOGIN);
     }
@@ -123,9 +120,7 @@ type ForgetPasswordType = {
 };
 function* forgetPassword({payload}: ForgetPasswordType): Generator<any> {
   try {
-    console.log('payloadSaga: ', payload);
     const data: any = yield forgetPasswordService(payload);
-    console.log('result: ', data);
     if (data.success) {
       yield put({type: types.FORGET_PASSWORD_SUCCESS, payload: []});
     }

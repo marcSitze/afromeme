@@ -21,8 +21,7 @@ import colors from '../../../constants/colors';
 const ForgetPassword = ({ navigation, forgetPassword_msg, loading_forgetPass }: any) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>('');
-console.log('forgetPassword_msg: ', forgetPassword_msg);
-console.log('email: ', email);
+
   return (
     <Box backgroundColor={colors.light.white} height="full">
       <Box px={2} justifyContent="flex-end" height="1/3" pb={5}>
@@ -61,7 +60,6 @@ console.log('email: ', email);
             <Button
             _text={{ fontWeight: 'bold'}}
               onPress={() => {
-                console.log('pressed');
                 dispatch(forgetPassword(email))
               }}
               py="4"

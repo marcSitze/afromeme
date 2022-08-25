@@ -37,17 +37,8 @@ const Profile = ({account, bg}: PropsType) => {
   const dispatch = useDispatch();
   const [showPosts, setShowPosts] = useState(false);
 
-  console.log('account: ', account);
   const handleLogout = () => {
     dispatch(logout());
-  };
-
-  const formatText = (length: number, text: string) => {
-    if (text.length > length) {
-      return `${text.slice(0, length)}...`;
-    }
-
-    return `${text.slice(0, length)}`;
   };
 
   return (
@@ -61,7 +52,7 @@ const Profile = ({account, bg}: PropsType) => {
                 resizeMode="contain"
                 source={profile}
               /> */}
-              <Gravatar username={account.user.username} size={100} style={{paddingVertical: 15, borderRadius: 60}} />
+              <Gravatar username={account.user.username} size={70} />
             </Box>
             <Container mb={'4'}>
               <Text fontSize={16} textAlign="center" fontWeight={'bold'}>
@@ -90,14 +81,14 @@ const Profile = ({account, bg}: PropsType) => {
             </HStack>
             <Box mb={'4'}>
               <HStack>
-                <Button
+                {/* <Button
                   borderColor={colors.light.gray}
                   borderWidth={1}
                   bg={colors.light.white}
                   px={width * 0.15}
                   mr={2}>
                   Edit profile
-                </Button>
+                </Button> */}
                 <Button
                   bg={colors.light.white}
                   borderColor={colors.light.gray}
@@ -110,12 +101,12 @@ const Profile = ({account, bg}: PropsType) => {
               </HStack>
             </Box>
             <Box width={width * 0.9} mb="4" alignItems={'center'}>
-              <Text textAlign={'center'} fontSize={13} color={'#000'}>
+              {/* <Text textAlign={'center'} fontSize={13} color={'#000'}>
                 {formatText(
                   100,
                   'this is the bio text this is the bio text space this is the bio text space this is the bio text space',
                 )}
-              </Text>
+              </Text> */}
             </Box>
 
             {/**

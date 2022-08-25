@@ -21,7 +21,6 @@ type ReturnType = {
 };
 
 function* getUserAccount({payload}: any): Generator<any> {
-  console.log('payloadSagaGetUserAccount: ', payload);
   try {
     const token: any = yield AsyncStorage.getItem('@token');
     const data: any = yield getUserAccountService(token, payload);
@@ -31,7 +30,6 @@ function* getUserAccount({payload}: any): Generator<any> {
       return;
     }
     if (data?.success) {
-      console.log('Get Current user success...')
       yield put({type: types.GET_USER_ACCOUNT_SUCCESS, payload: data?.data});
       // save user account information to the local storage
       yield AsyncStorage.setItem('@account', JSON.stringify(data.data));
@@ -47,8 +45,6 @@ function* getUserAccount({payload}: any): Generator<any> {
 function* getLocalUserAccount({payload}: any): Generator<any> {
   try {
     const data: any = yield AsyncStorage.getItem('@account');
-    console.log('LocalUsertype: ', typeof data);
-    console.log('LocalUserAcc: ', JSON.parse(data));
     if (data.length === 0 || data === null || data === '') {
       //  return RootNavigation.navigate(SCREENS.LOGIN);
       yield put({type: types.GET_USER_ACCOUNT_REQUEST, payload});
@@ -72,7 +68,6 @@ type ViewProfileType = {
 }
 
 function* viewProfile({payload}: ViewProfileType): Generator<any> {
-  console.log('payloadSaga: ', payload);
   try {
     const token: any = yield AsyncStorage.getItem('@token');
     const data: any = yield viewProfileService(token, payload);
@@ -94,7 +89,6 @@ function* getUsersAccounts (): Generator<any> {
   try {
     const token: any = yield AsyncStorage.getItem('@token');
     const data: any = yield getUsersAccountsService(token);
-    console.log('users: ', data);
     if(data?.success) {
       yield put({ type: types.GET_USERS_ACCOUNTS_SUCCESS, payload: data.data})
     }

@@ -32,6 +32,7 @@ export const createPost = async (req: Request, res: Response) => {
 	let post = {
 		author,
 		description: req.body.description ? req.body.description: '',
+		tags: req.body.tags ?? '',
 		media,
 		comments: [],
 	}
@@ -67,7 +68,7 @@ export const getPost = async (req: Request, res: Response) => {
 export const getPosts = async (req: Request, res: Response) => {
 
 	try {
-		const posts = await postsService.getPosts();
+		const posts = await postsService.getPosts({});
 		if(!posts) {
 			return ErrorHandler(res, httpStatus.NO_CONTENT, 'No posts yet...');
 		}

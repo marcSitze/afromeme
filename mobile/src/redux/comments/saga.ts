@@ -12,10 +12,8 @@ type CreateCommentType = {
 function* createComment({ payload }: CreateCommentType ): Generator<any>{
 
   try {
-    console.log('payloadSaga: ', payload);
     const token: any = yield AsyncStorage.getItem('@token');
     const data: any = yield createCommentService(token, payload);
-    console.log('dataSa: ', data);
     if(data.success) {
       yield put({ type: types.CREATE_COMMENT_SUCCESS, payload: {msg: "comment create success..."}});
       yield put({ type: types.GET_COMMENTS_REQUEST, payload: payload.post})
@@ -38,7 +36,6 @@ function* getComments({ payload }: GetCommentsType): Generator<any> {
   try {
     const token: any = yield AsyncStorage.getItem('@token');
     const data: any = yield getCommentService(token, payload);
-    console.log('dataSa: ', data);
     yield(3000)
     if(data.success) {
       yield put({ type: types.GET_COMMENTS_SUCCESS, payload: {comments: data.data, msg: "get comments success..."}})

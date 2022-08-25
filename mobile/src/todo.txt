@@ -1,7 +1,7 @@
 Navigation - done
 Screens - In Progress
-Colors
-layout
+Colors - Done
+layout - Done
 fonts
 translations
 Add Drawer Navigation in the profile screen for settings options

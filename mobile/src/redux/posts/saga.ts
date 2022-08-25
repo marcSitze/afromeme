@@ -18,7 +18,6 @@ function* getPosts(): Generator<any> {
   try {
     const token: any = yield AsyncStorage.getItem('@token');
     const result: any = yield getPostsService(token);
-    console.log('dataS: ', result);
     yield put({type: types.GET_POSTS_SUCCESS, payload: result.data});
   } catch (error) {
     console.error('SomeS err: ', error);
@@ -41,7 +40,6 @@ function* createPost({payload}: CreatePostType): Generator<any> {
     const token: any = yield AsyncStorage.getItem('@token');
     const account: any = yield AsyncStorage.getItem('@token');
     const data: any = yield createPostService(token, payload);
-    console.log('dAtaSaga: ', data);
     if (data.success) {
       yield put({type: types.CREATE_POST_SUCCESS, payload: 'post published'});
       // toast.show('Post published');
@@ -71,11 +69,9 @@ type LikePostType = {
 };
 
 function* likePost({payload}: LikePostType): Generator<any> {
-  console.log('payloadSaga: ', payload);
   try {
     const token: any = yield AsyncStorage.getItem('@token');
     const data: any = yield likePostService(token, payload);
-    console.log('dataSL: ', data);
     if (data.success) {
       yield put({
         type: types.LIKE_POST_SUCCESS,

@@ -2,11 +2,6 @@ Todo:
 - Validate Client inputs
 - Add #hashtags when creating posts and desc.
 - Edit profile
-#- Reset Password
-#- Like a post
-#- Comment a post
-#- View a profile => passing real data
-#- View Profile posts (Scrollview)
 - Add Story
 - View Story
 - Comment Story
@@ -17,8 +12,6 @@ Todo:
 - Video Chats
 - Message Chats
 - CI/CD
-- Profile image generators
-- Sort Data by date
 - unique tags with variants
 
 Done
@@ -27,3 +20,10 @@ Done
 - View Profile posts (Scrollview)
 - View a profile => passing real data
 - Reset Password
+- Profile image generators
+- Sort Data by date
+- Reset Password
+- Like a post
+- Comment a post
+- View a profile => passing real data
+- View Profile posts (Scrollview)

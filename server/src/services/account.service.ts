@@ -11,17 +11,28 @@ export default class AccountService implements IAccountService {
   getAccounts = async (query: any) => {
     return await Account.find(query)
       .populate("user", { password: 0, __v: 0 })
-      .populate("posts");
+      .populate({
+        path: "posts",
+        populate: { path: "media", select: "path photo.contentType" },
+      });
   };
   findOne = async (query: any) => {
     // console.log("query: ", query);
     return await Account.findOne(query)
       .populate("posts")
       .populate("user", { password: 0, __v: 0 })
-      .exec();
+      .populate({
+        path: "posts",
+        populate: { path: "media", select: "path photo.contentType" },
+      });
   };
   getAccountById = async (id: string) => {
-    return await Account.findById(id).populate("user").select("-password");
+    return await Account.findById(id)
+      .populate("user", { password: 0, __v: 0 })
+      .populate({
+        path: "posts",
+        populate: { path: "media", select: "path photo.contentType" },
+      });
   };
   // findAccountByQuery: async (query) => {
   //   return await Account.find(query).populate('user').select('-password');

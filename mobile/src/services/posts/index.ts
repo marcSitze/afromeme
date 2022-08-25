@@ -1,7 +1,6 @@
 import config from '../../config';
 
 export const getPosts = async (token: string) => {
-  console.log('getPostsService...');
   var myHeaders = new Headers();
   myHeaders.append("Authorization", "Bearer " + token)
 
@@ -24,6 +23,7 @@ export const getPosts = async (token: string) => {
 type PostType = {
   author: string;
   description: string;
+  tags?: string;
   photo: any;
 };
 
@@ -33,12 +33,10 @@ myHeaders.append('Content-Type', 'application/json');
 export const createPost = async (token: string, payload: PostType) => {
 
   try {
-    console.log('payloadSe: ', payload);
     const media: any = await createMedia(token, {
       author: payload.author,
       photo: payload.photo,
     });
-    console.log('medIaS: ', media);
 
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -48,6 +46,8 @@ export const createPost = async (token: string, payload: PostType) => {
       author: payload.author,
       description: payload.description,
       media: media.data._id,
+      tags: payload.tags,
+      tag: payload.tags,
     });
 
     var requestOptions: any = {
@@ -57,6 +57,8 @@ export const createPost = async (token: string, payload: PostType) => {
       redirect: 'follow',
     };
 
+    const tagsReq = await fetch(config.API + '/api/tags', requestOptions);
+    const tagsRes = await tagsReq.json()
     const request = await fetch(config.API + '/api/posts', requestOptions);
     const result = await request.json();
     return result;
@@ -92,7 +94,6 @@ const createMedia = async (token: string, payload: mediaType) => {
 
     const request = await fetch(config.API + '/api/media', requestOptions);
     const result = await request.json();
-    console.log('Result: ', result);
     return result;
   } catch (error) {
     console.log('error Media service', error);
@@ -109,7 +110,6 @@ export const likePost = async (token: string, payload: any) => {
   //   description: payload.description,
   //   media: media.data._id,
   // });
-console.log('payloadService: ', payload);
   var requestOptions: any = {
     method: 'POST',
     // body: raw,
@@ -119,7 +119,6 @@ console.log('payloadService: ', payload);
   try {
     const request = await fetch(config.API + '/api/posts/' + payload.post + '/like', requestOptions);
     const result = await request.json();
-    console.log('Result: ', result);
     return result;
   } catch (error) {
     console.error('LikeServiceErr: ', error);
