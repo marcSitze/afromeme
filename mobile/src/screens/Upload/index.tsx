@@ -54,7 +54,7 @@ const Upload = ({account, creating, creating_msg}: any) => {
   const pickImage = async () => {
     try {
       const res = await DocumentPicker.pickSingle({
-        type: [DocumentPicker.types.images],
+        type: [DocumentPicker.types.images, DocumentPicker.types.video],
       });
       setPicture(res);
       setInput(res);
