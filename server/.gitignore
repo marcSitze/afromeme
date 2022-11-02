@@ -3,8 +3,8 @@ node_modules/
 
 ups/
 tmp/
-uploads/
+# uploads/
 server/src/public/
 server/src/views/
 
-dist/
+# dist/

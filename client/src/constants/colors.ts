@@ -1,4 +1,4 @@
-export default {
+const colors = {
     light: {
       white: "#fff",
       whiteTrans: 'rgba(255, 255, 255, 0)',
@@ -14,3 +14,5 @@ export default {
       text: '#fff',
     },
   };
+
+  export default colors

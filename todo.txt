@@ -1,6 +1,5 @@
 Todo:
 - Validate Client inputs
-- Add #hashtags when creating posts and desc.
 - Edit profile
 - Add Story
 - View Story
@@ -12,7 +11,6 @@ Todo:
 - Video Chats
 - Message Chats
 - CI/CD
-- unique tags with variants
 
 Done
 - Like a post
@@ -27,3 +25,5 @@ Done
 - Comment a post
 - View a profile => passing real data
 - View Profile posts (Scrollview)
+- unique tags with variants
+- Add #hashtags when creating posts and desc.

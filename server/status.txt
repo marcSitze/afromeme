@@ -14,8 +14,8 @@ Done
 - Get Comments of a Post
 - Like a Post
 - Add Authorization
+- Posts categories
 
 To Do
 - Follow an account
-- Posts categories
 - Refactor Error messages
