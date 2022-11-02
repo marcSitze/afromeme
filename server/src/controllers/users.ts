@@ -57,11 +57,11 @@ export const createUser = async (req: Request, res: Response) => {
     // 2 Encrypt password
     const newAccount = await userService.createUser(user);
     await accountService.createAccount({ user: newAccount._id, posts: [] });
-    await emailService.newmailjet({
-      subject: "Account created",
-      text: "Account has been created successfully...",
-      to: "jorelsitze01@gmail.com",
-    });
+    // await emailService.newmailjet({
+    //   subject: "Account created",
+    //   text: "Account has been created successfully...",
+    //   to: "jorelsitze01@gmail.com",
+    // });
     console.log("User created");
     SuccessHandler(res, httpStatus.CREATED, {
       msg: "User created successfully...",

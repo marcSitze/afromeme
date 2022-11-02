@@ -22,6 +22,7 @@ var userSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
+    //gender
     createdAt: {
         type: Date,
         default: Date.now
