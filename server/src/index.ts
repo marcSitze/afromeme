@@ -50,6 +50,7 @@ io.on("connection", (socket) => {
       id: data.id,
       name: data.name
     }
+    createNotification(socket);
 
     users.push(newUser)
     console.log('data: ', data)
