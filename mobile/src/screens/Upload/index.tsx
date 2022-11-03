@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
 import {View, Modal, Animated, TouchableOpacity, Image, ActivityIndicator} from 'react-native';
 import {
   Box,
@@ -112,6 +113,7 @@ const Upload = ({account, creating, creating_msg}: any) => {
           </Box>
           ): (
             <Box flex={1} p={5}>
+              <ScrollView>
             <Text fontSize={18}>Post preview</Text>
             <Image source={{uri: picture.uri}} style={{height: 300}} />
             <FormControl my={5}>
@@ -150,6 +152,7 @@ const Upload = ({account, creating, creating_msg}: any) => {
                 Post
               </Button>
             </HStack>
+            </ScrollView>
           </Box>
           )}
         </Modal>

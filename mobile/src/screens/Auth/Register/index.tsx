@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { ScrollView } from 'react-native-gesture-handler'
 import {TouchableOpacity} from 'react-native';
 import {
   Box,
@@ -41,6 +42,7 @@ const Register = ({navigation, registering, registering_message = ''}: any) => {
 
   return (
     <Box h="full" backgroundColor={colors.light.white}>
+      <ScrollView>
       <Box justifyContent="center" h="1/4">
         <Center>
           <Heading color={colors.light.white} mb="2">
@@ -121,7 +123,7 @@ const Register = ({navigation, registering, registering_message = ''}: any) => {
               />
             </Box>
           </VStack>
-          <Box>
+          <Box height={200}>
             <Button
               _text={{padding: 2, fontWeight: 'bold'}}
               shadow={3}
@@ -148,6 +150,7 @@ const Register = ({navigation, registering, registering_message = ''}: any) => {
           </Box>
         </FormControl>
       </Box>
+    </ScrollView>
     </Box>
   );
 };
