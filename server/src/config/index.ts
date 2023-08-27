@@ -13,7 +13,7 @@ export default {
     host: process.env.HOST || 'http://localhost:5000'
   },
   mongo: {
-    MONGO_LOCAL: process.env.MONGO_LOCAL || 'mongodb://localhost:27017/afromeme',
+    MONGO_LOCAL: process.env.MONGO_LOCAL || "mongodb+srv://afromeme-mongo-user:YsfySK9iDg1999bc@localdb.2oyid.mongodb.net/afromeme-master?retryWrites=true&w=majority",
     // MONGO_LOCAL: process.env.MONGO_LOCAL || 'mongodb+srv://afromeme-mongo-user:YsfySK9iDg1999bc@localdb.2oyid.mongodb.net/afromeme-master?retryWrites=true&w=majority',
     MONGO_ONLINE: process.env.MONGO_ONLINE,
     MONGO_TEST_DB: process.env.MONGO_TEST_DB || 'mongodb://localhost:27017/testAfromeme',

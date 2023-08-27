@@ -1,7 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux';
 
-const Home: any = ({ posts }: any) => {
+const Home = ({ posts }: any): React.ReactElement => {
 
   console.log('posts: ', posts);
   return (
@@ -59,9 +58,4 @@ const Home: any = ({ posts }: any) => {
   );
 }
 
-const mapStateToProps = ({ postsReducer }: any) => ({
-  posts: postsReducer.posts
-});
-
-export default connect<any, {}>(mapStateToProps)(Home);
-// export default Home;
+export default Home

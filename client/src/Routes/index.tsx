@@ -5,14 +5,13 @@ import {
   Routes as Switch,
 } from "react-router-dom";
 
-import Register from '../pages/Auth/Register';
 import Home from '../components/Home';
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/" element={Home} />
+        <Route path="/" element={<Home/>} />
         {/* <Route path="/register" element={Register} /> */}
       </Switch>
     </Router>
